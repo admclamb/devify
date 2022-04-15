@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx cross-env LOG_LEVEL=warn jest --runInBand --detectOpenHandles --forceExit",
+    "test:1": "npm run test -- us-01"
   },
   "author": "",
   "dependencies": {
@@ -20,14 +21,11 @@
     "sqlite3": "^5.0.3"
   },
   "devDependencies": {
+    "chai": "^4.3.6",
     "jest": "^27.5.1",
+    "mocha": "^9.2.2",
     "nodemon": "^2.0.15",
     "supertest": "^6.2.2"
-  },
-  "jest": {
-    "setupFilesAfterEnv": [
-      "./jest.setup.js"
-    ]
   },
   "license": "ISC"
 }
