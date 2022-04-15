@@ -5,7 +5,7 @@ async function postExist(req, res, next) {
   const { post_id } = req.params;
   const postExist = await service.read(post_id);
   if (postExist) {
-    res.locals.post = post;
+    res.locals.post = postExist;
     return next();
   }
   next({ status: 404, message: `Post ${post_id} does not exist.` });

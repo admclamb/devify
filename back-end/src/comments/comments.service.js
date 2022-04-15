@@ -1,4 +1,4 @@
-const kenx = require("../db/connection");
+const knex = require("../db/connection");
 
 const TABLE = "comments";
 

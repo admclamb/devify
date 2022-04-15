@@ -42,7 +42,6 @@ describe("US-01 list posts and comments", () => {
           const response = await request(app)
             .get("/posts")
             .set("Accept", "application/json");
-
           expect(response.body.status).to.equal(200);
           expect(response.body.data).to.include({
             post_id: 1,
