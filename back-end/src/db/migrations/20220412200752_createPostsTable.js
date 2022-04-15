@@ -8,6 +8,7 @@ exports.up = function (knex) {
     table.string("post_header");
     table.string("post_body");
     table.string("post_url").nullable();
+    table.specificType("hashtags_array", "text ARRAY");
     table.integer("user_id").references("user_id").inTable("users");
     table.timestamps(true, true);
   });

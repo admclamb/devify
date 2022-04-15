@@ -1,0 +1,26 @@
+.feed-loading {
+  border-radius: 6px;
+  padding: 2rem;
+  height: 16rem;
+  background-color: var(--color-light);
+  display: flex;
+  flex-direction: column;
+}
+
+.feed-loading-bar {
+  background-color: var(--color-light);
+  filter: brightness(96%);
+  display: inline-block;
+  border-radius: 9px;
+  height: 0.3rem;
+  padding: 0.3rem;
+  margin-bottom: 0.9rem;
+}
+
+.feed-loading-pfp {
+  width: 3rem;
+  height: 3rem;
+  background-color: var(--color-light);
+  filter: brightness(96%);
+  border-radius: 100%;
+}

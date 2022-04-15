@@ -1,0 +1,18 @@
+.sidebar-nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.sidebar-nav li {
+  padding: 0.8rem 0.5rem;
+  border-radius: 10px;
+  width: 65%;
+}
+
+.sidebar-nav li:hover {
+  background-color: var(--color-main-hover);
+}
+
+.sidebar-nav li:not(:last-child) {
+  margin-bottom: 1rem;
+}

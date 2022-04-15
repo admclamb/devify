@@ -1,7 +1,6 @@
 let API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL || "http://localhost:5000";
 
-
 const headers = new Headers();
 headers.append("Content-Type", "application/json");
 
@@ -39,4 +38,18 @@ export async function fetchJson(url, options, onCancel) {
     }
     return Promise.resolve(onCancel);
   }
+}
+
+/**
+ *
+ * @param {paramaters for .get} params
+ * @param {AbortController.signal} signal
+ * @returns posts in []
+ */
+export async function listPosts(params, signal) {
+  const url = new URL(`${API_BASE_URL}/posts`);
+  Object.entries(params).forEach(([key, value]) =>
+    url.searchParams.append(key, value.toString())
+  );
+  return await fetchJson(url, { headers, signal }, []);
 }

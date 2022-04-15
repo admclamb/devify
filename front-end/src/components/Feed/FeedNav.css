@@ -1,0 +1,19 @@
+.feed-nav ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.feed-nav ul li {
+  display: inline;
+  border-radius: 6px;
+  padding: 0.8rem 0.6rem;
+}
+
+.feed-nav ul li:hover {
+  background-color: var(--color-light);
+  color: var(--color-main);
+}
+
+.feed-nav ul li:not(:last-child) {
+  margin-right: 0.9rem;
+}

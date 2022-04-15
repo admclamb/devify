@@ -2,8 +2,20 @@ const knex = require("../db/connection");
 
 const TABLE = "posts";
 const COMMENTS_TABLE = "comments";
+const USERS_PROFILES_TABLE = "users_profiles";
+
 function list() {
   return knex(TABLE).select("*");
+}
+
+/**
+ * function that list the post with author and comments
+ */
+function listWithAll() {
+  return knex(`${TABLE} as p`)
+    .join(`${USERS_PROFILES_TABLE} as up`, "p.user_id", "up.user_id")
+    .join(`${COMMENTS_TABLE} as c`, "p.user_id", "c.user_id")
+    .select("p.*", "up.first_name", "up.last_name", "c.*");
 }
 
 function read(post_id) {
@@ -11,11 +23,15 @@ function read(post_id) {
 }
 
 function comments(post_id) {
-  return knex(COMMENTS_TABLE).select("*").where({ post_id });
+  return knex(`COMMENTS_TABLE as c`)
+    .join(`${USERS_PROFILES_TABLE} as up`)
+    .select("c.*", "up.first_name", "up.last_name")
+    .where({ "c.post_id": post_id });
 }
 
 module.exports = {
   list,
+  listWithAll,
   read,
   comments,
 };
