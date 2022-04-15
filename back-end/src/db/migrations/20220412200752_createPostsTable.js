@@ -1,0 +1,22 @@
+/**
+ * @param { import("knex").Knex } knex
+ * @returns { Promise<void> }
+ */
+exports.up = function (knex) {
+  return knex.schema.createTable("posts", (table) => {
+    table.increments("post_id").primary();
+    table.string("post_header");
+    table.string("post_body");
+    table.string("post_url").nullable();
+    table.integer("user_id").references("user_id").inTable("users");
+    table.timestamps(true, true);
+  });
+};
+
+/**
+ * @param { import("knex").Knex } knex
+ * @returns { Promise<void> }
+ */
+exports.down = function (knex) {
+  return knex.schema.dropTable("posts");
+};
