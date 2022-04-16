@@ -5,13 +5,10 @@ import SidebarNav from "../../components/sidebarNav/SidebarNav";
 const Home = () => {
   return (
     <>
-      <header>
-        <Navbar />
-      </header>
       <main className="row container-lg gx-0">
-        <section className="col-0 d-none d-sm-block col-sm-2">
+        <aside className="col-0 d-none d-sm-block col-sm-2">
           <SidebarNav />
-        </section>
+        </aside>
         <section className="col-12 col-sm-8">
           <Feed />
         </section>

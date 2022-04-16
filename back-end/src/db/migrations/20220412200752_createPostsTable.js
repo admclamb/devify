@@ -7,7 +7,7 @@ exports.up = function (knex) {
     table.increments("post_id").primary();
     table.string("post_header");
     table.string("post_body");
-    table.string("post_url").nullable();
+    table.string("image_url").nullable();
     table.specificType("hashtags_array", "text ARRAY");
     table.integer("user_id").references("user_id").inTable("users");
     table.timestamps(true, true);

@@ -1,11 +1,12 @@
 const router = require("express").Router();
 const controller = require("./posts.controller");
-const methodNotAllower = require("../errors/methodNotAllowed");
+const methodNotAllowed = require("../errors/methodNotAllowed");
 
-router.route("/").get(controller.list).all(methodNotAllower);
+router.route("/").get(controller.list).all(methodNotAllowed);
+router.route("/:post_id").get(controller.read).all(methodNotAllowed);
 router
   .route("/:post_id/comments")
   .get(controller.listComments)
-  .all(methodNotAllower);
+  .all(methodNotAllowed);
 
 module.exports = router;

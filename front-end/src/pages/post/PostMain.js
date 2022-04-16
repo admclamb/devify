@@ -1,16 +1,13 @@
-import { Link } from "react-router-dom";
-import "./PostCard.css";
-
-const PostCard = ({ post }) => {
-  console.log(post);
+const PostMain = ({ post }) => {
+  if (Object.keys(post).length === 0) return null;
   const {
-    post_id,
-    image_url,
-    created_at,
-    first_name,
-    last_name,
-    hashtags_array,
-    post_header,
+    post_id = null,
+    image_url = null,
+    created_at = null,
+    first_name = null,
+    last_name = null,
+    hashtags_array = null,
+    post_header = null,
   } = post;
   const hashtags = Array.isArray(hashtags_array)
     ? hashtags_array.join("  ")
@@ -31,9 +28,7 @@ const PostCard = ({ post }) => {
           </div>
         </div>
         <header className="post-card-header">
-          <Link to={`/post/${post_id}`} className="post-header-link">
-            <h2>{post_header}</h2>
-          </Link>
+          <h2>{post_header}</h2>
         </header>
 
         <div className="post-card-main">
@@ -52,5 +47,4 @@ const PostCard = ({ post }) => {
     </article>
   );
 };
-
-export default PostCard;
+export default PostMain;

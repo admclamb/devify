@@ -1,0 +1,8 @@
+.post-sidebar {
+  margin-top: 2rem;
+  list-style-type: none;
+}
+
+.post-sidebar li:not(:last-child) {
+  margin-bottom: 4rem;
+}

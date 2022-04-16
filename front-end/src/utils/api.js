@@ -53,3 +53,7 @@ export async function listPosts(params, signal) {
   );
   return await fetchJson(url, { headers, signal }, []);
 }
+
+export async function readPost(post_id, signal) {
+  const url = `${API_BASE_URL}/posts/:post_id`;
+}

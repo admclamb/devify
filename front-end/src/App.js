@@ -1,10 +1,14 @@
-import Home from "./pages/home/Home";
+import Navbar from "./components/navbar/Navbar";
+import PageRoutes from "./pages/Routes";
 
 function App() {
   return (
-    <div className="App">
-      <Home />
-    </div>
+    <>
+      <header>
+        <Navbar />
+      </header>
+      <PageRoutes />
+    </>
   );
 }
 
