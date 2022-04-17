@@ -17,7 +17,7 @@ const Post = () => {
     readPost(post_id, abortController.signal).then(setPost).catch(setError);
   }, [post_id]);
   console.log(post);
-  if (Object.keys(post).length === 0 && !error) return <FeedLoading />;
+  if (!post && !error) return <FeedLoading />;
   return (
     <main className="row container-lg gx-0">
       <ErrorAlert error={error} />
@@ -25,7 +25,7 @@ const Post = () => {
         <PostSidebar />
       </aside>
       <section className="col-sm-8">
-        {post && Object.keys(post).length > 0 && <PostMain post={post} />}
+        <PostMain post={post} />
       </section>
       <section className="col-sm-4">
         <PostBio />

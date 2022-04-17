@@ -1,5 +1,7 @@
+import FeedLoading from "../../components/Feed/FeedLoading";
+
 const PostMain = ({ post }) => {
-  if (Object.keys(post).length === 0) return null;
+  if (!post) return <FeedLoading />;
   const {
     post_id = null,
     image_url = null,
@@ -9,6 +11,7 @@ const PostMain = ({ post }) => {
     hashtags_array = null,
     post_header = null,
   } = post;
+
   const hashtags = Array.isArray(hashtags_array)
     ? hashtags_array.join("  ")
     : "";
