@@ -12,11 +12,12 @@ async function postExist(req, res, next) {
 }
 
 async function list(req, res) {
-  res.status(200).json({ data: await service.listWithAll() });
+  console.log("here");
+  res.status(200).json({ data: await service.list() });
 }
 
 async function read(req, res) {
-  res.status(200).json({ data: await service.readWithAll() });
+  res.status(200).json({ data: res.locals.post });
 }
 
 async function listComments(req, res, next) {
@@ -25,7 +26,7 @@ async function listComments(req, res, next) {
 }
 
 module.exports = {
-  list: asyncErrorBoundary(list),
+  list,
   read: [asyncErrorBoundary(postExist), asyncErrorBoundary(read)],
   listComments: [
     asyncErrorBoundary(postExist),

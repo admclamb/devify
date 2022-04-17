@@ -2,14 +2,14 @@
   {
     "post_id": 1,
     "post_header": "Wubba lubba dub dub",
-    "post_body": "This is Rick , I don't love my grand kids.",
+    "post_body": "This is Rick, I don't love my grand kids.",
     "hashtags_array": ["#rick", "#morty", "#summer", "#rekt"],
     "image_url": null,
     "user_id": 1
   },
   {
     "post_id": 2,
-    "post_header": "Bird Person quote",
+    "post_header": "Bird Person Quote",
     "post_body": "I am Bird Person.",
     "hashtags_array": ["#rick", "#rickAndMorty"],
     "image_url": null,

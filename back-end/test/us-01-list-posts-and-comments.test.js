@@ -1,4 +1,4 @@
-const { expect } = require("chai");
+const { expect, should } = require("chai");
 const request = require("supertest");
 
 const app = require("../src/app");
@@ -42,57 +42,35 @@ describe("US-01 list posts and comments", () => {
           const response = await request(app)
             .get("/posts")
             .set("Accept", "application/json");
-          expect(response.body.status).to.equal(200);
-          expect(response.body.data).to.include({
-            post_id: 1,
-            post_header: "Wubba lubba dub dub",
-            post_body: "This is Rick , I don't love my grand kids.",
-            post_url: null,
-            user_id: 1,
-          });
+          console.log(response.body);
+          expect(response.status).to.equal(200);
+          expect(response.body.error).to.be.undefined;
+          expect(response.body.data).to.have.lengthOf(3);
+          expect(response.body.data[0].post_id).to.equal(1);
+          expect(response.body.data[1].post_id).to.equal(2);
+          expect(response.body.data[2].post_id).to.equal(3);
         });
       });
 
-      describe("GET posts/:post_id/comments", () => {
+      describe("GET /posts/:post_id", () => {
         test("returns 404 for non-existent post_id", async () => {
           const response = await request(app)
-            .get("posts/9999/comments")
+            .get("/posts/9999")
             .set("Accept", "application/json");
-
-          expect(response.body.status).to.equal(404);
-          expect(repsonse.body.error).to.contain("9999");
+          expect(response.status).to.equal(404);
+          expect(response.body.error).to.contain("9999");
         });
 
-        test("returns 200 for comments from post_id", async () => {
+        test("should return 200 and post from post_id", async () => {
           const response = await request(app)
-            .get("posts/2/comments")
+            .get("/posts/2")
             .set("Accept", "application/json");
 
-          expect(response.body.status).to.equal(200);
-          expect(response.body.data).to.include({
-            comment_id: 1,
-            post_id: 2,
-            user_id: 1,
-            comment: "Bird Person, Contact me",
-          });
-        });
-      });
-    });
-
-    describe("comments", () => {
-      describe("GET comments", () => {
-        test("returns 200 for comments", async () => {
-          const response = await request(app)
-            .get("/comments")
-            .set("Accept", "application/json");
-
-          expect(response.body.status).to.equal(200);
-          expect(response.body.data).to.include({
-            comment_id: 1,
-            post_id: 2,
-            user_id: 1,
-            comment: "Bird Person, Contact me",
-          });
+          expect(response.status).to.equal(200);
+          expect(response.status).to.equal(200);
+          expect(response.body.error).to.be.undefined;
+          expect(response.body.data.post_id).to.equal(2);
+          expect(response.body.data.post_header).to.equal("Bird Person Quote");
         });
       });
     });
