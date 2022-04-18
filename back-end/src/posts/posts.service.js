@@ -32,7 +32,8 @@ function read(post_id) {
 }
 
 function comments(post_id) {
-  return knex(`COMMENTS_TABLE as c`)
+  console.log("here inside service");
+  return knex(`${COMMENTS_TABLE} as c`)
     .join(`${USERS_PROFILES_TABLE} as up`)
     .select("c.*", "up.first_name", "up.last_name")
     .where({ "c.post_id": post_id });

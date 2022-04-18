@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { readPost } from "../../utils/api";
+import { readComments, readPost } from "../../utils/api";
 import PostSidebar from "./PostSidebar";
 import PostMain from "./PostMain";
 import PostBio from "./PostBio";
@@ -9,12 +9,16 @@ import ErrorAlert from "../../errors/ErrorAlert";
 const Post = () => {
   const { post_id } = useParams();
   const [post, setPost] = useState({});
+  const [comments, setComments] = useState([]);
   const [error, setError] = useState({});
   useEffect(() => {
     const abortController = new AbortController();
     setPost({});
     setError({});
     readPost(post_id, abortController.signal).then(setPost).catch(setError);
+    readComments(post_id, abortController.signal)
+      .then(setComments)
+      .catch(setError);
   }, [post_id]);
   console.log(post);
   if (!post && !error) return <FeedLoading />;
@@ -25,7 +29,7 @@ const Post = () => {
         <PostSidebar />
       </aside>
       <section className="col-sm-8">
-        <PostMain post={post} />
+        <PostMain post={post} comments={comments} />
       </section>
       <section className="col-sm-4">
         <PostBio />

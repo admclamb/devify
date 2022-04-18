@@ -1,4 +1,4 @@
-const PostBio = () => {
+const PostBio = ({}) => {
   return null;
 };
 

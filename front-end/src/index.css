@@ -70,3 +70,7 @@ p {
 .container-lg {
   margin-inline: 17%;
 }
+
+.text-container {
+  width: 100%;
+}

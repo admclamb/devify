@@ -63,3 +63,13 @@ export async function readPost(post_id, signal) {
   };
   return await fetchJson(url, options, {});
 }
+
+export async function readComments(post_id, signal) {
+  const url = `${API_BASE_URL}/posts/${post_id}/comments`;
+  const options = {
+    method: "GET",
+    headers,
+    signal,
+  };
+  return await fetchJson(url, options, []);
+}

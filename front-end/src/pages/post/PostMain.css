@@ -1,0 +1,9 @@
+.post-main-container {
+  background-color: var(--color-light);
+  border-radius: 8px;
+  border: solid 1px var(--color-gray);
+}
+
+.post-main-body {
+  padding: 1.6rem;
+}
