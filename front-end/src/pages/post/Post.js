@@ -26,7 +26,7 @@ const Post = () => {
     <main className="row container-lg gx-0">
       <ErrorAlert error={error} />
       <aside className="col-sm-1">
-        <PostSidebar />
+        <PostSidebar post={post} />
       </aside>
       <section className="col-sm-8">
         <PostMain post={post} comments={comments} />

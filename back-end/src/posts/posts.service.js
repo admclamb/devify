@@ -33,8 +33,8 @@ function read(post_id) {
 
 function comments(post_id) {
   return knex(`${COMMENTS_TABLE} as c`)
-    .join(`${USERS_PROFILES_TABLE} as up`)
-    .select("c.*", "up.first_name", "up.last_name")
+    .join(`${USERS_PROFILES_TABLE} as up`, "c.user_id", "up.user_id")
+    .select("c.*", "up.*")
     .where({ "c.post_id": post_id });
 }
 
