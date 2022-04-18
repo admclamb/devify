@@ -10,11 +10,11 @@ const Post = () => {
   const { post_id } = useParams();
   const [post, setPost] = useState({});
   const [comments, setComments] = useState([]);
-  const [error, setError] = useState({});
+  const [error, setError] = useState(null);
   useEffect(() => {
     const abortController = new AbortController();
     setPost({});
-    setError({});
+    setError(null);
     readPost(post_id, abortController.signal).then(setPost).catch(setError);
     readComments(post_id, abortController.signal)
       .then(setComments)

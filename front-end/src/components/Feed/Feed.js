@@ -11,6 +11,7 @@ const Feed = () => {
   useEffect(() => {
     const abortController = new AbortController();
     setPosts([]);
+    setError(null);
     listPosts({}, abortController.signal).then(setPosts).catch(setError);
     return () => abortController.abort();
   }, []);

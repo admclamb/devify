@@ -1,8 +1,8 @@
 const ErrorAlert = ({ error }) => {
   return (
-    Object.hasOwnProperty("message") && (
+    error && (
       <div className="alert alert-primary" role="alert">
-        {error.message}
+        Error: {error.message}
       </div>
     )
   );
