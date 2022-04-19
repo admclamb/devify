@@ -36,7 +36,7 @@ describe("US-01 list posts and comments", () => {
       });
     });
 
-    describe("Posts", () => {
+    describe("Posts Route", () => {
       describe("GET /posts", () => {
         test("returns 200 for posts", async () => {
           const response = await request(app)
