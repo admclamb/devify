@@ -149,6 +149,22 @@ describe("US-01 list posts and comments", () => {
         expect(response.body.error).to.contain("user_id");
         expect(response.status).to.equal(400);
       });
+
+      test("Should return 201 if data is valid", async () => {
+        const response = await request(app)
+          .post("/posts")
+          .set("Accept", "application/json")
+          .send({
+            post_header: "Test",
+            post_body: "Another test 111",
+            image_url:
+              "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png",
+            hastags_array: ["JavaScript", "Java", "Mocha", "Chai"],
+            user_id: null,
+          });
+        expect(response.status).to.equal(201);
+        expect(response.body.error).to.be.undefined;
+      });
     });
   });
 });
