@@ -1,6 +1,9 @@
 const service = require("./posts.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
+const hasOnlyValidProperties = require("../utils/hasOnlyValidProperties");
+const hasRequiredProperties = require("../utils/hasRequiredProperties");
+
 const ValidProperties = [
   "post_header",
   "post_body",
@@ -8,6 +11,15 @@ const ValidProperties = [
   "hashtags_array",
   "user_id",
 ];
+
+const RequiredProperties = ["post_header", "post_body", "user_id"];
+
+function validateValues(req, res, next) {
+  const { data = {} } = req.body;
+  res.locals.post = data;
+  next();
+}
+
 async function postExist(req, res, next) {
   console.log("here");
   const { post_id } = req.params;
@@ -27,6 +39,10 @@ async function read(req, res) {
   res.status(200).json({ data: res.locals.post });
 }
 
+async function create(req, res, next) {
+  res.status(201).json({ data: await service.create(res.locals.post) });
+}
+
 async function listComments(req, res, next) {
   console.log("here inside comments");
   const { post_id } = res.locals.post;
@@ -43,8 +59,9 @@ module.exports = {
     asyncErrorBoundary(listComments),
   ],
   create: [
-    asyncErrorBoundary(hasValidProperties),
-    asyncErrorBoundary(hasValidPropertyValues),
+    asyncErrorBoundary(hasOnlyValidProperties(ValidProperties)),
+    asyncErrorBoundary(hasRequiredProperties(RequiredProperties)),
+    asyncErrorBoundary(validateValues),
     asyncErrorBoundary(create),
   ],
 };

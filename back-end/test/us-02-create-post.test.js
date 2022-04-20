@@ -36,132 +36,140 @@ describe("US-01 list posts and comments", () => {
       });
 
       test("Should return 400 if post_header is missing", async () => {
+        const data = {
+          post_body: "Another test 111",
+          image_url:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png",
+          hashtags_array: ["JavaScript", "Java", "Mocha", "Chai"],
+          user_id: 1,
+        };
         const response = await request(app)
           .post("/posts")
           .set("Accept", "application/json")
-          .send({
-            post_body: "Another test 111",
-            image_url:
-              "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png",
-            hastags_array: ["JavaScript", "Java", "Mocha", "Chai"],
-            user_id: 1,
-          });
+          .send({ data });
 
         expect(response.body.error).to.contain("post_header");
         expect(response.status).to.equal(400);
       });
 
       test("Should return 400 if post_body is missing", async () => {
+        const data = {
+          post_header: "Test",
+          image_url:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png",
+          hashtags_array: ["JavaScript", "Java", "Mocha", "Chai"],
+          user_id: 1,
+        };
         const response = await request(app)
           .post("/posts")
           .set("Accept", "application/json")
-          .send({
-            post_header: "Test",
-            image_url:
-              "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png",
-            hastags_array: ["JavaScript", "Java", "Mocha", "Chai"],
-            user_id: 1,
-          });
+          .send({ data });
 
         expect(response.body.error).to.contain("post_body");
         expect(response.status).to.equal(400);
       });
 
       test("Should return 400 if hashtags_array is missing", async () => {
+        const data = {
+          post_header: "Test",
+          post_body: "Another test 111",
+          image_url:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png",
+          user_id: 1,
+        };
         const response = await request(app)
           .post("/posts")
           .set("Accept", "application/json")
-          .send({
-            post_header: "Test",
-            post_body: "Another test 111",
-            image_url:
-              "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png",
-            user_id: 1,
-          });
+          .send({ data });
 
         expect(response.body.error).to.contain("hashtags_array");
         expect(response.status).to.equal(400);
       });
 
       test("Should return 400 if user_id is missing", async () => {
+        const data = {
+          post_header: "Test",
+          post_body: "Another test 111",
+          image_url:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png",
+          hashtags_array: ["JavaScript", "Java", "Mocha", "Chai"],
+        };
         const response = await request(app)
           .post("/posts")
           .set("Accept", "application/json")
-          .send({
-            post_header: "Test",
-            post_body: "Another test 111",
-            image_url:
-              "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png",
-            hastags_array: ["JavaScript", "Java", "Mocha", "Chai"],
-          });
+          .send({ data });
 
         expect(response.body.error).to.contain("user_id");
         expect(response.status).to.equal(400);
       });
 
       test("Should return 400 if user_id is not a number", async () => {
+        const data = {
+          post_header: "Test",
+          post_body: "Another test 111",
+          image_url:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png",
+          hashtags_array: ["JavaScript", "Java", "Mocha", "Chai"],
+          user_id: "1",
+        };
         const response = await request(app)
           .post("/posts")
           .set("Accept", "application/json")
-          .send({
-            post_header: "Test",
-            post_body: "Another test 111",
-            image_url:
-              "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png",
-            hastags_array: ["JavaScript", "Java", "Mocha", "Chai"],
-            user_id: "1",
-          });
+          .send({ data });
 
         expect(response.body.error).to.contain("user_id");
         expect(response.status).to.equal(400);
       });
 
       test("Should return 400 if user_id is empty", async () => {
+        const data = {
+          post_header: "Test",
+          post_body: "Another test 111",
+          image_url:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png",
+          hashtags_array: ["JavaScript", "Java", "Mocha", "Chai"],
+          user_id: "",
+        };
         const response = await request(app)
           .post("/posts")
           .set("Accept", "application/json")
-          .send({
-            post_header: "Test",
-            post_body: "Another test 111",
-            image_url:
-              "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png",
-            hastags_array: ["JavaScript", "Java", "Mocha", "Chai"],
-            user_id: "",
-          });
+          .send({ data });
 
         expect(response.body.error).to.contain("user_id");
         expect(response.status).to.equal(400);
       });
 
       test("Should return 400 if user_id is null", async () => {
+        const data = {
+          post_header: "Test",
+          post_body: "Another test 111",
+          image_url:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png",
+          hashtags_array: ["JavaScript", "Java", "Mocha", "Chai"],
+          user_id: null,
+        };
         const response = await request(app)
           .post("/posts")
           .set("Accept", "application/json")
-          .send({
-            post_header: "Test",
-            post_body: "Another test 111",
-            image_url:
-              "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png",
-            hastags_array: ["JavaScript", "Java", "Mocha", "Chai"],
-            user_id: null,
-          });
+          .send({ data });
 
         expect(response.body.error).to.contain("user_id");
         expect(response.status).to.equal(400);
       });
 
       test("Should return 201 if data is valid", async () => {
+        const data = {
+          post_header: "Test",
+          post_body: "Another test 111",
+          image_url:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png",
+          hashtags_array: ["JavaScript", "Java", "Mocha", "Chai"],
+          user_id: null,
+        };
         const response = await request(app)
           .post("/posts")
           .set("Accept", "application/json")
-          .send({
-            post_header: "Test",
-            post_body: "Another test 111",
-            image_url:
-              "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png",
-            hastags_array: ["JavaScript", "Java", "Mocha", "Chai"],
-            user_id: null,
-          });
+          .send({ data });
         expect(response.status).to.equal(201);
         expect(response.body.error).to.be.undefined;
       });
