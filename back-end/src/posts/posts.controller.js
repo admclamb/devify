@@ -1,6 +1,13 @@
 const service = require("./posts.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
+const ValidProperties = [
+  "post_header",
+  "post_body",
+  "image_url",
+  "hashtags_array",
+  "user_id",
+];
 async function postExist(req, res, next) {
   console.log("here");
   const { post_id } = req.params;
@@ -34,5 +41,10 @@ module.exports = {
   listComments: [
     asyncErrorBoundary(postExist),
     asyncErrorBoundary(listComments),
+  ],
+  create: [
+    asyncErrorBoundary(hasValidProperties),
+    asyncErrorBoundary(hasValidPropertyValues),
+    asyncErrorBoundary(create),
   ],
 };
