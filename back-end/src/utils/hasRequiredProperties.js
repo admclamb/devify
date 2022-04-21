@@ -1,13 +1,14 @@
-function hasRequiredProperties(...PROPERTIES) {
+function hasRequiredProperties(PROPERTIES) {
   return function (req, res, next) {
     const { data = {} } = req.body;
-
+    console.log("in here");
     try {
-      properties.forEach((property) => {
+      PROPERTIES.forEach((property) => {
         if (!data[property]) {
-          const error = new Error(`A '${property}' property is required.`);
-          error.status = 400;
-          throw error;
+          return next({
+            status: 400,
+            message: `A '${property}' property is required`,
+          });
         }
       });
       next();

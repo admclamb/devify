@@ -31,6 +31,13 @@ function read(post_id) {
   return knex(TABLE).select("*").where({ post_id }).first();
 }
 
+function create(post) {
+  return knex(TABLE)
+    .insert(post)
+    .returning("*")
+    .then((createdPost) => createdPost[0]);
+}
+
 function comments(post_id) {
   return knex(`${COMMENTS_TABLE} as c`)
     .join(`${USERS_PROFILES_TABLE} as up`, "c.user_id", "up.user_id")
@@ -44,4 +51,5 @@ module.exports = {
   readWithAll,
   read,
   comments,
+  create,
 };
