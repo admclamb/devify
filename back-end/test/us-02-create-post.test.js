@@ -69,23 +69,6 @@ describe("US-01 list posts and comments", () => {
         expect(response.status).to.equal(400);
       });
 
-      test("Should return 400 if hashtags_array is missing", async () => {
-        const data = {
-          post_header: "Test",
-          post_body: "Another test 111",
-          image_url:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png",
-          user_id: 1,
-        };
-        const response = await request(app)
-          .post("/posts")
-          .set("Accept", "application/json")
-          .send({ data });
-
-        expect(response.body.error).to.contain("hashtags_array");
-        expect(response.status).to.equal(400);
-      });
-
       test("Should return 400 if user_id is missing", async () => {
         const data = {
           post_header: "Test",

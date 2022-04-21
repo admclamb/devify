@@ -15,6 +15,9 @@ const ValidProperties = [
 const RequiredProperties = ["post_header", "post_body", "user_id"];
 
 function validateValues(req, res, next) {
+  console.log(
+    "validateValues ------------------------------------------------------"
+  );
   const { data = {} } = req.body;
   res.locals.post = data;
   next();
@@ -40,6 +43,10 @@ async function read(req, res) {
 }
 
 async function create(req, res, next) {
+  console.log(
+    "here in create: ----------------------------------------------",
+    res.locals.post
+  );
   res.status(201).json({ data: await service.create(res.locals.post) });
 }
 
