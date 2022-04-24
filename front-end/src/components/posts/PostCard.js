@@ -7,8 +7,8 @@ const PostCard = ({ post }) => {
     post_id,
     image_url,
     created_at,
-    first_name,
-    last_name,
+    first_name = null,
+    last_name = null,
     hashtags_array,
     post_header,
   } = post;
@@ -26,7 +26,12 @@ const PostCard = ({ post }) => {
         <div className="post-card-head d-flex align-items-center mb-3">
           <div className="post-card-pfp"></div>
           <div className="name_date">
-            <h5 className="text-sm">{first_name + "   " + last_name}</h5>
+            <h5 className="text-sm">
+              {first_name && last_name
+                ? first_name + "   " + last_name
+                : "No Name"}
+            </h5>
+
             <p className="text-sm">{created_at}</p>
           </div>
         </div>

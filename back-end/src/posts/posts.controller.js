@@ -15,6 +15,19 @@ const REQUIRED_PROPERTIES = ["post_header", "post_body", "user_id"];
 const has_only_valid_post_props = hasOnlyValidProperties(VALID_PROPERTIES);
 const has_required_props = hasRequiredProperties(REQUIRED_PROPERTIES);
 
+function validateDataValues(req, res, next) {
+  const { data = {} } = req.body;
+  const { user_id = null } = data;
+
+  if (typeof user_id !== "number") {
+    return next({
+      status: 400,
+      message: "user_id must be a number",
+    });
+  }
+  next();
+}
+
 async function postExist(req, res, next) {
   const { post_id } = req.params;
   const postExist = await service.read(post_id);
@@ -34,8 +47,9 @@ async function read(req, res) {
 }
 
 async function create(req, res, next) {
-  console.log("in here");
-  res.status(201).json({ data: await service.create(req.body.data) });
+  const data = req.body.data;
+  const response = await service.create(data);
+  res.status(201).json({ data });
 }
 
 async function listComments(req, res, next) {
@@ -54,6 +68,7 @@ module.exports = {
   create: [
     asyncErrorBoundary(has_only_valid_post_props),
     asyncErrorBoundary(has_required_props),
+    validateDataValues,
     asyncErrorBoundary(create),
   ],
 };

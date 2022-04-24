@@ -1,6 +1,5 @@
 [
   {
-    "post_id": 1,
     "post_header": "Wubba lubba dub dub",
     "post_body": "This is Rick, I don't love my grand kids.",
     "hashtags_array": ["#rick", "#morty", "#summer", "#rekt"],
@@ -8,19 +7,25 @@
     "user_id": 2
   },
   {
-    "post_id": 2,
     "post_header": "Bird Person Quote",
     "post_body": "I am Bird Person.",
     "hashtags_array": ["#rick", "#rickAndMorty"],
     "image_url": null,
     "user_id": 2
   },
+
   {
-    "post_id": 3,
     "post_header": "This is a test",
     "post_body": "Testing Everything",
     "image_url": "https://source.unsplash.com/random",
     "hashtags_array": ["#testing", "#3rdPost", "#Iloveprogramming"],
     "user_id": 3
+  },
+  {
+    "post_header": "Testing",
+    "post_body": "I am Bird Person.",
+    "hashtags_array": ["#rick", "#rickAndMorty"],
+    "image_url": null,
+    "user_id": 2
   }
 ]
