@@ -5,7 +5,7 @@ const PostCard = ({ post }) => {
   console.log(post);
   const {
     post_id,
-    image_url,
+    image_url = null,
     created_at,
     first_name = null,
     last_name = null,

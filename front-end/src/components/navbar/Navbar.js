@@ -2,6 +2,7 @@ import Searchbar from "../Searchbar/Searchbar";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 const Navbar = () => {
+  const user_id = 1;
   return (
     <nav className="navbar">
       <div className="container-lg ">
@@ -10,7 +11,9 @@ const Navbar = () => {
         </Link>
         <Searchbar />
         <div className="navbar__profile-container">
-          <button className="btn btn-outline-primary">Create Post</button>
+          <Link to={`${user_id}/create`} className="btn btn-outline-primary">
+            Create Post
+          </Link>
           <i className="fa-thin fa-bell fa-lg"></i>
           <div className="profile-picture"></div>
         </div>
