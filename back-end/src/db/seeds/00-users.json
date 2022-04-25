@@ -1,17 +1,17 @@
 [
   {
     "user_id": 1,
-    "email": "rickSanchez@mail.com",
+    "email": "ricksanchez@mail.com",
     "password": "1111Abc"
   },
   {
     "user_id": 2,
-    "email": "birdPerson@mail.com",
+    "email": "birdperson@mail.com",
     "password": "1111Abc"
   },
   {
     "user_id": 3,
-    "email": "joeDirt@mail.com",
+    "email": "joedirt@mail.com",
     "password": "1111Abc"
   }
 ]

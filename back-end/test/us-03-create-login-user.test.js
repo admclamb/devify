@@ -5,7 +5,7 @@ const app = require('../src/app');
 const knex = require('../src/db/connection');
 
 /**
- * US-01 List posts and list comments for front end user stories
+ * US-03 create and login user
  */
 
 describe('US-03 create and login user', () => {
@@ -35,7 +35,7 @@ describe('US-03 create and login user', () => {
         expect(response.status).to.equal(400);
       });
 
-      test('Should return 400 if no username property', async () => {
+      test('Should return 400 if no email property', async () => {
         const data = { password: '1234' };
         const response = await request(app)
           .post('/sessions')
@@ -43,47 +43,82 @@ describe('US-03 create and login user', () => {
           .send({ data });
 
         expect(resposne.status).to.equal(400);
-        expect(response.body.error).to.equal('username or password is missing');
+        expect(response.body.error).to.equal('email or password is missing.');
       });
 
-      test('Should return 400 if username property is empty', async () => {
-        const data = { username: '', password: '1234' };
+      test('Should return 400 if email property is empty', async () => {
+        const data = { email: '', password: '1234' };
         const response = await request(app)
           .post('/sessions')
           .set('Accept', 'application/json')
           .send({ data });
 
         expect(response.status).to.equal(400);
-        expect(response.body.error).to.equal('username or password is missing');
+        expect(response.body.error).to.equal('email or password is missing.');
       });
 
       test('Should return 400 if no password property', async () => {
-        const data = { username: 'testing_username' };
+        const data = { email: 'testingemail@mail.com' };
         const response = await request(app)
           .post('/sessions')
           .set('Accept', 'application/json')
           .send({ data });
 
         expect(resposne.status).to.equal(400);
-        expect(response.body.error).to.equal('username or password is missing');
+        expect(response.body.error).to.equal('email or password is missing.');
       });
 
       test('Should return 400 if password property is empty', async () => {
-        const data = { username: 'testing_username', password: '' };
+        const data = { email: 'testingemail@mail.com', password: '' };
         const response = await request(app)
           .post('/sessions')
           .set('Accept', 'application/json')
           .send({ data });
 
         expect(response.status).to.equal(400);
-        expect(response.body.error).to.equal('username or password is missing');
+        expect(response.body.error).to.equal('email or password is missing.');
+      });
+
+      test('Should return 404 if email is not found', async () => {
+        const data = { email: 'notafoundemail@mail.com' };
+        const response = await request(app)
+          .post('/sessions')
+          .set('Accept', 'application/json')
+          .send({ data });
+
+        expect(response.status).to.equal(400);
+        expect(response.body.error).to.equal(`email ${data.email} not found.`);
+      });
+
+      test('Should return 401 if password is incorrect', async () => {
+        const data = {
+          email: 'ricksanchez@mail.com',
+          password: 'notarealpassword',
+        };
+        const response = await request(app)
+          .post('/sessions')
+          .set('Accept', 'application/json')
+          .send({ data });
+
+        expect(response.status).to.equal(401);
+        expect(response.body.error).to.equal('Password is incorrect.');
+      });
+
+      test('Should return 201 for created session', async () => {
+        const data = {
+          email: 'ricksanchez@mail.com',
+          password: '1111Abc',
+        };
+        const response = await request(app)
+          .post('/sessions')
+          .set('Accept', 'application/json')
+          .send({ data });
+
+        expect(response.status).to.equal(201);
+        expect(response.status.error).to.be.undefined;
+        expect(response.body.data.session_id).to.equal(2);
+        expect(response.body.data.user_id).to.equal(1);
       });
     });
-
-    test('Should return 404 if username is not found', async () => {
-      const { data = { username: }}
-    })
-
-    describe('DELETE /sessions', () => {});
   });
 });

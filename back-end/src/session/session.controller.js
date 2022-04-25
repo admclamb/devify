@@ -1,7 +1,7 @@
 const asyncErrorBoundary = require('../errors/asyncErrorBoundary');
 const service = require('./session.service');
 const bcrypt = require('bcryptjs');
-const SALT = 10;
+const SALT = process.env.SALT || 10;
 function checkLogin(req, res, next) {
   // if (session.user_id) {
   //   return next();
@@ -13,17 +13,17 @@ function checkLogin(req, res, next) {
 }
 
 async function validateLogin(req, res, next) {
-  const { username = null } = req.body.data;
+  const { email = null } = req.body.data;
   const { password = null } = req.body.data;
-  if (!username || !password) {
-    return next({ status: 400, message: 'username or password is missing' });
+  if (!email || !password) {
+    return next({ status: 400, message: 'email or password is missing' });
   }
-  const user = await service.readUser(username);
+  const user = await service.readUser(email);
   if (user) {
     res.locals.user = user;
     return next();
   }
-  next({ status: 404, message: `Customer: ${username} does not exist` });
+  next({ status: 404, message: `Customer: ${email} does not exist` });
 }
 
 async function validatePassword(req, res, next) {
