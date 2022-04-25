@@ -4,25 +4,21 @@ import ErrorAlert from '../../errors/ErrorAlert';
 import { createLogin } from '../../utils/api';
 import './LoginForm.css';
 const Login = () => {
-  const loginInit = {
-    username: '',
-    password: '',
-  };
-  const [login, setLogin] = useState(loginInit);
+  const [login, setLogin] = useState({ username: '', password: '' });
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const handleChange = ({ target }) => {
     const { id } = target;
     setLogin({
       ...login,
-      id: target.value,
+      [id]: target.value,
     });
   };
-
+  console.log(login);
   const handleSubmit = async (event) => {
     try {
-      setError(null);
       event.preventDeault();
+      setError(null);
       const abortController = new AbortController();
       await createLogin(login, abortController.signal);
       navigate('/');
@@ -65,8 +61,8 @@ const Login = () => {
             className="form-check-input"
             id="exampleCheck1"
           />
-          <label className="form-check-label" htmlFor="exampleCheck1">
-            Check me out
+          <label className="form-check-label" htmlFor="exampleCheck1" disabled>
+            Remember Me
           </label>
         </div>
         <button

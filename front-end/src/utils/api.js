@@ -25,7 +25,7 @@ export async function fetchJson(url, options, onCancel) {
     if (response.status === 204) {
       return null;
     }
-
+    console.log(response);
     const payload = await response.json();
 
     if (payload.error) {
@@ -78,6 +78,7 @@ export async function createLogin(login, signal) {
   const url = `${API_BASE_URL}/sessions`;
   const options = {
     method: 'POST',
+    body: JSON.stringify({ data: login }),
     headers,
     signal,
   };
