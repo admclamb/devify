@@ -3,10 +3,9 @@
  * @returns { Promise<void> }
  */
 exports.up = function (knex) {
-  return knex.schema.createTable("session", (table) => {
-    table.integer("user_id").references("user_id").inTable("users");
-    table.string("current_status");
-    table.string("posting_time");
+  return knex.schema.createTable('session', (table) => {
+    table.increments('session_id').primary();
+    table.integer('user_id');
     table.timestamps(true, true);
   });
 };
@@ -16,5 +15,5 @@ exports.up = function (knex) {
  * @returns { Promise<void> }
  */
 exports.down = function (knex) {
-  return knex.schema.dropTable("session");
+  return knex.schema.dropTable('session');
 };
