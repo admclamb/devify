@@ -1,8 +1,8 @@
 let API_BASE_URL =
-  process.env.REACT_APP_API_BASE_URL || "http://localhost:5000";
+  process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
 const headers = new Headers();
-headers.append("Content-Type", "application/json");
+headers.append('Content-Type', 'application/json');
 
 /**
  * Fetch `json` from the specified URL and handle error status codes and ignore `AbortError`s
@@ -33,7 +33,7 @@ export async function fetchJson(url, options, onCancel) {
     }
     return payload.data;
   } catch (error) {
-    if (error.name !== "AbortError") {
+    if (error.name !== 'AbortError') {
       throw error;
     }
     return Promise.resolve(onCancel);
@@ -57,7 +57,7 @@ export async function listPosts(params, signal) {
 export async function readPost(post_id, signal) {
   const url = `${API_BASE_URL}/posts/${post_id}`;
   const options = {
-    method: "GET",
+    method: 'GET',
     headers,
     signal,
   };
@@ -67,9 +67,19 @@ export async function readPost(post_id, signal) {
 export async function readComments(post_id, signal) {
   const url = `${API_BASE_URL}/posts/${post_id}/comments`;
   const options = {
-    method: "GET",
+    method: 'GET',
     headers,
     signal,
   };
   return await fetchJson(url, options, []);
+}
+
+export async function createLogin(login, signal) {
+  const url = `${API_BASE_URL}/sessions`;
+  const options = {
+    method: 'POST',
+    headers,
+    signal,
+  };
+  return await fetchJson(url, options, {});
 }
