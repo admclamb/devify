@@ -8,22 +8,25 @@ function checkLogin(req, res, next) {
   // }
   next({
     status: 401,
-    message: 'Unauthorized. authentication has failed or not yet been proven',
+    message: 'Unauthorized. authentication has failed or not yet been proven.',
   });
 }
 
 async function validateLogin(req, res, next) {
+  if (!req.body.data) {
+    return next({ status: 400, message: 'data is missing.' });
+  }
   const { email = null } = req.body.data;
   const { password = null } = req.body.data;
   if (!email || !password) {
-    return next({ status: 400, message: 'email or password is missing' });
+    return next({ status: 400, message: 'email or password is missing.' });
   }
-  const user = await service.readUser(email);
+  const user = await service.readUser(email.toLowerCase());
   if (user) {
     res.locals.user = user;
     return next();
   }
-  next({ status: 404, message: `Customer: ${email} does not exist` });
+  next({ status: 404, message: `Customer: ${email} does not exist.` });
 }
 
 async function validatePassword(req, res, next) {
@@ -33,7 +36,7 @@ async function validatePassword(req, res, next) {
   if (validPassword) {
     return next();
   }
-  next({ status: 401, message: 'Invalid password' });
+  next({ status: 401, message: 'Password is incorrect.' });
 }
 
 async function createSession(req, res, next) {
@@ -49,7 +52,7 @@ async function sessionExist(req, res, next) {
     res.locals.session = session;
     return next();
   }
-  next({ status: 404, message: `Session: ${session_id} does not exist` });
+  next({ status: 404, message: `Session: ${session_id} does not exist.` });
 }
 
 async function destroy(req, res, next) {

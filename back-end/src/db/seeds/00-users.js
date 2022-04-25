@@ -6,7 +6,7 @@ exports.seed = function (knex) {
     .raw('TRUNCATE TABLE users RESTART IDENTITY CASCADE')
     .then(function () {
       return USERS_DATA.forEach((USER) => {
-        USER.password = bcrypt.hashSync(USER.password, SALT);
+        USER.password = bcrypt.hashSync(USER.password, 10);
         return knex('users')
           .insert(USER)
           .returning('*')

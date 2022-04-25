@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/posts', postsRouter);
 app.use('/comments', commentsRouter);
-app.use('/session', sessionRouter);
+app.use('/sessions', sessionRouter);
 app.use(notFound);
 app.use(errorHandler);
 
