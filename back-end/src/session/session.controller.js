@@ -74,8 +74,8 @@ async function destroy(req, res, next) {
 module.exports = {
   create: [
     asyncErrorBoundary(validateLogin),
-    asyncErrorBoundary(validatePassword),
     asyncErrorBoundary(checkSession),
+    asyncErrorBoundary(validatePassword),
     asyncErrorBoundary(createSession),
   ],
   destroy: [asyncErrorBoundary(sessionExist), asyncErrorBoundary(destroy)],

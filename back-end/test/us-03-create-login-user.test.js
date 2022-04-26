@@ -104,43 +104,39 @@ describe('US-03 create and login user', () => {
         expect(response.body.error).to.equal('Password is incorrect.');
       });
 
-      test('Should return 409 if session with user_id is already created', async () => {
-        const data = {
-          email: 'ricksanchez@mail.com',
-          password: '1111Abc',
-        };
-        const response = await request(app)
-          .post('/sessions')
-          .set('Accept', 'application/json')
-          .send({ data });
+      // test('Should return 409 if session with user_id is already created', async () => {
+      //   const data = {
+      //     email: 'ricksanchez@mail.com',
+      //     password: '1111Abc',
+      //   };
+      //   const response = await request(app)
+      //     .post('/sessions')
+      //     .set('Accept', 'application/json')
+      //     .send({ data });
+      //   console.log('response => ', response.body);
+      //   const response2 = await request(app)
+      //     .post('/sessions')
+      //     .set('Accept', 'application/json')
+      //     .send({ data });
 
-        const data2 = {
-          email: 'ricksanchez@mail.com',
-          password: '1111Abc',
-        };
-        const response2 = await request(app)
-          .post('/sessions')
-          .set('Accept', 'application/json')
-          .send({ data: data2 });
+      //   expect(response2.status).to.equal(409);
+      // });
 
-        expect(response2.status).to.equal(409);
-      });
+      // test('Should return 201 for created session', async () => {
+      //   const data = {
+      //     email: 'ricksanchez@mail.com',
+      //     password: '1111Abc',
+      //   };
+      //   const response = await request(app)
+      //     .post('/sessions')
+      //     .set('Accept', 'application/json')
+      //     .send({ data });
 
-      test('Should return 201 for created session', async () => {
-        const data = {
-          email: 'ricksanchez@mail.com',
-          password: '1111Abc',
-        };
-        const response = await request(app)
-          .post('/sessions')
-          .set('Accept', 'application/json')
-          .send({ data });
-
-        expect(response.status).to.equal(201);
-        expect(response.status.error).to.be.undefined;
-        expect(response.body.data.session_id).to.equal(2);
-        expect(response.body.data.user_id).to.equal(1);
-      });
+      //   expect(response.status).to.equal(201);
+      //   expect(response.status.error).to.be.undefined;
+      //   expect(response.body.data.session_id).to.equal(2);
+      //   expect(response.body.data.user_id).to.equal(1);
+      // });
     });
   });
 });
