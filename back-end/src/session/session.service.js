@@ -12,6 +12,10 @@ function read(session_id) {
   return knex(TABLE).select('*').where({ session_id }).first();
 }
 
+function readFromUser(user_id) {
+  return knex(TABLE).select('*').where({ user_id }).first();
+}
+
 function readUser(email) {
   return knex(USERS_TABLE).select('*').where({ email }).first();
 }
@@ -23,6 +27,7 @@ function destroy(session_id) {
 module.exports = {
   create,
   read,
+  readFromUser,
   destroy,
   readUser,
 };

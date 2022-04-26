@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import ErrorAlert from '../../errors/ErrorAlert';
 import { createLogin } from '../../utils/api';
 import './LoginForm.css';
-const Login = () => {
+const Login = ({ setSession }) => {
   const [login, setLogin] = useState({ username: '', password: '' });
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -16,19 +16,25 @@ const Login = () => {
   };
   console.log(login);
   const handleSubmit = async (event) => {
-    try {
-      event.preventDeault();
-      setError(null);
-      const abortController = new AbortController();
-      await createLogin(login, abortController.signal);
-      navigate('/');
-    } catch (error) {
-      setError(error);
-    }
+    event.preventDefault();
+    console.log('here');
+    setError(null);
+    const abortController = new AbortController();
+    createLogin(login, abortController.signal)
+      .then((response) => {
+        setSession(response);
+        navigate('/');
+      })
+      .catch(setError);
   };
+  console.log(error);
   return (
     <main className="row">
-      <form className="col-12 col-sm-11 col-md-5 ms-auto me-auto border rounded login-form">
+      <form
+        id="login-form"
+        onSubmit={handleSubmit}
+        className="col-12 col-sm-11 col-md-5 ms-auto me-auto border rounded login-form"
+      >
         <ErrorAlert error={error} />
         <h3 className="text-center">Welcome to DEV Clone</h3>
         <div className="input-control mb-3">
@@ -68,7 +74,8 @@ const Login = () => {
         <button
           type="submit"
           className="btn btn-primary login-submit"
-          onSubmit={handleSubmit}
+          value="Submit"
+          form="login-form"
         >
           Continue
         </button>

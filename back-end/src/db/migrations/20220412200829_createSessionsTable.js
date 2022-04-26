@@ -3,7 +3,7 @@
  * @returns { Promise<void> }
  */
 exports.up = function (knex) {
-  return knex.schema.createTable('session', (table) => {
+  return knex.schema.createTable('sessions', (table) => {
     table.increments('session_id').primary();
     table.integer('user_id');
     table.timestamps(true, true);

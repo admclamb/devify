@@ -75,6 +75,7 @@ export async function readComments(post_id, signal) {
 }
 
 export async function createLogin(login, signal) {
+  console.log('here');
   const url = `${API_BASE_URL}/sessions`;
   const options = {
     method: 'POST',

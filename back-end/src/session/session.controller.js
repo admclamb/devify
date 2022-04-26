@@ -42,7 +42,17 @@ async function validatePassword(req, res, next) {
 async function createSession(req, res, next) {
   const { user_id } = res.locals.user;
   const session = await service.create(user_id);
+  console.log(session);
   res.status(201).json({ data: session });
+}
+
+async function checkSession(req, res, next) {
+  const { user_id } = res.locals.user;
+  const session = await service.readFromUser(user_id);
+  if (session) {
+    res.status(409).json({ data: session });
+  }
+  next();
 }
 
 async function sessionExist(req, res, next) {
@@ -65,6 +75,7 @@ module.exports = {
   create: [
     asyncErrorBoundary(validateLogin),
     asyncErrorBoundary(validatePassword),
+    asyncErrorBoundary(checkSession),
     asyncErrorBoundary(createSession),
   ],
   destroy: [asyncErrorBoundary(sessionExist), asyncErrorBoundary(destroy)],

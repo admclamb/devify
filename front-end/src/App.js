@@ -8,7 +8,7 @@ function App() {
   useEffect(() => {
     document.documentElement.style.setProperty('--color-dark', '#fff');
   }, [darkMode]);
-
+  console.log(session);
   return (
     <>
       <header>
@@ -18,7 +18,7 @@ function App() {
           user_id={session.user_id}
         />
       </header>
-      <PageRoutes />
+      <PageRoutes setSession={setSession} />
     </>
   );
 }
