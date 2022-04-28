@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const controller = require('./session.controller');
+
+const controller = require('./login.controller');
 const methodNotAllowed = require('../errors/methodNotAllowed');
 
 router

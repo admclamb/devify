@@ -3,18 +3,35 @@ require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 
 const express = require('express');
 const cors = require('cors');
+const session = require('express-session');
+const passport = require('passport');
 const errorHandler = require('./errors/errorHandler');
 const notFound = require('./errors/notFound');
 const postsRouter = require('./posts/posts.router');
 const commentsRouter = require('./comments/comments.router');
-const sessionRouter = require('./session/session.router');
+const loginRouter = require('./login/login.router');
+
+const store = new session.MemoryStore();
 const app = express();
 
 app.use(cors());
+
+app.use(
+  session({
+    secret: process.env.SECRET,
+    cookie: { maxAge: 30000 },
+    saveUninitialized: false,
+    store,
+  })
+);
+
 app.use(express.json());
+
+app.use(passport.initialize());
+app.use(passport.session());
 app.use('/posts', postsRouter);
 app.use('/comments', commentsRouter);
-app.use('/sessions', sessionRouter);
+app.use('/login', loginRouter);
 app.use(notFound);
 app.use(errorHandler);
 
