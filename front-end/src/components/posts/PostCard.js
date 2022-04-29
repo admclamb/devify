@@ -31,7 +31,7 @@ const PostCard = ({ post }) => {
                 : 'No Name'}
             </h5>
 
-            <p className="text-sm">{created_at}</p>
+            <p className="text-sm text-dark">{created_at}</p>
           </div>
         </div>
         <header className="post-card-header">
@@ -41,12 +41,12 @@ const PostCard = ({ post }) => {
         </header>
 
         <div className="post-card-main">
-          <p>{hashtags}</p>
+          <p className="text-dark">{hashtags}</p>
           <div className="footer d-flex align-items-center mt-5">
-            <p className="me-5">
-              <i className="fa-light fa-heart"></i> 0 Likes
+            <p className="me-5 text-dark">
+              <i className="fa-light fa-heart text-dark"></i> 0 Likes
             </p>
-            <p>
+            <p className="text-dark">
               <i className="fa-light fa-comment"></i> Add Comment
             </p>
             <button className=" ms-auto btn btn-secondary">Save</button>
