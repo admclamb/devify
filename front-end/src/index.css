@@ -9,14 +9,14 @@
 :root {
   --color-dark: #000;
   --color-light: #fff;
-  --color-light-darker: rgb(245, 245, 245);
-  --color-gray: rgb(219, 219, 219);
-  --color-main: rgb(36, 119, 182);
-  --color-main-hover: rgb(156, 194, 224);
+  --color-light-darker: #f5f5f5;
+  --color-gray: #dbdbdb;
+  --color-main: #2477b6;
+  --color-main-hover: #9cc2e0;
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   background-color: var(--color-light-darker);
 }
 
@@ -26,7 +26,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
+  color: var(--color-dark);
 }
 
 h1 {
@@ -60,7 +61,7 @@ p {
 
 .text-size-p {
   font-size: 1.25rem;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .container {

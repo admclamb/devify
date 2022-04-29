@@ -6,7 +6,8 @@ const jwt = require('jsonwebtoken');
 
 const hasOnlyValidProperties = require('../utils/hasOnlyValidProperties');
 const hasRequiredProperties = require('../utils/hasRequiredProperties');
-const VALID_PROPERTIES = ['email', 'password'];
+const VALID_PROPERTIES = ['email', 'password', 'username'];
+const REQUIRED_PROPERTIES = ['email', 'password'];
 // function checkLogin(req, res, next) {
 //   // if (session.user_id) {
 //   //   return next();
@@ -95,12 +96,12 @@ async function validatePassword(req, res, next) {
 
 async function createToken(req, res, next) {
   const { user } = res.locals;
-  const { email, user_id } = user;
+  const { email, user_id, username } = user;
   const token = jwt.sign({ user_id, email }, process.env.TOKEN_KEY, {
     expiresIn: '2h',
   });
   user.token = token;
-  res.status(200).json({ data: user_id, token });
+  res.status(200).json({ data: { user_id, token, username } });
 }
 
 async function destroy(req, res, next) {
@@ -112,7 +113,7 @@ async function destroy(req, res, next) {
 module.exports = {
   create: [
     hasOnlyValidProperties(VALID_PROPERTIES),
-    hasRequiredProperties(VALID_PROPERTIES),
+    hasRequiredProperties(REQUIRED_PROPERTIES),
     asyncErrorBoundary(userExist),
     asyncErrorBoundary(validatePassword),
     asyncErrorBoundary(createToken),

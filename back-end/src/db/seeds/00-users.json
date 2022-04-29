@@ -2,16 +2,19 @@
   {
     "user_id": 1,
     "email": "ricksanchez@mail.com",
+    "username": "thisisrick",
     "password": "1111Abc"
   },
   {
     "user_id": 2,
     "email": "birdperson@mail.com",
+    "username": "birdPerson",
     "password": "1111Abc"
   },
   {
     "user_id": 3,
     "email": "joedirt@mail.com",
+    "username": "joedirt",
     "password": "1111Abc"
   }
 ]
