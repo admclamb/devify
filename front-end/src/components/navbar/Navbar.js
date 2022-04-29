@@ -2,14 +2,19 @@ import { useState } from 'react';
 import Searchbar from '../Searchbar/Searchbar';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
-const Navbar = ({ darkMode, setDarkMode, user_id }) => {
+const Navbar = ({ darkMode, setDarkMode, user_id = 1 }) => {
   const [openModal, setOpenModal] = useState(false);
   const modal = (
-    <section className="navbar__modal">
-      <p></p>
+    <section className="navbar__modal rounded border">
+      <Link to={`profile/${user_id}`}>Profile</Link>
+      <hr />
       <ul>
-        <li>Dashboard</li>
-        <li>Crate Post</li>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to={`${user_id}/create`}>Create Post</Link>
+        </li>
         <li>Settings</li>
       </ul>
     </section>
