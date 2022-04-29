@@ -7,6 +7,7 @@
   display: inline;
   border-radius: 6px;
   padding: 0.8rem 0.6rem;
+  color: var(--color-dark);
 }
 
 .feed-nav ul li:hover {

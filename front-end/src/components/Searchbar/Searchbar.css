@@ -7,12 +7,14 @@
   right: 3%;
   top: 50%;
   transform: translateY(-50%);
+  color: var(--color-dark);
 }
 
 .searchbar {
   height: 2rem;
   border-radius: 4px;
-  border: rgb(190, 190, 190) 1px solid;
+  border: var(--color-border) 1px solid;
   padding: 1rem 0.5rem;
   width: 25em;
+  background-color: var(--color-light);
 }

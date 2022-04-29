@@ -18,6 +18,10 @@ function App() {
     }
   }, []);
 
+  const logoutUser = () => {
+    localStorage.removeItem('session');
+    setSession({});
+  };
   // Light and dark mode
   useEffect(() => {
     let colorLight = {
@@ -25,16 +29,22 @@ function App() {
       light: '#fff',
       lightDarker: '#f5f5f5',
       gray: '#dbdbdb',
+      borderColor: '#dee2e6',
     };
     let colorDark = {
       dark: '#fff',
       light: '#333',
       lightDarker: '#222',
       gray: '#dbdbdb',
+      borderColor: '#111',
     };
     let color = darkMode ? colorDark : colorLight;
     document.documentElement.style.setProperty('--color-dark', color.dark);
     document.documentElement.style.setProperty('--color-light', color.light);
+    document.documentElement.style.setProperty(
+      '--color-border',
+      color.borderColor
+    );
     document.documentElement.style.setProperty(
       '--color-light-darker',
       color.lightDarker
@@ -47,7 +57,8 @@ function App() {
         <Navbar
           darkMode={darkMode}
           setDarkMode={setDarkMode}
-          user_id={session.user_id}
+          session={session}
+          logoutUser={logoutUser}
         />
       </header>
       <PageRoutes setSession={setSession} />

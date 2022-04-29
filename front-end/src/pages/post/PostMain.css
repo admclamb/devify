@@ -1,7 +1,7 @@
 .post-main-container {
   background-color: var(--color-light);
   border-radius: 8px;
-  border: solid 1px var(--color-gray);
+  border: solid 1px var(--color-border) !important;
 }
 
 .post-main-body {

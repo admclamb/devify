@@ -13,6 +13,7 @@
   --color-gray: #dbdbdb;
   --color-main: #206eaa;
   --color-main-hover: #9cc2e0;
+  --color-border: #dee2e6;
 }
 
 body {
@@ -74,4 +75,12 @@ p {
 
 .text-container {
   width: 100%;
+}
+
+.border {
+  border-color: var(--color-border) !important;
+}
+
+.rounded {
+  border-color: var(--color-border) !important;
 }

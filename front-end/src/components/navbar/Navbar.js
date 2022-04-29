@@ -1,12 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Searchbar from '../Searchbar/Searchbar';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
-const Navbar = ({ darkMode, setDarkMode, user_id }) => {
+const Navbar = ({ darkMode, setDarkMode, session, logoutUser }) => {
+  const { user_id = '', username = '' } = session;
   const [openModal, setOpenModal] = useState(false);
   const modal = (
     <section className="navbar__modal rounded border">
-      <Link to={`profile/${user_id}`}>Profile</Link>
+      <Link to={`profile/${username}`} className="navbar__modal-profile">
+        {username ? `@${username}` : 'Profile'}
+      </Link>
       <hr />
       <ul>
         <li>
@@ -17,6 +20,10 @@ const Navbar = ({ darkMode, setDarkMode, user_id }) => {
         </li>
         <li>Settings</li>
       </ul>
+      <hr />
+      <Link to="/" className="navbar__modal-profile" onClick={logoutUser}>
+        Logout
+      </Link>
     </section>
   );
   const signedInNavbar = (
@@ -34,7 +41,7 @@ const Navbar = ({ darkMode, setDarkMode, user_id }) => {
   );
   const notSignedInNavbar = (
     <div className="navbar__profile-container">
-      <Link to="/login" className="me-3 btn">
+      <Link to="/login" className="me-3 btn login">
         Log in
       </Link>
       <Link to="/signup" className="btn btn-outline-primary">
