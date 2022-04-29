@@ -2,7 +2,7 @@ const asyncErrorBoundary = require('../errors/asyncErrorBoundary');
 const service = require('./login.service');
 const bcrypt = require('bcryptjs');
 const SALT = process.env.SALT || 10;
-const passport = require('passport');
+const jwt = require('jsonwebtoken');
 
 const hasOnlyValidProperties = require('../utils/hasOnlyValidProperties');
 const hasRequiredProperties = require('../utils/hasRequiredProperties');
@@ -72,8 +72,10 @@ const VALID_PROPERTIES = ['email', 'password'];
 // }
 
 async function userExist(req, res, next) {
-  const { email } = req.body;
-  const userExist = await service.read(email);
+  const { email } = req.body.data;
+  console.log(email);
+  const userExist = (await service.read(email)) || null;
+  console.log(userExist);
   if (userExist) {
     res.locals.user = userExist;
     return next();
@@ -82,7 +84,7 @@ async function userExist(req, res, next) {
 }
 
 async function validatePassword(req, res, next) {
-  const { password } = req.body;
+  const { password } = req.body.data;
   const { user } = res.locals;
   const validPassword = await bcrypt.compare(password, user.password);
   if (validPassword) {
@@ -92,13 +94,13 @@ async function validatePassword(req, res, next) {
 }
 
 async function createToken(req, res, next) {
-  const { user } = req.body;
-  const { email } = res.locals;
-  const token = jwt.sign({ user_id: user._id, email }, process.env.TOKEN_KEY, {
+  const { user } = res.locals;
+  const { email, user_id } = user;
+  const token = jwt.sign({ user_id, email }, process.env.TOKEN_KEY, {
     expiresIn: '2h',
   });
   user.token = token;
-  res.status(200).json({ data: user });
+  res.status(200).json({ data: user_id, token });
 }
 
 async function destroy(req, res, next) {

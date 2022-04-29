@@ -8,15 +8,11 @@ function create(user_id) {
     .then((createdPost) => createdPost[0]);
 }
 
-function read(session_id) {
-  return knex(TABLE).select('*').where({ session_id }).first();
-}
-
 function readFromUser(user_id) {
   return knex(TABLE).select('*').where({ user_id }).first();
 }
 
-function readUser(email) {
+function read(email) {
   return knex(USERS_TABLE).select('*').where({ email }).first();
 }
 
@@ -29,5 +25,4 @@ module.exports = {
   read,
   readFromUser,
   destroy,
-  readUser,
 };
