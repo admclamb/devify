@@ -1,8 +1,7 @@
-import { Link } from "react-router-dom";
-import "./PostCard.css";
+import { Link } from 'react-router-dom';
+import './PostCard.css';
 
 const PostCard = ({ post }) => {
-  console.log(post);
   const {
     post_id,
     image_url = null,
@@ -13,8 +12,8 @@ const PostCard = ({ post }) => {
     post_header,
   } = post;
   const hashtags = Array.isArray(hashtags_array)
-    ? hashtags_array.join("  ")
-    : "";
+    ? hashtags_array.join('  ')
+    : '';
   return (
     <article className="post-card">
       {image_url && (
@@ -28,8 +27,8 @@ const PostCard = ({ post }) => {
           <div className="name_date">
             <h5 className="text-sm">
               {first_name && last_name
-                ? first_name + "   " + last_name
-                : "No Name"}
+                ? first_name + '   ' + last_name
+                : 'No Name'}
             </h5>
 
             <p className="text-sm">{created_at}</p>

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { readComments, readPost } from "../../utils/api";
-import PostSidebar from "./PostSidebar";
-import PostMain from "./PostMain";
-import PostBio from "./PostBio";
-import FeedLoading from "../../components/Feed/FeedLoading";
-import ErrorAlert from "../../errors/ErrorAlert";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { readComments, readPost } from '../../utils/api';
+import PostSidebar from './PostSidebar';
+import PostMain from './PostMain';
+import PostBio from './PostBio';
+import FeedLoading from '../../components/Feed/FeedLoading';
+import ErrorAlert from '../../errors/ErrorAlert';
 const Post = () => {
   const { post_id } = useParams();
   const [post, setPost] = useState({});
@@ -20,7 +20,6 @@ const Post = () => {
       .then(setComments)
       .catch(setError);
   }, [post_id]);
-  console.log(post);
   if (!post && !error) return <FeedLoading />;
   return (
     <main className="row container-lg gx-0">

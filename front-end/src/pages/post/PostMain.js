@@ -1,6 +1,6 @@
-import FeedLoading from "../../components/Feed/FeedLoading";
-import "./PostMain.css";
-import PostMainComments from "./PostMainComments";
+import FeedLoading from '../../components/Feed/FeedLoading';
+import './PostMain.css';
+import PostMainComments from './PostMainComments';
 const PostMain = ({ post, comments }) => {
   if (!post) return <FeedLoading />;
   const {
@@ -14,9 +14,8 @@ const PostMain = ({ post, comments }) => {
   } = post;
   if (!post_id) return <FeedLoading />;
   const hashtags = Array.isArray(hashtags_array)
-    ? hashtags_array.join("  ")
-    : "";
-  console.log(comments);
+    ? hashtags_array.join('  ')
+    : '';
   return (
     <>
       <article className="post-main-container">
@@ -32,7 +31,7 @@ const PostMain = ({ post, comments }) => {
             <div className="post-card-head d-flex align-items-center mb-3">
               <div className="post-card-pfp"></div>
               <div className="name_date">
-                <h5 className="text-sm">{first_name + "   " + last_name}</h5>
+                <h5 className="text-sm">{first_name + '   ' + last_name}</h5>
                 <p className="text-sm">{created_at}</p>
               </div>
             </div>

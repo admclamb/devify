@@ -25,7 +25,6 @@ export async function fetchJson(url, options, onCancel) {
     if (response.status === 204) {
       return null;
     }
-    console.log(response);
     const payload = await response.json();
 
     if (payload.error) {
@@ -75,7 +74,6 @@ export async function readComments(post_id, signal) {
 }
 
 export async function createLogin(login, signal) {
-  console.log('here');
   const url = `${API_BASE_URL}/login`;
   const options = {
     method: 'POST',

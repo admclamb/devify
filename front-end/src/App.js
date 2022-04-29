@@ -6,6 +6,20 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [session, setSession] = useState({});
   useEffect(() => {
+    if (session.hasOwnProperty('user_id')) {
+      localStorage.setItem('session', JSON.stringify(session));
+    }
+  }, [session]);
+
+  useEffect(() => {
+    const session = localStorage.getItem('session');
+    if (session) {
+      setSession(JSON.parse(session));
+    }
+  }, []);
+
+  // Light and dark mode
+  useEffect(() => {
     let colorLight = {
       dark: '#000',
       light: '#fff',

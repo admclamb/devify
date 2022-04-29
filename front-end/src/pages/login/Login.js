@@ -14,10 +14,8 @@ const Login = ({ setSession }) => {
       [id]: target.value,
     });
   };
-  console.log(login);
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('here');
     setError(null);
     const abortController = new AbortController();
     createLogin(login, abortController.signal)
@@ -27,7 +25,6 @@ const Login = ({ setSession }) => {
       })
       .catch(setError);
   };
-  console.log(error);
   return (
     <main className="row">
       <form

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Searchbar from '../Searchbar/Searchbar';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
-const Navbar = ({ darkMode, setDarkMode, user_id = 1 }) => {
+const Navbar = ({ darkMode, setDarkMode, user_id }) => {
   const [openModal, setOpenModal] = useState(false);
   const modal = (
     <section className="navbar__modal rounded border">
