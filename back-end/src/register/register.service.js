@@ -1,4 +1,4 @@
-const knex = require('knex');
+const knex = require('../db/connection');
 const TABLE = 'users';
 const USERS_PROFILES_TABLE = 'users_profiles';
 

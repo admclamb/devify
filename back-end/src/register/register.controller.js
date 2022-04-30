@@ -4,16 +4,13 @@ const bcrypt = require('bcryptjs');
 const { SALT } = process.env;
 const hasOnlyValidProperties = require('../utils/hasOnlyValidProperties');
 const hasRequiredProperties = require('../utils/hasRequiredProperties');
-const VALID_PROPERTIES = ['email', 'password'];
-
-async function userExist(req, res, next) {
-  const { email } = req.body.data;
-  const user = await service.read(email);
-  if (user) {
-    res.status(409).json({ data: 'User already exist. Please Login' });
-  }
-  next();
-}
+const VALID_PROPERTIES = [
+  'email',
+  'password',
+  'username',
+  'first_name',
+  'last_name',
+];
 
 async function emailExist(req, res, next) {
   const { email } = req.body.data;
@@ -21,7 +18,7 @@ async function emailExist(req, res, next) {
   if (user) {
     return next({
       status: 409,
-      messgae: 'email already is in use. Please try a different one.',
+      message: 'email already is in use. Please try a different one.',
     });
   }
   next();
@@ -29,11 +26,12 @@ async function emailExist(req, res, next) {
 
 async function usernameExist(req, res, next) {
   const { username } = req.body.data;
+
   const user = await service.readFromUsername(username);
   if (user) {
     return next({
       status: 409,
-      messgae: 'username already in use. Please try a different one.',
+      message: 'username already in use. Please try a different one.',
     });
   }
   next();
@@ -42,7 +40,16 @@ async function usernameExist(req, res, next) {
 async function encryptPassword(req, res, next) {
   const { data } = req.body;
   const { password } = data;
-  const hashedPassword = await bcrypt.hash(password, SALT);
+  let saltError;
+  const hashedPassword = await bcrypt
+    .hash(password, parseInt(SALT))
+    .catch(saltError);
+  if (saltError) {
+    return next({
+      status: 400,
+      message: 'Error hasing password. Please try again',
+    });
+  }
   res.locals.user = {
     ...data,
     email: data.email.toLowerCase(),
@@ -61,7 +68,10 @@ async function create(req, res, next) {
     username,
     password,
   };
+  console.log(formattedUser);
+
   const createdUser = await service.create(formattedUser);
+  console.log(createdUser);
   res.locals.createdUser = createdUser;
   next();
 }
