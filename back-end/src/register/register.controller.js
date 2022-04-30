@@ -15,11 +15,36 @@ async function userExist(req, res, next) {
   next();
 }
 
+async function emailExist(req, res, next) {
+  const { email } = req.body.data;
+  const user = await service.read(email);
+  if (user) {
+    return next({
+      status: 409,
+      messgae: 'email already is in use. Please try a different one.',
+    });
+  }
+  next();
+}
+
+async function usernameExist(req, res, next) {
+  const { username } = req.body.data;
+  const user = await service.readFromUsername(username);
+  if (user) {
+    return next({
+      status: 409,
+      messgae: 'username already in use. Please try a different one.',
+    });
+  }
+  next();
+}
+
 async function encryptPassword(req, res, next) {
-  const { password } = req.body.data;
   const { data } = req.body;
+  const { password } = data;
   const hashedPassword = await bcrypt.hash(password, SALT);
   res.locals.user = {
+    ...data,
     email: data.email.toLowerCase(),
     password: hashedPassword,
   };
@@ -47,7 +72,8 @@ module.exports = {
   create: [
     hasOnlyValidProperties(VALID_PROPERTIES),
     hasRequiredProperties(VALID_PROPERTIES),
-    asyncErrorBoundary(userExist),
+    asyncErrorBoundary(emailExist),
+    asyncErrorBoundary(usernameExist),
     asyncErrorBoundary(encryptPassword),
     asyncErrorBoundary(create),
     asyncErrorBoundary(createToken),

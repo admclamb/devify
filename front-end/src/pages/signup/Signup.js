@@ -45,7 +45,7 @@ const Signup = ({ setSession }) => {
         <ErrorAlert error={error} />
         <h3 className="text-center">Welcome to DEV Clone</h3>
         <div className="row">
-          <div className="input-control mb-3 col-12 col-md-6">
+          <div className="input-control mb-3 col-12 col-lg-6">
             <label htmlFor="first_name" className="form-label">
               First Name
             </label>
@@ -58,7 +58,7 @@ const Signup = ({ setSession }) => {
               placeholder="first name"
             />
           </div>
-          <div className="input-control mb-3 col-12 col-md-6">
+          <div className="input-control mb-3 col-12 col-lg-6">
             <label htmlFor="last_name" className="form-label">
               Last Name
             </label>
