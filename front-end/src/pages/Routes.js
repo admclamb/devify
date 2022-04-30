@@ -3,6 +3,7 @@ import Home from './home/Home';
 import CreatePost from './post/CreatePost';
 import Post from './post/Post';
 import Login from './login/Login';
+import Signup from './signup/Signup';
 const PageRoutes = ({ setSession }) => {
   return (
     <Routes>
@@ -13,6 +14,11 @@ const PageRoutes = ({ setSession }) => {
         exact={true}
         path="/login"
         element={<Login setSession={setSession} />}
+      />
+      <Route
+        exact={true}
+        path="/signup"
+        element={<Signup setSession={setSession} />}
       />
     </Routes>
   );

@@ -1,0 +1,8 @@
+.signup-form {
+  padding: 3rem;
+  background-color: var(--color-light);
+}
+
+.signup-submit {
+  width: 100%;
+}

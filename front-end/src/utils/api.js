@@ -83,3 +83,14 @@ export async function createLogin(login, signal) {
   };
   return await fetchJson(url, options, {});
 }
+
+export async function signup(user, signal) {
+  const url = `${API_BASE_URL}/signup`;
+  const options = {
+    method: 'POST',
+    body: JSON.stringify({ data: user }),
+    headers,
+    signal,
+  };
+  return await fetchJson(url, options, {});
+}
