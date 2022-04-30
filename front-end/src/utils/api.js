@@ -85,7 +85,7 @@ export async function createLogin(login, signal) {
 }
 
 export async function signup(user, signal) {
-  const url = `${API_BASE_URL}/signup`;
+  const url = `${API_BASE_URL}/register`;
   const options = {
     method: 'POST',
     body: JSON.stringify({ data: user }),
