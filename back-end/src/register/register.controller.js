@@ -53,19 +53,51 @@ async function encryptPassword(req, res, next) {
 
 async function create(req, res, next) {
   const { user } = res.locals;
-  const createdUser = await service.create(user);
-  res.locals.user = createdUser;
+  const { email } = user;
+  const { username } = user;
+  const { password } = user;
+  const formattedUser = {
+    email,
+    username,
+    password,
+  };
+  const createdUser = await service.create(formattedUser);
+  res.locals.createdUser = createdUser;
   next();
 }
 
-function createToken(req, res, next) {
+async function createUsersProfile(req, res, next) {
   const { user } = res.locals;
-  const { email } = user;
-  const token = jwt.sign({ user_id: user._id, email }, process.env.TOKEN_KEY, {
+  const { user_id } = res.locals;
+  const { first_name } = user;
+  const { last_name } = user;
+  const formattedUserProfile = {
+    user_id,
+    first_name,
+    last_name,
+  };
+  const createdProfile = await service.createUsersProfile(formattedUserProfile);
+  res.locals.profile = createdProfile;
+  next();
+}
+
+async function createToken(req, res, next) {
+  const { user } = res.locals;
+  const { email, user_id, username } = user;
+  const { first_name } = res.locals.createdProfile;
+  const { last_name } = res.locals.createdProfile;
+  const token = jwt.sign({ user_id, email }, process.env.TOKEN_KEY, {
     expiresIn: '2h',
   });
   user.token = token;
-  res.status(201).json(user);
+  const data = {
+    user_id,
+    token,
+    username,
+    first_name,
+    last_name,
+  };
+  res.status(200).json({ data });
 }
 
 module.exports = {
@@ -76,6 +108,7 @@ module.exports = {
     asyncErrorBoundary(usernameExist),
     asyncErrorBoundary(encryptPassword),
     asyncErrorBoundary(create),
+    asyncErrorBoundary(createUsersProfile),
     asyncErrorBoundary(createToken),
   ],
 };

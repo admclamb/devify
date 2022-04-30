@@ -77,6 +77,10 @@ p {
   width: 100%;
 }
 
+input {
+  background-color: var(--color-light);
+}
+
 /* Resets */
 .text-dark {
   color: var(--color-dark) !important;
