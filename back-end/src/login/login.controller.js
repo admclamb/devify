@@ -1,7 +1,7 @@
 const asyncErrorBoundary = require('../errors/asyncErrorBoundary');
 const service = require('./login.service');
 const bcrypt = require('bcryptjs');
-const SALT = process.env.SALT || 10;
+const SALT = process.env.SALT;
 const jwt = require('jsonwebtoken');
 
 const hasOnlyValidProperties = require('../utils/hasOnlyValidProperties');
@@ -81,7 +81,7 @@ async function userExist(req, res, next) {
     res.locals.user = userExist;
     return next();
   }
-  next({ status: 404, message: 'User not found.' });
+  next({ status: 401, message: 'username and or password is incorrect.' });
 }
 
 async function validatePassword(req, res, next) {
@@ -91,7 +91,7 @@ async function validatePassword(req, res, next) {
   if (validPassword) {
     return next();
   }
-  next({ status: 400, message: 'Password is incorrect' });
+  next({ status: 401, message: 'username and or password is incorrect.' });
 }
 
 async function createToken(req, res, next) {

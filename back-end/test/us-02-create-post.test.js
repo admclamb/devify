@@ -4,10 +4,6 @@ const request = require('supertest');
 const app = require('../src/app');
 const knex = require('../src/db/connection');
 
-/**
- * US-01 List posts and list comments for front end user stories
- */
-
 describe('US-02 create post', () => {
   beforeAll(() => {
     return knex.migrate
