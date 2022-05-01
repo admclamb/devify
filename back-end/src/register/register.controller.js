@@ -2,6 +2,7 @@ const asyncErrorBoundary = require('../errors/asyncErrorBoundary');
 const service = require('./register.service');
 const bcrypt = require('bcryptjs');
 const { SALT } = process.env;
+const jwt = require('jsonwebtoken');
 const hasOnlyValidProperties = require('../utils/hasOnlyValidProperties');
 const hasRequiredProperties = require('../utils/hasRequiredProperties');
 const VALID_PROPERTIES = [
@@ -35,6 +36,14 @@ async function usernameExist(req, res, next) {
     });
   }
   next();
+}
+
+function validatePassword(req, res, next) {
+  const { password } = req.body.data;
+  if (typeof password === 'string') {
+    return next();
+  }
+  next({ status: 400, message: 'Password must be a string.' });
 }
 
 async function encryptPassword(req, res, next) {
@@ -71,14 +80,14 @@ async function create(req, res, next) {
   console.log(formattedUser);
 
   const createdUser = await service.create(formattedUser);
-  console.log(createdUser);
   res.locals.createdUser = createdUser;
   next();
 }
 
 async function createUsersProfile(req, res, next) {
   const { user } = res.locals;
-  const { user_id } = res.locals;
+  const { user_id } = res.locals.createdUser;
+  console.log(res.locals.createdUser);
   const { first_name } = user;
   const { last_name } = user;
   const formattedUserProfile = {
@@ -92,14 +101,13 @@ async function createUsersProfile(req, res, next) {
 }
 
 async function createToken(req, res, next) {
-  const { user } = res.locals;
-  const { email, user_id, username } = user;
-  const { first_name } = res.locals.createdProfile;
-  const { last_name } = res.locals.createdProfile;
+  const { createdUser } = res.locals;
+  const { email, user_id, username } = createdUser;
+  const { first_name } = res.locals.profile;
+  const { last_name } = res.locals.profile;
   const token = jwt.sign({ user_id, email }, process.env.TOKEN_KEY, {
     expiresIn: '2h',
   });
-  user.token = token;
   const data = {
     user_id,
     token,
@@ -107,7 +115,7 @@ async function createToken(req, res, next) {
     first_name,
     last_name,
   };
-  res.status(200).json({ data });
+  res.status(201).json({ data });
 }
 
 module.exports = {
@@ -116,6 +124,7 @@ module.exports = {
     hasRequiredProperties(VALID_PROPERTIES),
     asyncErrorBoundary(emailExist),
     asyncErrorBoundary(usernameExist),
+    validatePassword,
     asyncErrorBoundary(encryptPassword),
     asyncErrorBoundary(create),
     asyncErrorBoundary(createUsersProfile),

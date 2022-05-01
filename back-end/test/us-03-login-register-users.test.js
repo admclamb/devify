@@ -178,7 +178,7 @@ describe('US-03 login and register users', () => {
       });
       test('Should return 400 if last_name is missing', async () => {
         const data = {
-          last_name: 'testlast_name',
+          first_name: 'testfirst_name',
           username: 'testusername',
           email: 'testemail@mail.com',
           password: '1234Abc',
@@ -193,7 +193,7 @@ describe('US-03 login and register users', () => {
       test('Should return 400 if last_name is empty', async () => {
         const data = {
           first_name: 'testfirst_name',
-          last_name: 'testlast_name',
+          last_name: '',
           username: 'testusername',
           email: 'testemail@mail.com',
           password: '1234Abc',
@@ -320,7 +320,7 @@ describe('US-03 login and register users', () => {
           .set('Accept', 'application/json')
           .send({ data });
         expect(response.status).to.equal(400);
-        expect(response.body.error).to.contain('password');
+        expect(response.body.error).to.equal('Password must be a string.');
       });
       test('Should return 201 if user is created', async () => {
         const data = {
@@ -334,12 +334,14 @@ describe('US-03 login and register users', () => {
           .post('/register')
           .set('Accept', 'application/json')
           .send({ data });
+
+        console.log(response.body.data);
         expect(response.status).to.equal(201);
         expect(response.body.error).to.be.undefined;
         expect(response.body.data.user_id).to.equal(4);
         expect(response.body.data.username).to.equal('testusername');
         expect(response.body.data.first_name).to.equal('testfirst_name');
-        expect(response.body.data.last_name).to.equal(testlast_name);
+        expect(response.body.data.last_name).to.equal('testlast_name');
       });
     });
   });
