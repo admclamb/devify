@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ErrorAlert from '../../errors/ErrorAlert';
-import { signup } from '../../utils/api';
+import { signupUser } from '../../utils/api';
 import './Signup.css';
 
 const Signup = ({ setSession }) => {
@@ -18,22 +18,30 @@ const Signup = ({ setSession }) => {
   const navigate = useNavigate();
   const handleChange = ({ target }) => {
     const { id } = target;
-    if (id === 'passwordConfirm') setPasswordConfirm(target.value);
     setSignup({
       ...signup,
       [id]: target.value,
     });
   };
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     setError(null);
-    const abortController = new AbortController();
-    signup(signup, abortController.signal)
-      .then((response) => {
-        setSession(response);
+    console.log('here');
+    console.log(signup.password, passwordConfirm);
+    if (signup.password === passwordConfirm) {
+      const abortController = new AbortController();
+      console.log('here sending request');
+      signupUser(signup, abortController.signal)
+        .then(setSession)
+        .catch(setError);
+      console.log(session, error);
+      if (!error) {
         navigate('/');
-      })
-      .catch(setError);
+      }
+    } else {
+      console.log('password does not work');
+      setError({ message: 'Passwords are not matching. Please try again.' });
+    }
   };
   return (
     <main className="row">
@@ -56,6 +64,7 @@ const Signup = ({ setSession }) => {
               value={signup.first_name}
               onChange={handleChange}
               placeholder="first name"
+              required
             />
           </div>
           <div className="input-control mb-3 col-12 col-lg-6">
@@ -69,6 +78,7 @@ const Signup = ({ setSession }) => {
               value={signup.last_name}
               onChange={handleChange}
               placeholder="last name"
+              required
             />
           </div>
         </div>
@@ -84,6 +94,7 @@ const Signup = ({ setSession }) => {
             value={signup.username}
             onChange={handleChange}
             placeholder="username"
+            required
           />
         </div>
         <div className="input-control mb-3">
@@ -97,6 +108,7 @@ const Signup = ({ setSession }) => {
             value={signup.email}
             onChange={handleChange}
             placeholder="youremail@example.com"
+            required
           />
         </div>
         <div className="input-control mb-3">
@@ -110,6 +122,7 @@ const Signup = ({ setSession }) => {
             value={signup.password}
             onChange={handleChange}
             placeholder="password"
+            required
           />
         </div>
         <div className="input-control mb-3">
@@ -121,8 +134,9 @@ const Signup = ({ setSession }) => {
             className="form-control"
             id="passwordConfirm"
             value={passwordConfirm}
-            onChange={handleChange}
+            onChange={({ target }) => setPasswordConfirm(target.value)}
             placeholder="confirm password"
+            required
           />
         </div>
         <div className="mb-3 form-check">

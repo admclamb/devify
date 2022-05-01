@@ -77,7 +77,6 @@ async function create(req, res, next) {
     username,
     password,
   };
-  console.log(formattedUser);
 
   const createdUser = await service.create(formattedUser);
   res.locals.createdUser = createdUser;
@@ -87,7 +86,6 @@ async function create(req, res, next) {
 async function createUsersProfile(req, res, next) {
   const { user } = res.locals;
   const { user_id } = res.locals.createdUser;
-  console.log(res.locals.createdUser);
   const { first_name } = user;
   const { last_name } = user;
   const formattedUserProfile = {
