@@ -147,7 +147,7 @@ describe('US-03 login and register users', () => {
         expect(response.status).to.equal(400);
       });
 
-      test('SHould return 400 if first_name is missing', () => {
+      test('SHould return 400 if first_name is missing', async () => {
         const data = {
           last_name: 'testlast_name',
           username: 'testusername',
@@ -161,9 +161,9 @@ describe('US-03 login and register users', () => {
         expect(response.status).to.equal(400);
         expect(response.body.error).to.contain('first_name');
       });
-      test('SHould return 400 if first_name is empty', () => {
+      test('SHould return 400 if first_name is empty', async () => {
         const data = {
-          first_name: "",
+          first_name: '',
           last_name: 'testlast_name',
           username: 'testusername',
           email: 'testemail@mail.com',
@@ -176,7 +176,7 @@ describe('US-03 login and register users', () => {
         expect(response.status).to.equal(400);
         expect(response.body.error).to.contain('first_name');
       });
-      test('Should return 400 if last_name is missing', () => {
+      test('Should return 400 if last_name is missing', async () => {
         const data = {
           last_name: 'testlast_name',
           username: 'testusername',
@@ -190,7 +190,7 @@ describe('US-03 login and register users', () => {
         expect(response.status).to.equal(400);
         expect(response.body.error).to.contain('last_name');
       });
-      test('Should return 400 if last_name is empty', () => {
+      test('Should return 400 if last_name is empty', async () => {
         const data = {
           first_name: 'testfirst_name',
           last_name: 'testlast_name',
@@ -205,7 +205,7 @@ describe('US-03 login and register users', () => {
         expect(response.status).to.equal(400);
         expect(response.body.error).to.contain('last_name');
       });
-      test('Should return 400 if username is missing', () => {
+      test('Should return 400 if username is missing', async () => {
         const data = {
           first_name: 'testfirst_name',
           last_name: 'testlast_name',
@@ -219,11 +219,11 @@ describe('US-03 login and register users', () => {
         expect(response.status).to.equal(400);
         expect(response.body.error).to.contain('username');
       });
-      test('Should return 400 if username is empty', () => {
+      test('Should return 400 if username is empty', async () => {
         const data = {
           first_name: 'testfirst_name',
           last_name: 'testlast_name',
-          username: "",
+          username: '',
           email: 'testemail@mail.com',
           password: '1234Abc',
         };
@@ -234,7 +234,7 @@ describe('US-03 login and register users', () => {
         expect(response.status).to.equal(400);
         expect(response.body.error).to.contain('username');
       });
-      test('Should return 400 if email is missing', () => {
+      test('Should return 400 if email is missing', async () => {
         const data = {
           first_name: 'testfirst_name',
           last_name: 'testlast_name',
@@ -248,12 +248,12 @@ describe('US-03 login and register users', () => {
         expect(response.status).to.equal(400);
         expect(response.body.error).to.contain('email');
       });
-      test('Should return 400 if email is empty', () => {
+      test('Should return 400 if email is empty', async () => {
         const data = {
           first_name: 'testfirst_name',
           last_name: 'testlast_name',
           username: 'testusername',
-          email: "",
+          email: '',
           password: '1234Abc',
         };
         const response = await request(app)
@@ -263,7 +263,7 @@ describe('US-03 login and register users', () => {
         expect(response.status).to.equal(400);
         expect(response.body.error).to.contain('email');
       });
-      test('Should return 400 if password is missing', () => {
+      test('Should return 400 if password is missing', async () => {
         const data = {
           first_name: 'testfirst_name',
           last_name: 'testlast_name',
@@ -277,13 +277,13 @@ describe('US-03 login and register users', () => {
         expect(response.status).to.equal(400);
         expect(response.body.error).to.contain('password');
       });
-      test('Should return 400 if password is empty', () => {
+      test('Should return 400 if password is empty', async () => {
         const data = {
           first_name: 'testfirst_name',
           last_name: 'testlast_name',
           username: 'testusername',
           email: 'testemail@mail.com',
-          password: ""
+          password: '',
         };
         const response = await request(app)
           .post('/register')
@@ -292,7 +292,7 @@ describe('US-03 login and register users', () => {
         expect(response.status).to.equal(400);
         expect(response.body.error).to.contain('password');
       });
-      test('Should return 400 if password is not a string', () => {
+      test('Should return 400 if password is not a string', async () => {
         const data = {
           first_name: 'testfirst_name',
           last_name: 'testlast_name',
@@ -307,7 +307,7 @@ describe('US-03 login and register users', () => {
         expect(response.status).to.equal(400);
         expect(response.body.error).to.contain('password');
       });
-      test('Should return 400 if password is a number', () => {
+      test('Should return 400 if password is a number', async () => {
         const data = {
           first_name: 'testfirst_name',
           last_name: 'testlast_name',
@@ -322,13 +322,13 @@ describe('US-03 login and register users', () => {
         expect(response.status).to.equal(400);
         expect(response.body.error).to.contain('password');
       });
-      test('Should return 201 if user is created', () => {
+      test('Should return 201 if user is created', async () => {
         const data = {
           first_name: 'testfirst_name',
           last_name: 'testlast_name',
           username: 'testusername',
           email: 'testemail@mail.com',
-          password: "1234Abc",
+          password: '1234Abc',
         };
         const response = await request(app)
           .post('/register')
@@ -337,7 +337,7 @@ describe('US-03 login and register users', () => {
         expect(response.status).to.equal(201);
         expect(response.body.error).to.be.undefined;
         expect(response.body.data.user_id).to.equal(4);
-        expect(response.body.data.username).to.equal("testusername");
+        expect(response.body.data.username).to.equal('testusername');
         expect(response.body.data.first_name).to.equal('testfirst_name');
         expect(response.body.data.last_name).to.equal(testlast_name);
       });
