@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import './PostCard.css';
 
 const PostCard = ({ post }) => {
+  console.log(post);
   const {
     post_id,
     image_url = null,
@@ -10,6 +11,7 @@ const PostCard = ({ post }) => {
     last_name = null,
     hashtags_array,
     post_header,
+    likes = 0,
   } = post;
   const hashtags = Array.isArray(hashtags_array)
     ? hashtags_array.join('  ')
@@ -44,7 +46,7 @@ const PostCard = ({ post }) => {
           <p className="text-dark">{hashtags}</p>
           <div className="footer d-flex align-items-center mt-5">
             <p className="me-5 text-dark">
-              <i className="fa-light fa-heart text-dark"></i> 0 Likes
+              <i className="fa-light fa-heart text-dark"></i> {likes} Likes
             </p>
             <p className="text-dark">
               <i className="fa-light fa-comment"></i> Add Comment

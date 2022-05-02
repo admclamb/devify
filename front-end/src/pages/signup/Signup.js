@@ -4,7 +4,7 @@ import ErrorAlert from '../../errors/ErrorAlert';
 import { signupUser } from '../../utils/api';
 import './Signup.css';
 
-const Signup = ({ setSession }) => {
+const Signup = ({ setSession, session }) => {
   const initSignup = {
     first_name: '',
     last_name: '',
@@ -15,6 +15,7 @@ const Signup = ({ setSession }) => {
   const [signup, setSignup] = useState(initSignup);
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [error, setError] = useState(null);
+  const [signupBtnText, setSignupBtnText] = useState('Continue');
   const navigate = useNavigate();
   const handleChange = ({ target }) => {
     const { id } = target;
@@ -26,6 +27,8 @@ const Signup = ({ setSession }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setError(null);
+    setSession({});
+    setSignupBtnText('Loading...');
     console.log('here');
     console.log(signup.password, passwordConfirm);
     if (signup.password === passwordConfirm) {
@@ -34,8 +37,8 @@ const Signup = ({ setSession }) => {
       signupUser(signup, abortController.signal)
         .then(setSession)
         .catch(setError);
-      console.log(session, error);
-      if (!error) {
+      setSignupBtnText('Continue');
+      if (Object.keys(session) > 0 && !error) {
         navigate('/');
       }
     } else {
@@ -155,7 +158,7 @@ const Signup = ({ setSession }) => {
           value="Submit"
           form="signup-form"
         >
-          Continue
+          {signupBtnText}
         </button>
       </form>
     </main>

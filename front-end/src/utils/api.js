@@ -27,7 +27,7 @@ export async function fetchJson(url, options, onCancel) {
     }
 
     const payload = await response.json();
-    console.log(payload);
+    console.log('payload: ', payload);
     if (payload.error) {
       return Promise.reject({ message: payload.error });
     }
@@ -95,5 +95,7 @@ export async function signupUser(user, signal) {
     signal,
   };
   console.log('signup up user');
-  return await fetchJson(url, options, {});
+  const response = await fetchJson(url, options, {});
+  console.log('response in api: ', response);
+  return response;
 }

@@ -61,7 +61,7 @@ function App() {
           logoutUser={logoutUser}
         />
       </header>
-      <PageRoutes setSession={setSession} />
+      <PageRoutes setSession={setSession} session={session} />
     </>
   );
 }
