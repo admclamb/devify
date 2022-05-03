@@ -322,6 +322,42 @@ describe('US-03 login and register users', () => {
         expect(response.status).to.equal(400);
         expect(response.body.error).to.equal('Password must be a string.');
       });
+      test('Should return 409 if user email is already in use', async () => {
+        const data = {
+          email: 'ricksanchez@mail.com',
+          username: 'thisisrickNotTheSame',
+          password: '1111Abc',
+          first_name: 'testfirst_name',
+          last_name: 'testlast_name',
+        };
+        const response = await request(app)
+          .post('/register')
+          .set('Accept', 'application/json')
+          .send({ data });
+
+        expect(response.status).to.equal(409);
+        expect(response.body.error).to.equal(
+          'Email already is in use. Please try a different one.'
+        );
+      });
+      test('Should return 409 if user username is already in use', async () => {
+        const data = {
+          email: 'ricksanchezUnique@mail.com',
+          username: 'thisisrick',
+          password: '1111Abc',
+          first_name: 'testfirst_name',
+          last_name: 'testlast_name',
+        };
+        const response = await request(app)
+          .post('/register')
+          .set('Accpet', 'application/json')
+          .send({ data });
+
+        expect(response.status).to.equal(409);
+        expect(response.body.error).to.equal(
+          'Username already in use. Please try a different one.'
+        );
+      });
       test('Should return 201 if user is created', async () => {
         const data = {
           first_name: 'testfirst_name',

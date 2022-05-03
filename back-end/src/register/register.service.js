@@ -14,7 +14,6 @@ function create(user) {
 }
 
 function createUsersProfile(user) {
-  console.log('inside register.service: ', user);
   return knex(USERS_PROFILES_TABLE)
     .insert(user)
     .returning('*')

@@ -16,10 +16,11 @@ const VALID_PROPERTIES = [
 async function emailExist(req, res, next) {
   const { email } = req.body.data;
   const user = await service.read(email);
+  console.log(user);
   if (user) {
     return next({
       status: 409,
-      message: 'email already is in use. Please try a different one.',
+      message: 'Email already is in use. Please try a different one.',
     });
   }
   next();
@@ -32,7 +33,7 @@ async function usernameExist(req, res, next) {
   if (user) {
     return next({
       status: 409,
-      message: 'username already in use. Please try a different one.',
+      message: 'Username already in use. Please try a different one.',
     });
   }
   next();

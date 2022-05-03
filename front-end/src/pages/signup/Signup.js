@@ -46,6 +46,7 @@ const Signup = ({ setSession, session }) => {
       setError({ message: 'Passwords are not matching. Please try again.' });
     }
   };
+  console.log('session: ', session, error);
   return (
     <main className="row">
       <form

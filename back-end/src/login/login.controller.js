@@ -11,9 +11,7 @@ const REQUIRED_PROPERTIES = ['email', 'password'];
 
 async function userExist(req, res, next) {
   const { email } = req.body.data;
-  console.log(email);
   const userExist = (await service.read(email)) || null;
-  console.log(userExist);
   if (userExist) {
     res.locals.user = userExist;
     return next();
