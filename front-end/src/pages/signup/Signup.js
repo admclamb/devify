@@ -24,28 +24,52 @@ const Signup = ({ setSession, session }) => {
       [id]: target.value,
     });
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setError(null);
     setSession({});
     setSignupBtnText('Loading...');
-    console.log('here');
-    console.log(signup.password, passwordConfirm);
-    if (signup.password === passwordConfirm) {
-      const abortController = new AbortController();
-      console.log('here sending request');
-      signupUser(signup, abortController.signal)
-        .then(setSession)
-        .catch(setError);
-      setSignupBtnText('Continue');
-      if (Object.keys(session) > 0 && !error) {
+    try {
+      if (signup.password === passwordConfirm) {
+        const abortController = new AbortController();
+        const response = await signupUser(signup, abortController.signal);
+        setSession(response);
         navigate('/');
+      } else {
+        throw {
+          message: 'Passwords are not matching. Please try again.',
+        };
       }
-    } else {
-      console.log('password does not work');
-      setError({ message: 'Passwords are not matching. Please try again.' });
+    } catch (error) {
+      console.log(error);
+      setError(error);
+      setSignupBtnText('Continue');
     }
   };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   setError(null);
+  //   setSession({});
+  //   setSignupBtnText('Loading...');
+  //   console.log('here');
+  //   console.log(signup.password, passwordConfirm);
+  //   if (signup.password === passwordConfirm) {
+  //     const abortController = new AbortController();
+  //     console.log('here sending request');
+  //     signupUser(signup, abortController.signal)
+  //       .then(setSession)
+  //       .catch(setError);
+  //     console.log(session);
+  //     if (session.hasOwnProperty('user_id')) {
+  //       navigate.push('/');
+  //     }
+  //   } else {
+  //     console.log('password does not work');
+  //     setError({ message: 'Passwords are not matching. Please try again.' });
+  //   }
+  //   setSignupBtnText('Continue');
+  // };
+  console.log('session: " => ', Object.keys);
   console.log('session: ', session, error);
   return (
     <main className="row">
@@ -158,6 +182,7 @@ const Signup = ({ setSession, session }) => {
           className="btn btn-primary signup-submit"
           value="Submit"
           form="signup-form"
+          disabled={signupBtnText !== 'Continue'}
         >
           {signupBtnText}
         </button>
