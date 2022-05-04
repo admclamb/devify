@@ -5,3 +5,15 @@
 .post-body-container {
   height: 70vh;
 }
+.create-post-header-main {
+  padding: 2rem 3rem;
+}
+
+.create-post-body-container {
+  padding: 2rem 3rem;
+}
+
+.post_header-input {
+  border: none;
+  font-size: var(--font-lg);
+}

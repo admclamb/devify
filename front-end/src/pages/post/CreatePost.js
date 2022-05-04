@@ -56,9 +56,9 @@ const CreatePost = () => {
           <button className="btn ">Preview</button>
         </div>
       </nav>
-      <article className="row container-lg create-post-container rounded">
+      <article className="row container-lg create-post-container rounded gx-0">
         <header>
-          <div>
+          <div className="create-post-header-main">
             <button className="btn btn-lg btn-outline-dark mb-4">
               Add a cover image
             </button>
@@ -69,12 +69,13 @@ const CreatePost = () => {
                 value={post.post_header}
                 onChange={handleChange}
                 id="post_header"
+                className="post_header-input"
               />
             </form>
           </div>
           <CreatePostNav />
         </header>
-        <main className="post-body-container">
+        <main className="create-post-body-container">
           <PostBody body={body} setBody={setBody} />
         </main>
       </article>

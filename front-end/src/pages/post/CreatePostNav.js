@@ -1,6 +1,8 @@
+import './CreatePostNav.css';
+
 const CreatePostNav = () => {
   return (
-    <nav className="d-flex bg-light">
+    <nav className="d-flex bg-light create-post-nav">
       <button className="btn btn-lg btn-light">B</button>
       <button className="btn btn-lg btn-light">
         <em>I</em>
