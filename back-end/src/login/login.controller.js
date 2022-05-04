@@ -16,7 +16,7 @@ async function userExist(req, res, next) {
     res.locals.user = userExist;
     return next();
   }
-  next({ status: 401, message: 'username and or password is incorrect.' });
+  next({ status: 401, message: 'Email and or password is incorrect.' });
 }
 
 async function validatePassword(req, res, next) {

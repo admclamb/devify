@@ -41,36 +41,11 @@ const Signup = ({ setSession, session }) => {
         };
       }
     } catch (error) {
-      console.log(error);
       setError(error);
       setSignupBtnText('Continue');
     }
   };
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   setError(null);
-  //   setSession({});
-  //   setSignupBtnText('Loading...');
-  //   console.log('here');
-  //   console.log(signup.password, passwordConfirm);
-  //   if (signup.password === passwordConfirm) {
-  //     const abortController = new AbortController();
-  //     console.log('here sending request');
-  //     signupUser(signup, abortController.signal)
-  //       .then(setSession)
-  //       .catch(setError);
-  //     console.log(session);
-  //     if (session.hasOwnProperty('user_id')) {
-  //       navigate.push('/');
-  //     }
-  //   } else {
-  //     console.log('password does not work');
-  //     setError({ message: 'Passwords are not matching. Please try again.' });
-  //   }
-  //   setSignupBtnText('Continue');
-  // };
-  console.log('session: " => ', Object.keys);
-  console.log('session: ', session, error);
+
   return (
     <main className="row">
       <form
