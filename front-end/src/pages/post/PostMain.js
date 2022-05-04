@@ -11,6 +11,7 @@ const PostMain = ({ post, comments }) => {
     last_name = null,
     hashtags_array = null,
     post_header = null,
+    post_body,
   } = post;
   if (!post_id) return <FeedLoading />;
   const hashtags = Array.isArray(hashtags_array)
@@ -39,12 +40,7 @@ const PostMain = ({ post, comments }) => {
           <h2>{post_header}</h2>
           <p>{hashtags}</p>
           <div className="post-main-content">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi
-              non quis exercitationem culpa nesciunt nihil aut nostrum explicabo
-              reprehenderit optio amet ab temporibus asperiores quasi
-              cupiditate. Voluptatum ducimus voluptates voluptas?
-            </p>
+            <p>{post_body}</p>
           </div>
           <PostMainComments comments={comments} />
         </div>
