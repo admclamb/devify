@@ -1,6 +1,6 @@
 const CreatePostNav = () => {
   return (
-    <nav className="d-flex">
+    <nav className="d-flex bg-light">
       <button className="btn btn-lg btn-light">B</button>
       <button className="btn btn-lg btn-light">
         <em>I</em>
