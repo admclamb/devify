@@ -152,6 +152,16 @@ const Signup = ({ setSession, session }) => {
             Remember Me
           </label>
         </div>
+        <div className="warning">
+          <p className="text-sm mb-2">
+            BE CAREFUL. This project uses modern practices to keep your
+            passwords and emails secured. I cannot ensure that this project will
+            be constantly updated and upkept in the future and this could lead
+            to vulnerabilities in the future. This is a fun little application
+            and even though your passwords are secured, they might not be
+            forever! ⚠
+          </p>
+        </div>
         <button
           type="submit"
           className="btn btn-primary signup-submit"
