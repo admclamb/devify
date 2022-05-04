@@ -16,7 +16,6 @@ const VALID_PROPERTIES = [
 async function emailExist(req, res, next) {
   const { email } = req.body.data;
   const user = await service.read(email);
-  console.log(user);
   if (user) {
     return next({
       status: 409,

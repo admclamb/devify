@@ -12,33 +12,44 @@ const CreatePost = () => {
     post_header: '',
     image_url: '',
     hashtags_array: [],
-    user_id: user_id || null,
+    user_id: parseInt(user_id) || null,
   };
-
   const [post, setPost] = useState(initPost);
   const [error, setError] = useState(null);
   const [body, setBody] = useState('');
-  console.log(initPost, body);
+
+  const handleChange = async ({ target }) => {
+    const { id } = target;
+    setPost({
+      ...post,
+      [id]: target.value,
+    });
+  };
+
   const handleSubmit = async (event) => {
-    console.log('Here');
     try {
       event.preventDefault();
       setError(null);
-      const AbortController = new AbortController();
+      const abortController = new AbortController();
       const outPost = {
         ...post,
         post_body: body,
       };
-      const response = await createPost(outPost, AbortController.signal);
-      console.log(response);
+      console.log('Outpost: ', outPost);
+      await createPost(outPost, abortController.signal);
       navigate('/');
     } catch (error) {
+      console.log(error);
       setError(error);
     }
   };
+  console.log(post, body);
   return (
     <>
-      <ErrorAlert error={error} />
+      <div className="row container-lg">
+        <ErrorAlert error={error} />
+      </div>
+
       <nav className="row container-lg">
         <div className="create-post-top-nav d-flex mb-3">
           <button className="btn ms-auto me-4">Edit</button>
@@ -52,7 +63,13 @@ const CreatePost = () => {
               Add a cover image
             </button>
             <form>
-              <input placeholder="New post title here..." />
+              <input
+                placeholder="New post title here..."
+                type="text"
+                value={post.post_header}
+                onChange={handleChange}
+                id="post_header"
+              />
             </form>
           </div>
           <CreatePostNav />

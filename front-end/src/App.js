@@ -50,7 +50,6 @@ function App() {
       color.lightDarker
     );
   }, [darkMode]);
-  console.log(session);
   return (
     <>
       <header>

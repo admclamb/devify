@@ -150,8 +150,6 @@ describe('US-02 create post', () => {
           .set('Accept', 'application/json')
           .send({ data });
 
-        console.log('data: ', response.body.data);
-        console.log('error', response.body.error);
         expect(response.status).to.equal(201);
         expect(response.body.error).to.be.undefined;
         expect(response.body.data.post_header).to.equal('Test');

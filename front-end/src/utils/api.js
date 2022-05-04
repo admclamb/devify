@@ -27,6 +27,7 @@ export async function fetchJson(url, options, onCancel) {
     }
 
     const payload = await response.json();
+    console.log(payload);
     if (payload.error) {
       return Promise.reject({ message: payload.error });
     }
@@ -96,12 +97,15 @@ export async function signupUser(user, signal) {
 }
 
 export async function createPost(post, signal) {
-  const url = `${API_BASE_URL}/post`;
+  const url = `${API_BASE_URL}/posts`;
   const options = {
     method: 'POST',
     body: JSON.stringify({ data: post }),
     headers,
     signal,
   };
-  return await fetchJson(url, options, {});
+  console.log('Options', options);
+  const response = await fetchJson(url, options, {});
+  console.log(response);
+  return response;
 }

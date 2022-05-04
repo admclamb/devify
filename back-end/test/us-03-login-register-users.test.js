@@ -371,7 +371,6 @@ describe('US-03 login and register users', () => {
           .set('Accept', 'application/json')
           .send({ data });
 
-        console.log(response.body.data);
         expect(response.status).to.equal(201);
         expect(response.body.error).to.be.undefined;
         expect(response.body.data.user_id).to.equal(4);

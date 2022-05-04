@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import './PostCard.css';
 
 const PostCard = ({ post }) => {
-  console.log(post);
   const {
     post_id,
     image_url = null,
