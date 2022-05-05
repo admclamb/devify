@@ -4,6 +4,7 @@ import CreatePost from './post/CreatePost';
 import Post from './post/Post';
 import Login from './login/Login';
 import Signup from './signup/Signup';
+import About from './about/About';
 const PageRoutes = ({ setSession, session }) => {
   return (
     <Routes>
@@ -20,6 +21,7 @@ const PageRoutes = ({ setSession, session }) => {
         path="/signup"
         element={<Signup setSession={setSession} session={session} />}
       />
+      <Route exact={true} path="/about" element={<About />} />
     </Routes>
   );
 };

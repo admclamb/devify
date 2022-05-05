@@ -1,22 +1,23 @@
-import "./SidebarNav.css";
+import { Link } from 'react-router-dom';
+import './SidebarNav.css';
 
 const SidebarNav = () => {
   return (
     <ul className="sidebar-nav">
       <li>
-        <i className="fa-duotone fa-house me-1"></i> Home
+        <Link to="/">
+          <i className="fa-duotone fa-house me-1"></i> Home
+        </Link>
       </li>
       <li>
-        <i className="fa-duotone fa-book me-1"></i>Reading
+        <Link to="/about">
+          <i className="fa-duotone fa-address-card me-1"></i> About
+        </Link>
       </li>
       <li>
-        <i className="fa-duotone fa-address-card me-1"></i> About
-      </li>
-      <li>
-        <i className="fa-duotone fa-lightbulb me-1"></i> FAQ
-      </li>
-      <li>
-        <i className="fa-duotone fa-phone me-1"></i> Contact
+        <a href="https://github.com/admclamb/devify">
+          <i class="fa-brands fa-github-alt fa-lg me-1"></i> Github
+        </a>
       </li>
     </ul>
   );

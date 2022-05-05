@@ -1,9 +1,9 @@
-import "./Searchbar.css";
+import './Searchbar.css';
 
 const Searchbar = () => {
   return (
     <>
-      <div className="search-container">
+      <div className="search-container d-none d-md-block">
         <i className="fa-thin fa-magnifying-glass search-container__icon fa-lg"></i>
         <input
           type="text"

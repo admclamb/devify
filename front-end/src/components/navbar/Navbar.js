@@ -59,7 +59,7 @@ const Navbar = ({ darkMode, setDarkMode, session, logoutUser }) => {
         <Searchbar />
         {user_id ? signedInNavbar : notSignedInNavbar}
         <button
-          className="color-mode-toggle rounded bg-dark btn text-light ms-3"
+          className="color-mode-toggle rounded bg-dark btn text-light ms-3 d-none"
           onClick={() => setDarkMode((currMode) => !currMode)}
         >
           <i className={'fa-solid fa-' + (darkMode ? 'sun-bright' : 'moon')} />
