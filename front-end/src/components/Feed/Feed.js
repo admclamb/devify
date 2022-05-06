@@ -7,7 +7,7 @@ import Posts from '../posts/Posts';
 const Feed = () => {
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
-
+  console.log(error);
   useEffect(() => {
     const abortController = new AbortController();
     setPosts([]);

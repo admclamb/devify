@@ -104,8 +104,16 @@ export async function createPost(post, signal) {
     headers,
     signal,
   };
-  console.log('Options', options);
-  const response = await fetchJson(url, options, {});
-  console.log(response);
-  return response;
+  return await fetchJson(url, options, {});
+}
+
+export async function likePost(post_id, user_id) {
+  const url = `${API_BASE_URL}/posts/${post_id}/like`;
+  const options = {
+    method: 'POST',
+    body: JSON.stringify({ data: post }),
+    headers,
+    signal,
+  };
+  return await fetchJson(url, options, {});
 }

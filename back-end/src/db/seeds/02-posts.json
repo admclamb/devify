@@ -19,13 +19,22 @@
     "post_body": "Testing Everything",
     "image_url": "https://source.unsplash.com/random",
     "hashtags_array": ["#testing", "#3rdPost", "#Iloveprogramming"],
-    "user_id": 3
+    "user_id": 3,
+    "likes": 1
   },
   {
     "post_header": "Testing",
     "post_body": "I am Bird Person.",
     "hashtags_array": ["#rick", "#rickAndMorty"],
     "image_url": null,
-    "user_id": 2
+    "user_id": 2,
+    "likes": 1
+  },
+  {
+    "post_header": "Final Test",
+    "post_body": "This is the final test.",
+    "hashtags_array": ["#python", "#JavaScript"],
+    "image_url": null,
+    "user_id": 3
   }
 ]

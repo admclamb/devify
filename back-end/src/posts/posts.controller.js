@@ -68,7 +68,6 @@ async function listComments(req, res, next) {
 }
 
 async function userAlreadyLikedPost(req, res, next) {
-  console.log('here');
   const { post_id } = res.locals.post;
   const { user_id } = req.body.data;
   const like = await service.readLike(post_id, user_id);

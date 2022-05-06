@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import Navbar from './components/navbar/Navbar';
 import PageRoutes from './pages/Routes';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [session, setSession] = useState({});
+  const UserContext = createContext(session);
   useEffect(() => {
     if (session.hasOwnProperty('user_id')) {
       localStorage.setItem('session', JSON.stringify(session));
@@ -52,15 +53,17 @@ function App() {
   }, [darkMode]);
   return (
     <>
-      <header>
-        <Navbar
-          darkMode={darkMode}
-          setDarkMode={setDarkMode}
-          session={session}
-          logoutUser={logoutUser}
-        />
-      </header>
-      <PageRoutes setSession={setSession} session={session} />
+      <UserContext.Provider value={session}>
+        <header>
+          <Navbar
+            darkMode={darkMode}
+            setDarkMode={setDarkMode}
+            session={session}
+            logoutUser={logoutUser}
+          />
+        </header>
+        <PageRoutes setSession={setSession} session={session} />
+      </UserContext.Provider>
     </>
   );
 }

@@ -57,39 +57,32 @@ describe('US-04 like save comment post', () => {
         user_id: 1,
         post_id: 3,
       };
-      // First liking the post
-      await request(app)
-        .post('/posts/3like')
-        .set('Accept', 'application/json')
-        .send({ data });
-
-      // Second time liking the post
       const response = await request(app)
         .post('/posts/3/like')
         .set('Accept', 'application/json')
         .send({ data });
 
-      console.log(response.body.error);
       expect(response.status).to.equal(403);
       expect(response.body.error).to.equal(
-        `User ${user_id} has already liked this post.`
+        `User ${data.user_id} has already liked this post.`
       );
     });
 
     test('Should return 201 if post is liked', async () => {
       const data = {
         user_id: 1,
-        post_id: 3,
+        post_id: 5,
       };
       const response = await request(app)
-        .post('/posts/3/like')
+        .post('/posts/5/like')
         .set('Accept', 'application/json')
         .send({ data });
 
+      console.log(response.body.error);
       expect(response.status).to.equal(201);
       expect(response.body.error).to.be.undefined;
       expect(response.body.data.user_id).to.equal(1);
-      expect(response.body.data.post_id).to.equal(3);
+      expect(response.body.data.post_id).to.equal(5);
     });
   });
 });
