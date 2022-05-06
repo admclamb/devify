@@ -1,15 +1,16 @@
-const router = require("express").Router();
-const controller = require("./posts.controller");
-const methodNotAllowed = require("../errors/methodNotAllowed");
+const router = require('express').Router();
+const controller = require('./posts.controller');
+const methodNotAllowed = require('../errors/methodNotAllowed');
 
 router
-  .route("/")
+  .route('/')
   .get(controller.list)
   .post(controller.create)
   .all(methodNotAllowed);
-router.route("/:post_id").get(controller.read).all(methodNotAllowed);
+router.route('/:post_id/like').post(controller.likePost).all(methodNotAllowed);
+router.route('/:post_id').get(controller.read).all(methodNotAllowed);
 router
-  .route("/:post_id/comments")
+  .route('/:post_id/comments')
   .get(controller.listComments)
   .all(methodNotAllowed);
 

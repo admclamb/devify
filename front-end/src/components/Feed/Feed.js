@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { listPosts } from "../../utils/api";
-import FeedLoading from "./FeedLoading";
-import FeedNav from "./FeedNav";
-import ErrorAlert from "../../errors/ErrorAlert";
-import Posts from "../posts/Posts";
+import { useEffect, useState } from 'react';
+import { listPosts } from '../../utils/api';
+import FeedLoading from './FeedLoading';
+import FeedNav from './FeedNav';
+import ErrorAlert from '../../errors/ErrorAlert';
+import Posts from '../posts/Posts';
 const Feed = () => {
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
@@ -16,7 +16,13 @@ const Feed = () => {
     return () => abortController.abort();
   }, []);
   const content =
-    posts.length > 0 ? <Posts posts={posts} /> : !error ? <FeedLoading /> : "";
+    posts.length > 0 ? (
+      <Posts posts={posts} setError={setError} />
+    ) : !error ? (
+      <FeedLoading />
+    ) : (
+      ''
+    );
   return (
     <section>
       <FeedNav />

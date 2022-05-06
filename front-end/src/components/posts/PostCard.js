@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import './PostCard.css';
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, likePost }) => {
   const {
     post_id,
     image_url = null,
@@ -44,9 +44,9 @@ const PostCard = ({ post }) => {
         <div className="post-card-main">
           <p className="text-dark">{hashtags}</p>
           <div className="footer d-flex align-items-center mt-5">
-            <p className="me-5 text-dark">
+            <button className="btn me-5 text-dark" onClick={likePost}>
               <i className="fa-light fa-heart text-dark"></i> {likes} Likes
-            </p>
+            </button>
             <p className="text-dark">
               <i className="fa-light fa-comment"></i> Add Comment
             </p>

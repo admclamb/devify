@@ -1,17 +1,17 @@
-const service = require("./posts.service");
-const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
+const service = require('./posts.service');
+const asyncErrorBoundary = require('../errors/asyncErrorBoundary');
 
-const hasOnlyValidProperties = require("../utils/hasOnlyValidProperties");
-const hasRequiredProperties = require("../utils/hasRequiredProperties");
+const hasOnlyValidProperties = require('../utils/hasOnlyValidProperties');
+const hasRequiredProperties = require('../utils/hasRequiredProperties');
 
 const VALID_PROPERTIES = [
-  "post_header",
-  "post_body",
-  "image_url",
-  "hashtags_array",
-  "user_id",
+  'post_header',
+  'post_body',
+  'image_url',
+  'hashtags_array',
+  'user_id',
 ];
-const REQUIRED_PROPERTIES = ["post_header", "post_body", "user_id"];
+const REQUIRED_PROPERTIES = ['post_header', 'post_body', 'user_id'];
 const has_only_valid_post_props = hasOnlyValidProperties(VALID_PROPERTIES);
 const has_required_props = hasRequiredProperties(REQUIRED_PROPERTIES);
 
@@ -19,10 +19,10 @@ function validateDataValues(req, res, next) {
   const { data = {} } = req.body;
   const { user_id = null } = data;
 
-  if (typeof user_id !== "number") {
+  if (typeof user_id !== 'number') {
     return next({
       status: 400,
-      message: "user_id must be a number",
+      message: 'user_id must be a number',
     });
   }
   next();
@@ -38,8 +38,17 @@ async function postExist(req, res, next) {
   next({ status: 404, message: `Post ${post_id} does not exist.` });
 }
 
+async function userExist(req, res, next) {
+  const { user_id = null } = req.body.data;
+  const userExist = await service.readUser(user_id);
+  if (userExist) {
+    return next();
+  }
+  next({ status: 404, message: `User ${user_id} does not exist.` });
+}
+
 async function list(req, res) {
-  res.status(200).json({ data: await service.list() });
+  const posts = await res.status(200).json({ data: await service.list() });
 }
 
 async function read(req, res) {
@@ -58,6 +67,30 @@ async function listComments(req, res, next) {
   res.status(200).json({ data: comments });
 }
 
+async function userAlreadyLikedPost(req, res, next) {
+  const { post_id } = res.locals.post;
+  const { user_id } = req.body.data;
+  const like = await service.readLike(post_id, user_id);
+  if (!like) {
+    return next();
+  }
+  next({
+    status: 403,
+    message: `User ${user_id} has already liked this post.`,
+  });
+}
+
+async function likePost(req, res, next) {
+  const { post_id } = res.locals.post;
+  const { user_id } = req.body.data;
+  const likeData = {
+    post_id,
+    user_id,
+  };
+  const like = await service.createLike(likeData);
+  res.status(201).json({ data: like });
+}
+
 module.exports = {
   list,
   read: [asyncErrorBoundary(postExist), asyncErrorBoundary(read)],
@@ -70,5 +103,11 @@ module.exports = {
     asyncErrorBoundary(has_required_props),
     validateDataValues,
     asyncErrorBoundary(create),
+  ],
+  likePost: [
+    asyncErrorBoundary(postExist),
+    asyncErrorBoundary(userExist),
+    asyncErrorBoundary(userAlreadyLikedPost),
+    asyncErrorBoundary(likePost),
   ],
 };
