@@ -29,6 +29,7 @@ function readWithAll(post_id) {
 }
 
 function read(post_id) {
+  console.log('post_id: ', post_id);
   return knex(TABLE).select('*').where({ post_id }).first();
 }
 
@@ -37,7 +38,11 @@ function readUser(user_id) {
 }
 
 function readLike(post_id, user_id) {
-  return knex(USERS_LIKES_TABLE).slect('*').where({ post_id, user_id }).first();
+  return knex(USERS_LIKES_TABLE)
+    .slect('*')
+    .where({ post_id })
+    .where({ user_id })
+    .first();
 }
 
 function create(post) {

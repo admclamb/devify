@@ -48,7 +48,7 @@ async function userExist(req, res, next) {
 }
 
 async function list(req, res) {
-  const posts = await res.status(200).json({ data: await service.list() });
+  res.status(200).json({ data: await service.list() });
 }
 
 async function read(req, res) {

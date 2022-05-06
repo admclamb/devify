@@ -28,10 +28,10 @@ describe('US-04 like save comment post', () => {
         post_id: 100,
       };
       const response = await request(app)
-        .post('/posts/:post_id/like')
+        .post('/posts/100/like')
         .set('Accept', 'application/json')
         .send({ data });
-
+      console.log(response.body.error);
       expect(response.status).to.equal(404);
       expect(response.body.error).to.equal(`Post ${data.post_id} not found.`);
     });
@@ -42,7 +42,7 @@ describe('US-04 like save comment post', () => {
         post_id: 3,
       };
       const response = await request(app)
-        .post('/posts/:post_id/like')
+        .post('/posts/3/like')
         .set('Accept', 'application/json')
         .send({ data });
 
@@ -56,13 +56,13 @@ describe('US-04 like save comment post', () => {
       };
       // First liking the post
       await request(app)
-        .post('/posts/:post_id/like')
+        .post('/posts/3like')
         .set('Accept', 'application/json')
         .send({ data });
 
       // Second time liking the post
       const response = await request(app)
-        .post('/posts/:post_id/like')
+        .post('/posts/3/like')
         .set('Accept', 'application/json')
         .send({ data });
       expect(response.status).to.equal(403);
@@ -77,7 +77,7 @@ describe('US-04 like save comment post', () => {
         post_id: 3,
       };
       const response = await request(app)
-        .post('/posts/:post_id/like')
+        .post('/posts/3/like')
         .set('Accept', 'application/json')
         .send({ data });
 
