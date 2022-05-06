@@ -31,9 +31,10 @@ describe('US-04 like save comment post', () => {
         .post('/posts/100/like')
         .set('Accept', 'application/json')
         .send({ data });
-      console.log(response.body.error);
       expect(response.status).to.equal(404);
-      expect(response.body.error).to.equal(`Post ${data.post_id} not found.`);
+      expect(response.body.error).to.equal(
+        `Post ${data.post_id} does not exist.`
+      );
     });
 
     test('Should return 404 if user is not found', async () => {
@@ -47,7 +48,9 @@ describe('US-04 like save comment post', () => {
         .send({ data });
 
       expect(response.status).to.equal(404);
-      expect(response.body.error).to.equal(`User ${data.user_id} not found.`);
+      expect(response.body.error).to.equal(
+        `User ${data.user_id} does not exist.`
+      );
     });
     test('Should return 403 if user already has liked the post', async () => {
       const data = {
@@ -65,6 +68,8 @@ describe('US-04 like save comment post', () => {
         .post('/posts/3/like')
         .set('Accept', 'application/json')
         .send({ data });
+
+      console.log(response.body.error);
       expect(response.status).to.equal(403);
       expect(response.body.error).to.equal(
         `User ${user_id} has already liked this post.`

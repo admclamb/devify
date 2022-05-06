@@ -38,11 +38,7 @@ function readUser(user_id) {
 }
 
 function readLike(post_id, user_id) {
-  return knex(USERS_LIKES_TABLE)
-    .slect('*')
-    .where({ post_id })
-    .where({ user_id })
-    .first();
+  return knex(USERS_LIKES_TABLE).select('*').where({ post_id }).first();
 }
 
 function create(post) {
@@ -62,7 +58,7 @@ function createLike(like) {
       })
       .transacting(transaction);
     return knex(USERS_LIKES_TABLE)
-      .inser(like)
+      .insert(like)
       .returning('*')
       .then((createdLike) => createdLike[0]);
   });
