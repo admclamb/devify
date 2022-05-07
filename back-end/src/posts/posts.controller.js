@@ -38,15 +38,6 @@ async function postExist(req, res, next) {
   next({ status: 404, message: `Post ${post_id} does not exist.` });
 }
 
-async function userExist(req, res, next) {
-  const { user_id = null } = req.body.data;
-  const userExist = await service.readUser(user_id);
-  if (userExist) {
-    return next();
-  }
-  next({ status: 404, message: `User ${user_id} does not exist.` });
-}
-
 async function list(req, res) {
   res.status(200).json({ data: await service.list() });
 }
@@ -67,50 +58,6 @@ async function listComments(req, res, next) {
   res.status(200).json({ data: comments });
 }
 
-async function userAlreadyLikedPost(req, res, next) {
-  const { post_id } = res.locals.post;
-  const { user_id } = req.body.data;
-  const like = await service.readLike(post_id, user_id);
-  if (!like) {
-    return next();
-  }
-  next({
-    status: 403,
-    message: `User ${user_id} has already liked this post.`,
-  });
-}
-
-async function userDidntLikePost(req, res, next) {
-  const { post_id } = res.locals.post;
-  const { user_id } = req.body.data;
-  const like = await service.readLike(post_id, user_id);
-  if (like) {
-    return next();
-  }
-  next({
-    status: 403,
-    message: `User ${user_id} has not liked this post.`,
-  });
-}
-
-async function likePost(req, res, next) {
-  const { post_id } = res.locals.post;
-  const { user_id } = req.body.data;
-  const likeData = {
-    post_id,
-    user_id,
-  };
-  const like = await service.createLike(likeData);
-  res.status(201).json({ data: like });
-}
-
-async function unlikePost(req, res, next) {
-  const { post_id } = res.locals.post;
-  const { user_id } = req.body.data;
-  await service.destroyLike(post_id, user_id);
-  res.sendStatus(204);
-}
-
 module.exports = {
   list,
   read: [asyncErrorBoundary(postExist), asyncErrorBoundary(read)],
@@ -123,17 +70,5 @@ module.exports = {
     asyncErrorBoundary(has_required_props),
     validateDataValues,
     asyncErrorBoundary(create),
-  ],
-  destroy: [
-    asyncErrorBoundary(postExist),
-    asyncErrorBoundary(userExist),
-    asyncErrorBoundary(userDidntLikePost),
-    asyncErrorBoundary(unlikePost),
-  ],
-  likePost: [
-    asyncErrorBoundary(postExist),
-    asyncErrorBoundary(userExist),
-    asyncErrorBoundary(userAlreadyLikedPost),
-    asyncErrorBoundary(likePost),
   ],
 };

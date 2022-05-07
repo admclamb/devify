@@ -4,7 +4,6 @@ const TABLE = 'posts';
 const USERS_TABLE = 'users';
 const COMMENTS_TABLE = 'comments';
 const USERS_PROFILES_TABLE = 'users_profiles';
-const USERS_LIKES_TABLE = 'users_likes';
 function list() {
   return knex(TABLE).select('*');
 }
@@ -36,46 +35,11 @@ function readUser(user_id) {
   return knex(USERS_TABLE).select('*').where({ user_id }).first();
 }
 
-function readLike(post_id, user_id) {
-  return knex(USERS_LIKES_TABLE)
-    .select('*')
-    .where({ post_id, user_id })
-    .first();
-}
-
 function create(post) {
   return knex(TABLE)
     .insert(post)
     .returning('*')
     .then((createdPost) => createdPost[0]);
-}
-
-function createLike(like) {
-  const { post_id } = like;
-  return knex.transaction(async (transaction) => {
-    await knex(TABLE)
-      .where({ post_id })
-      .update({
-        likes: knex.raw('likes + 1'),
-      })
-      .transacting(transaction);
-    return knex(USERS_LIKES_TABLE)
-      .insert(like)
-      .returning('*')
-      .then((createdLike) => createdLike[0]);
-  });
-}
-
-function destroyLike(post_id, user_id) {
-  return knex.transaction(async (transaction) => {
-    await knex(TABLE)
-      .where({ post_id })
-      .update({
-        likes: knex.raw('likes - 1'),
-      })
-      .transacting(transaction);
-    return knex(USERS_LIKES_TABLE).where({ post_id, user_id }).del();
-  });
 }
 
 function comments(post_id) {
@@ -91,9 +55,6 @@ module.exports = {
   readWithAll,
   read,
   readUser,
-  readLike,
-  createLike,
-  destroyLike,
   comments,
   create,
 };

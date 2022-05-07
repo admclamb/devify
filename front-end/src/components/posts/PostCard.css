@@ -37,6 +37,9 @@
 }
 
 .post-card-image img {
+  object-fit: cover;
+  object-position: center;
+  max-height: 400px;
 }
 
 .post-like,

@@ -24,11 +24,10 @@ describe('US-04 likes save  post', () => {
     describe('POST Like post', () => {
       test('Should return 404 if post is not found', async () => {
         const data = {
-          user_id: 1,
           post_id: 100,
         };
         const response = await request(app)
-          .post('/posts/100/like')
+          .post('/reactions/1/likes')
           .set('Accept', 'application/json')
           .send({ data });
         expect(response.status).to.equal(404);
@@ -39,26 +38,22 @@ describe('US-04 likes save  post', () => {
 
       test('Should return 404 if user is not found', async () => {
         const data = {
-          user_id: 100,
           post_id: 3,
         };
         const response = await request(app)
-          .post('/posts/3/like')
+          .post('/reactions/100/likes')
           .set('Accept', 'application/json')
           .send({ data });
 
         expect(response.status).to.equal(404);
-        expect(response.body.error).to.equal(
-          `User ${data.user_id} does not exist.`
-        );
+        expect(response.body.error).to.equal(`User 100 does not exist.`);
       });
       test('Should return 403 if user already has liked the post', async () => {
         const data = {
-          user_id: 1,
           post_id: 3,
         };
         const response = await request(app)
-          .post('/posts/3/like')
+          .post('/reactions/1/likes')
           .set('Accept', 'application/json')
           .send({ data });
 
@@ -70,11 +65,10 @@ describe('US-04 likes save  post', () => {
 
       test('Should return 201 if post is liked', async () => {
         const data = {
-          user_id: 1,
           post_id: 5,
         };
         const response = await request(app)
-          .post('/posts/5/like')
+          .post('/reactions/1/likes')
           .set('Accept', 'application/json')
           .send({ data });
 
@@ -88,11 +82,10 @@ describe('US-04 likes save  post', () => {
     describe('DELETE unlike post', () => {
       test('Should return 404 if post is not found', async () => {
         const data = {
-          user_id: 1,
           post_id: 100,
         };
         const response = await request(app)
-          .delete('/posts/100/like')
+          .delete('/reactions/1/likes')
           .set('Accept', 'application/json')
           .send({ data });
         expect(response.status).to.equal(404);
@@ -102,39 +95,33 @@ describe('US-04 likes save  post', () => {
       });
       test('Should return 404 if user is not found', async () => {
         const data = {
-          user_id: 100,
           post_id: 3,
         };
         const response = await request(app)
-          .delete('/posts/3/like')
+          .delete('/reactions/100/likes')
           .set('Accept', 'application/json')
           .send({ data });
 
         expect(response.status).to.equal(404);
-        expect(response.body.error).to.equal(
-          `User ${data.user_id} does not exist.`
-        );
+        expect(response.body.error).to.equal(`User 100 does not exist.`);
       });
       test('Should return 403 if user has not liked the post yet', async () => {
         const data = {
-          user_id: 1,
           post_id: 5,
         };
         const response = await request(app)
-          .delete('/posts/5/like')
+          .delete('/reactions/1/likes')
           .set('Accept', 'application/json')
           .send({ data });
         expect(response.status).to.equal(403);
-        expect(response.body.error).to.equal(
-          `User ${data.user_id} has not liked this post.`
-        );
+        expect(response.body.error).to.equal(`User 1 has not liked this post.`);
       });
       test('Should return 204 if user has unliked the post', async () => {
         const data = {
-          user_id: 1,
+          post_id: 4,
         };
         const response = await request(app)
-          .delete('/posts/4/like')
+          .delete('/reactions/1/likes')
           .set('Accept', 'application/json')
           .send({ data });
 
@@ -144,30 +131,220 @@ describe('US-04 likes save  post', () => {
   });
   describe('special_like a post', () => {
     describe('POST special_like a post', () => {
-      test('Should return 404 if post is not found', async () => {});
-      test('Should return 404 if user is not found', async () => {});
-      test("Should return 403 if user already has special_like'd the post", async () => {});
-      test("Should return 201 if post is special_like'd", async () => {});
+      test('Should return 404 if post is not found', async () => {
+        const data = {
+          post_id: 100,
+        };
+        const response = await request(app)
+          .post('/reactions/1/special_likes')
+          .set('Accept', 'application/json')
+          .send({ data });
+        expect(response.status).to.equal(404);
+        expect(response.body.error).to.equal(
+          `Post ${data.post_id} does not exist.`
+        );
+      });
+
+      test('Should return 404 if user is not found', async () => {
+        const data = {
+          post_id: 3,
+        };
+        const response = await request(app)
+          .post('/reactions/100/special_likes')
+          .set('Accept', 'application/json')
+          .send({ data });
+
+        expect(response.status).to.equal(404);
+        expect(response.body.error).to.equal(`User 100 does not exist.`);
+      });
+      test('Should return 403 if user already has special_liked the post', async () => {
+        const data = {
+          post_id: 3,
+        };
+        const response = await request(app)
+          .post('/reactions/1/special_likes')
+          .set('Accept', 'application/json')
+          .send({ data });
+
+        expect(response.status).to.equal(403);
+        expect(response.body.error).to.equal(
+          `User ${data.user_id} has already special_liked this post.`
+        );
+      });
+
+      test('Should return 201 if post is special_liked', async () => {
+        const data = {
+          post_id: 5,
+        };
+        const response = await request(app)
+          .post('/reactions/1/special_likes')
+          .set('Accept', 'application/json')
+          .send({ data });
+
+        expect(response.status).to.equal(201);
+        expect(response.body.error).to.be.undefined;
+        expect(response.body.data.user_id).to.equal(1);
+        expect(response.body.data.post_id).to.equal(5);
+      });
     });
     describe('DELETE un-special_like a post', () => {
-      test('Should return 404 if post is not found', async () => {});
-      test('Should return 404 if user is not found', async () => {});
-      test("Should return 403 if user has not special_like'd the post yet", async () => {});
-      test("Should return 204 if user has un-special-like'd", async () => {});
+      test('Should return 404 if post is not found', async () => {
+        const data = {
+          post_id: 100,
+        };
+        const response = await request(app)
+          .delete('/reactions/1/special_likes')
+          .set('Accept', 'application/json')
+          .send({ data });
+        expect(response.status).to.equal(404);
+        expect(response.body.error).to.equal(
+          `Post ${data.post_id} does not exist.`
+        );
+      });
+      test('Should return 404 if user is not found', async () => {
+        const data = {
+          post_id: 3,
+        };
+        const response = await request(app)
+          .delete('/reactions/100/special_likes')
+          .set('Accept', 'application/json')
+          .send({ data });
+
+        expect(response.status).to.equal(404);
+        expect(response.body.error).to.equal(`User 100 does not exist.`);
+      });
+      test('Should return 403 if user has not special_liked the post yet', async () => {
+        const data = {
+          post_id: 5,
+        };
+        const response = await request(app)
+          .delete('/reactions/1/special_likes')
+          .set('Accept', 'application/json')
+          .send({ data });
+        expect(response.status).to.equal(403);
+        expect(response.body.error).to.equal(
+          `User 1 has not special_liked this post.`
+        );
+      });
+      test('Should return 204 if user has unspecial_liked the post', async () => {
+        const data = {
+          post_id: 4,
+        };
+        const response = await request(app)
+          .delete('/reactions/1/special_likes')
+          .set('Accept', 'application/json')
+          .send({ data });
+
+        expect(response.status).to.equal(204);
+      });
     });
   });
   describe('save a post', () => {
     describe('POST save a post', () => {
-      test('Should return 404 if post is not found', async () => {});
-      test('Should return 404 if user is not found', async () => {});
-      test('Should return 403 if user already has saved the post', async () => {});
-      test('Should return 201 if post is saved', async () => {});
+      test('Should return 404 if post is not found', async () => {
+        const data = {
+          post_id: 100,
+        };
+        const response = await request(app)
+          .post('/reactions/1/saves')
+          .set('Accept', 'application/json')
+          .send({ data });
+        expect(response.status).to.equal(404);
+        expect(response.body.error).to.equal(
+          `Post ${data.post_id} does not exist.`
+        );
+      });
+
+      test('Should return 404 if user is not found', async () => {
+        const data = {
+          post_id: 3,
+        };
+        const response = await request(app)
+          .post('/reactions/100/saves')
+          .set('Accept', 'application/json')
+          .send({ data });
+
+        expect(response.status).to.equal(404);
+        expect(response.body.error).to.equal(`User 100 does not exist.`);
+      });
+      test('Should return 403 if user already has saved the post', async () => {
+        const data = {
+          post_id: 3,
+        };
+        const response = await request(app)
+          .post('/reactions/1/saves')
+          .set('Accept', 'application/json')
+          .send({ data });
+
+        expect(response.status).to.equal(403);
+        expect(response.body.error).to.equal(
+          `User ${data.user_id} has already saved this post.`
+        );
+      });
+
+      test('Should return 201 if post is saved', async () => {
+        const data = {
+          post_id: 5,
+        };
+        const response = await request(app)
+          .post('/reactions/1/saves')
+          .set('Accept', 'application/json')
+          .send({ data });
+
+        expect(response.status).to.equal(201);
+        expect(response.body.error).to.be.undefined;
+        expect(response.body.data.user_id).to.equal(1);
+        expect(response.body.data.post_id).to.equal(5);
+      });
     });
     describe('DELETE un-save a post', () => {
-      test('Should return 404 if post is not found', async () => {});
-      test('Should return 404 if user is not found', async () => {});
-      test('Should return 403 if user has not saved the post yet', async () => {});
-      test('Should return 204 if user has un-saved a post', async () => {});
+      test('Should return 404 if post is not found', async () => {
+        const data = {
+          post_id: 100,
+        };
+        const response = await request(app)
+          .delete('/reactions/1/saves')
+          .set('Accept', 'application/json')
+          .send({ data });
+        expect(response.status).to.equal(404);
+        expect(response.body.error).to.equal(
+          `Post ${data.post_id} does not exist.`
+        );
+      });
+      test('Should return 404 if user is not found', async () => {
+        const data = {
+          post_id: 3,
+        };
+        const response = await request(app)
+          .delete('/reactions/100/saves')
+          .set('Accept', 'application/json')
+          .send({ data });
+
+        expect(response.status).to.equal(404);
+        expect(response.body.error).to.equal(`User 100 does not exist.`);
+      });
+      test('Should return 403 if user has not saved the post yet', async () => {
+        const data = {
+          post_id: 5,
+        };
+        const response = await request(app)
+          .delete('/reactions/1/saves')
+          .set('Accept', 'application/json')
+          .send({ data });
+        expect(response.status).to.equal(403);
+        expect(response.body.error).to.equal(`User 1 has not saved this post.`);
+      });
+      test('Should return 204 if user has unsaved the post', async () => {
+        const data = {
+          post_id: 4,
+        };
+        const response = await request(app)
+          .delete('/reactions/1/saves')
+          .set('Accept', 'application/json')
+          .send({ data });
+
+        expect(response.status).to.equal(204);
+      });
     });
   });
 });
