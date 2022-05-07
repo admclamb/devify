@@ -107,7 +107,7 @@ async function likePost(req, res, next) {
 async function unlikePost(req, res, next) {
   const { post_id } = res.locals.post;
   const { user_id } = req.body.data;
-  await service.destroy(post_id, user_id);
+  await service.destroyLike(post_id, user_id);
   res.sendStatus(204);
 }
 

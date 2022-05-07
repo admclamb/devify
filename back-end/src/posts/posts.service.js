@@ -72,7 +72,7 @@ function destroyLike(post_id, user_id) {
     await knex(TABLE)
       .where({ post_id })
       .update({
-        like: knex.raw('likes - 1'),
+        likes: knex.raw('likes - 1'),
       })
       .transacting(transaction);
     return knex(USERS_LIKES_TABLE).where({ post_id, user_id }).del();
