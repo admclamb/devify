@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { readComments, readPost } from '../../utils/api';
+import { getUserReactions, readComments, readPost } from '../../utils/api';
 import PostSidebar from './PostSidebar';
 import PostMain from './PostMain';
 import PostBio from './PostBio';
@@ -19,6 +19,7 @@ const Post = () => {
     readComments(post_id, abortController.signal)
       .then(setComments)
       .catch(setError);
+    return () => abortController.abort();
   }, [post_id]);
   if (!post && !error) return <FeedLoading />;
   return (

@@ -1,6 +1,17 @@
-import "./PostSidebar.css";
+import { useEffect, useState } from 'react';
+import './PostSidebar.css';
 
 const PostSidebar = ({ post }) => {
+  const [userReactions, setUserReactions] = useState({
+    like: false,
+    bookmark: false,
+    special_likes: false,
+  });
+  useEffect(() => {
+    const abortController = new AbortController();
+
+    return () => abortController.abort();
+  }, [post]);
   let { likes = 0, special_likes = 0, bookmarks = 0 } = post;
   const handleClick = ({ target }) => {
     const { value } = target;

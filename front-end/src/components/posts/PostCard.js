@@ -1,7 +1,4 @@
 import { Link } from 'react-router-dom';
-import { UserContext } from './UserContext
-import { likePost } from './utils/api';
-import { ToggleLike } from '../../utils/ToggleLike';
 import './PostCard.css';
 
 const PostCard = ({ post }) => {
@@ -18,17 +15,6 @@ const PostCard = ({ post }) => {
   const hashtags = Array.isArray(hashtags_array)
     ? hashtags_array.join('  ')
     : '';
-
-  const handleClick = () => {
-    try {
-      setError(null);
-      const abortController = new AbortController();
-      const like = await likePost(post_id);
-      console.log(like);
-    } catch (error) {
-      return error;
-    }
-  };
 
   return (
     <article className="post-card">
@@ -59,12 +45,12 @@ const PostCard = ({ post }) => {
         <div className="post-card-main">
           <p className="text-dark">{hashtags}</p>
           <div className="footer d-flex align-items-center mt-5">
-            <button className="btn me-5 text-dark" onClick={handleClick}>
+            <Link to={`/post/${post_id}`} className="me-5 text-dark post-like">
               <i className="fa-light fa-heart text-dark"></i> {likes} Likes
-            </button>
-            <p className="text-dark">
+            </Link>
+            <Link to={`/post/${post_id}`} className="text-dark post-comment">
               <i className="fa-light fa-comment"></i> Add Comment
-            </p>
+            </Link>
             <button className=" ms-auto btn btn-secondary">Save</button>
           </div>
         </div>

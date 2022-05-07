@@ -107,13 +107,24 @@ export async function createPost(post, signal) {
   return await fetchJson(url, options, {});
 }
 
-export async function likePost(post_id, user_id) {
+export async function likePost(post_id, user_id, signal) {
   const url = `${API_BASE_URL}/posts/${post_id}/like`;
   const options = {
     method: 'POST',
-    body: JSON.stringify({ data: post }),
+    body: JSON.stringify({ data: user_id }),
     headers,
     signal,
   };
   return await fetchJson(url, options, {});
+}
+
+export async function getUserLikes(user_id, signal) {
+  const url = `${API_BASE_URL}/users/likes`;
+  const options = {
+    method: 'GET',
+    body: JSON.stringify({ data: user_id }),
+    headers,
+    signal,
+  };
+  return await fetchJson(url, options, []);
 }

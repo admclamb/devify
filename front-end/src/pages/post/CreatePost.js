@@ -35,11 +35,9 @@ const CreatePost = () => {
         ...post,
         post_body: body,
       };
-      console.log('Outpost: ', outPost);
       await createPost(outPost, abortController.signal);
       navigate('/');
     } catch (error) {
-      console.log(error);
       setError(error);
     }
   };

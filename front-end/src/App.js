@@ -5,6 +5,8 @@ import { UserContext } from './utils/UserContext';
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [session, setSession] = useState({});
+  const [userLikes, setUserLikes] = useState([]);
+
   useEffect(() => {
     if (session.hasOwnProperty('user_id')) {
       localStorage.setItem('session', JSON.stringify(session));
@@ -50,6 +52,7 @@ function App() {
       color.lightDarker
     );
   }, [darkMode]);
+  console.log('likes: ', userLikes);
   return (
     <>
       <UserContext.Provider value={session}>

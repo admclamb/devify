@@ -38,3 +38,14 @@
 
 .post-card-image img {
 }
+
+.post-like,
+.post-comment {
+  padding: 0.3rem 0.5rem;
+  border-radius: 10px;
+}
+
+.post-like:hover,
+.post-comment:hover {
+  background-color: var(--color-gray);
+}

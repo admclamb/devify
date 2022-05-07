@@ -29,7 +29,6 @@ function readWithAll(post_id) {
 }
 
 function read(post_id) {
-  console.log('post_id: ', post_id);
   return knex(TABLE).select('*').where({ post_id }).first();
 }
 
