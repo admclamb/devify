@@ -3,7 +3,7 @@ const service = require('./reactions.service');
 
 async function postExist(req, res, next) {
   const { post_id } = req.body.data;
-  const postExist = await service.read(post_id);
+  const postExist = await service.readPost(post_id);
   if (postExist) {
     res.locals.post = postExist;
     return next();

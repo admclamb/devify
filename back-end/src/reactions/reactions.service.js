@@ -27,16 +27,16 @@ function createReaction(post_id, user_id, reaction) {
     table = `users_${reaction}`;
   }
   return knex.transaction(async (transaction) => {
+    const update = {};
+    update[reaction] = knex.raw(`${reaction} + 1`);
     await knex(POSTS_TABLE)
       .where({ post_id })
-      .update({
-        reaction: knex.raw(`${reaction} + 1`),
-      })
+      .update(update)
       .transacting(transaction);
     return knex(table)
-      .insert(like)
+      .insert({ post_id, user_id })
       .returning('*')
-      .then((createdLike) => createdLike[0]);
+      .then((createdReaction) => createdReaction[0]);
   });
 }
 
@@ -46,11 +46,11 @@ function destroyReaction(post_id, user_id, reaction) {
     table = `users_${reaction}`;
   }
   return knex.transaction(async (transaction) => {
+    const update = {};
+    update[reaction] = knex.raw(`${reaction} -1`);
     await knex(POSTS_TABLE)
       .where({ post_id })
-      .update({
-        reaction: knex.raw(`${reaction} - 1`),
-      })
+      .update(update)
       .transacting(transaction);
     return knex(table).where({ post_id, user_id }).del();
   });

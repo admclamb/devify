@@ -30,6 +30,7 @@ describe('US-04 likes save  post', () => {
           .post('/reactions/1/likes')
           .set('Accept', 'application/json')
           .send({ data });
+        console.log(response.body.error);
         expect(response.status).to.equal(404);
         expect(response.body.error).to.equal(
           `Post ${data.post_id} does not exist.`
@@ -59,7 +60,7 @@ describe('US-04 likes save  post', () => {
 
         expect(response.status).to.equal(403);
         expect(response.body.error).to.equal(
-          `User ${data.user_id} has already liked this post.`
+          `User 1 has already liked this post.`
         );
       });
 
@@ -71,7 +72,6 @@ describe('US-04 likes save  post', () => {
           .post('/reactions/1/likes')
           .set('Accept', 'application/json')
           .send({ data });
-
         console.log(response.body.error);
         expect(response.status).to.equal(201);
         expect(response.body.error).to.be.undefined;
@@ -113,6 +113,7 @@ describe('US-04 likes save  post', () => {
           .delete('/reactions/1/likes')
           .set('Accept', 'application/json')
           .send({ data });
+        console.log('delete: 403 error', response.body.error);
         expect(response.status).to.equal(403);
         expect(response.body.error).to.equal(`User 1 has not liked this post.`);
       });
@@ -124,7 +125,7 @@ describe('US-04 likes save  post', () => {
           .delete('/reactions/1/likes')
           .set('Accept', 'application/json')
           .send({ data });
-
+        console.log('delete: 204 error', response.body.error);
         expect(response.status).to.equal(204);
       });
     });
@@ -168,7 +169,7 @@ describe('US-04 likes save  post', () => {
 
         expect(response.status).to.equal(403);
         expect(response.body.error).to.equal(
-          `User ${data.user_id} has already special_liked this post.`
+          `User 1 has already special_liked this post.`
         );
       });
 
@@ -278,7 +279,7 @@ describe('US-04 likes save  post', () => {
 
         expect(response.status).to.equal(403);
         expect(response.body.error).to.equal(
-          `User ${data.user_id} has already saved this post.`
+          `User 1 has already saved this post.`
         );
       });
 
