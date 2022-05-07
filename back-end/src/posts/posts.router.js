@@ -7,7 +7,11 @@ router
   .get(controller.list)
   .post(controller.create)
   .all(methodNotAllowed);
-router.route('/:post_id/like').post(controller.likePost).all(methodNotAllowed);
+router
+  .route('/:post_id/like')
+  .post(controller.likePost)
+  .delete(controller.destroy)
+  .all(methodNotAllowed);
 router.route('/:post_id').get(controller.read).all(methodNotAllowed);
 router
   .route('/:post_id/comments')

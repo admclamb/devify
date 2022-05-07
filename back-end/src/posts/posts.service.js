@@ -67,6 +67,18 @@ function createLike(like) {
   });
 }
 
+function destroyLike(post_id, user_id) {
+  return knex.transaction(async (transaction) => {
+    await knex(TABLE)
+      .where({ post_id })
+      .update({
+        like: knex.raw('likes - 1'),
+      })
+      .transacting(transaction);
+    return knex(USERS_LIKES_TABLE).where({ post_id, user_id }).del();
+  });
+}
+
 function comments(post_id) {
   return knex(`${COMMENTS_TABLE} as c`)
     .join(`${USERS_PROFILES_TABLE} as up`, 'c.user_id', 'up.user_id')
@@ -82,6 +94,7 @@ module.exports = {
   readUser,
   readLike,
   createLike,
+  destroyLike,
   comments,
   create,
 };

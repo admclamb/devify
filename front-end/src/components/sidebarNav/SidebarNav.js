@@ -16,7 +16,7 @@ const SidebarNav = () => {
       </li>
       <li>
         <a href="https://github.com/admclamb/devify">
-          <i class="fa-brands fa-github-alt fa-lg me-1"></i> Github
+          <i className="fa-brands fa-github-alt fa-lg me-1"></i> Github
         </a>
       </li>
     </ul>

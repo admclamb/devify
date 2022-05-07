@@ -1,11 +1,10 @@
-import { createContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from './components/navbar/Navbar';
 import PageRoutes from './pages/Routes';
-
+import { UserContext } from './utils/UserContext';
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [session, setSession] = useState({});
-  const UserContext = createContext(session);
   useEffect(() => {
     if (session.hasOwnProperty('user_id')) {
       localStorage.setItem('session', JSON.stringify(session));

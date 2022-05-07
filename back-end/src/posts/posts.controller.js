@@ -71,13 +71,25 @@ async function userAlreadyLikedPost(req, res, next) {
   const { post_id } = res.locals.post;
   const { user_id } = req.body.data;
   const like = await service.readLike(post_id, user_id);
-  console.log(like);
   if (!like) {
     return next();
   }
   next({
     status: 403,
     message: `User ${user_id} has already liked this post.`,
+  });
+}
+
+async function userDidntLikePost(req, res, next) {
+  const { post_id } = res.locals.post;
+  const { user_id } = req.body.data;
+  const like = await service.readLike(post_id, user_id);
+  if (like) {
+    return next();
+  }
+  next({
+    status: 403,
+    message: `User ${user_id} has not liked this post.`,
   });
 }
 
@@ -92,6 +104,13 @@ async function likePost(req, res, next) {
   res.status(201).json({ data: like });
 }
 
+async function unlikePost(req, res, next) {
+  const { post_id } = res.locals.post;
+  const { user_id } = req.body.data;
+  await service.destroy(post_id, user_id);
+  res.sendStatus(204);
+}
+
 module.exports = {
   list,
   read: [asyncErrorBoundary(postExist), asyncErrorBoundary(read)],
@@ -104,6 +123,12 @@ module.exports = {
     asyncErrorBoundary(has_required_props),
     validateDataValues,
     asyncErrorBoundary(create),
+  ],
+  destroy: [
+    asyncErrorBoundary(postExist),
+    asyncErrorBoundary(userExist),
+    asyncErrorBoundary(userDidntLikePost),
+    asyncErrorBoundary(unlikePost),
   ],
   likePost: [
     asyncErrorBoundary(postExist),
