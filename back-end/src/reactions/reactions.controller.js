@@ -23,7 +23,6 @@ async function userExist(req, res, next) {
 
 function checkQuery(req, res, next) {
   const reaction_type = getLastSegment(req.originalUrl);
-  console.log('reaction type: ', reaction_type);
   res.locals.reaction_type = reaction_type;
   next();
 }
@@ -51,7 +50,6 @@ async function userHasReacted(req, res, next) {
   const { post_id } = res.locals.post;
   const { user_id } = req.params;
   const { reaction_type } = res.locals;
-  console.log('user_id: ', user_id);
   const reaction = await service.read(post_id, user_id, reaction_type);
   if (reaction) {
     return next();
@@ -69,7 +67,7 @@ async function createUserReaction(req, res, next) {
   const { post_id } = res.locals.post;
   const { user_id } = req.params;
   const { reaction_type } = res.locals;
-  console.log(reaction_type);
+  console.log(post_id, user_id, reaction_type);
   const reaction = await service.createReaction(
     post_id,
     user_id,
@@ -80,7 +78,7 @@ async function createUserReaction(req, res, next) {
 
 async function destroyUserReaction(req, res, next) {
   const { post_id } = res.locals.post;
-  const { user_id } = req.body.data;
+  const { user_id } = req.params;
   const { reaction_type } = res.locals;
   await service.destroyReaction(post_id, user_id, reaction_type);
   res.sendStatus(204);

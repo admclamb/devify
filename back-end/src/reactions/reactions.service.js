@@ -11,7 +11,6 @@ function read(post_id, user_id, reaction) {
   if (reaction !== 'special_likes') {
     table = `users_${reaction}`;
   }
-  console.log('post_id: ', post_id, user_id, reaction);
   return knex(table).select('*').where({ post_id, user_id }).first();
 }
 
