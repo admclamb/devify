@@ -5,6 +5,7 @@ import { createLogin } from '../../utils/api';
 import './Login.css';
 const Login = ({ setSession }) => {
   const [login, setLogin] = useState({ username: '', password: '' });
+  const [loginBtnText, setLoginBtnText] = useState('Continue');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const handleChange = ({ target }) => {
@@ -15,15 +16,20 @@ const Login = ({ setSession }) => {
     });
   };
   const handleSubmit = async (event) => {
+    console.log('here');
     event.preventDefault();
     setError(null);
+    setLoginBtnText('Loading...');
     const abortController = new AbortController();
     createLogin(login, abortController.signal)
       .then((response) => {
         setSession(response);
         navigate('/');
       })
-      .catch(setError);
+      .catch((err) => {
+        setError(err);
+        setLoginBtnText('Continue');
+      });
   };
   return (
     <main className="row">
@@ -73,8 +79,9 @@ const Login = ({ setSession }) => {
           className="btn btn-primary login-submit"
           value="Submit"
           form="login-form"
+          disabled={loginBtnText !== 'Continue'}
         >
-          Continue
+          {loginBtnText}
         </button>
       </form>
     </main>
