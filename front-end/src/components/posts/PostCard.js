@@ -18,13 +18,10 @@ const PostCard = ({ post }) => {
     ? hashtags_array.join('  ')
     : '';
   console.log(first_name, last_name);
+  const pfp = <img src={'default-pfp.png'} width="100%" className="mb-4" />;
   return (
     <article className="post-card">
-      {image_url && (
-        <div className="post-card-image">
-          <img src={image_url} width="100%" className="mb-4" />
-        </div>
-      )}
+      {image_url && <div className="post-card-image">{pfp}</div>}
       <div className="post-card-container">
         <div className="post-card-head d-flex align-items-center mb-3">
           <div className="post-card-pfp"></div>
