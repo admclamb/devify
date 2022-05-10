@@ -49,8 +49,9 @@ async function userHasntReacted(req, res, next) {
 
 async function userHasReacted(req, res, next) {
   const { post_id } = res.locals.post;
-  const { user_id } = req.body.data;
+  const { user_id } = req.params;
   const { reaction_type } = res.locals;
+  console.log('user_id: ', user_id);
   const reaction = await service.read(post_id, user_id, reaction_type);
   if (reaction) {
     return next();
@@ -66,7 +67,7 @@ async function userHasReacted(req, res, next) {
 
 async function createUserReaction(req, res, next) {
   const { post_id } = res.locals.post;
-  const { user_id } = req.body.data;
+  const { user_id } = req.params;
   const { reaction_type } = res.locals;
   console.log(reaction_type);
   const reaction = await service.createReaction(
