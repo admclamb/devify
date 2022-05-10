@@ -7,3 +7,15 @@
 .post-sidebar li:not(:last-child) {
   margin-bottom: 4rem;
 }
+
+.text-like {
+  color: #dc2626;
+}
+
+.text-special_like {
+  color: #059669;
+}
+
+.text-save {
+  color: #4f46e5;
+}

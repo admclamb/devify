@@ -73,12 +73,19 @@ function destroyReaction(post_id, user_id, reaction) {
   });
 }
 
+function readTotal(post_id) {
+  return knex(POSTS_TABLE)
+    .select('likes', 'special_likes', 'saves')
+    .where({ post_id });
+}
+
 module.exports = {
   readPost,
   readUser,
   read,
   readUserLike,
   readUserSave,
+  readTotal,
   readUserSpecialLike,
   createReaction,
   destroyReaction,

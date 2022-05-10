@@ -2,7 +2,7 @@ const asyncErrorBoundary = require('../errors/asyncErrorBoundary');
 const service = require('./reactions.service');
 
 async function postExist(req, res, next) {
-  const { post_id } = req.body.data;
+  const { post_id } = req.method === 'GET' ? req.params : req.body.data;
   const postExist = await service.readPost(post_id);
   if (postExist) {
     res.locals.post = postExist;
@@ -36,8 +36,6 @@ async function read(req, res, next) {
   const save = (await service.readUserSave(post_id, user_id)) || '';
   const special_like =
     (await service.readUserSpecialLike(post_id, user_id)) || '';
-
-  console.log(data);
   res.status(200).json({ data: { like, save, special_like } });
 }
 
@@ -96,6 +94,11 @@ async function destroyUserReaction(req, res, next) {
   res.sendStatus(204);
 }
 
+async function readTotal(req, res, next) {
+  const { post_id } = res.locals.post;
+  res.status(200).json({ data: await service.readTotal(post_id) });
+}
+
 module.exports = {
   read: [asyncErrorBoundary(postExist), asyncErrorBoundary(userExist), read],
   like: [
@@ -140,4 +143,5 @@ module.exports = {
     asyncErrorBoundary(userHasReacted),
     asyncErrorBoundary(destroyUserReaction),
   ],
+  readTotal: [asyncErrorBoundary(postExist), asyncErrorBoundary(readTotal)],
 };

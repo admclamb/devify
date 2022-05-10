@@ -350,35 +350,24 @@ describe('US-04 likes save  post', () => {
   });
   describe('Read like save special_like from user_id and post_id', () => {
     test('Should return 404 if user_id is not found', async () => {
-      const data = {
-        post_id: 1,
-      };
       const response = await request(app)
-        .get('/reactions/100')
-        .set('Accept', 'application/json')
-        .send({ data });
+        .get('/reactions/100/post/1')
+        .set('Accept', 'application/json');
 
       expect(response.status).to.equal(404);
       expect(response.body.error).to.equal('User 100 does not exist.');
     });
     test('Should return 404 if post_id is not found', async () => {
-      const data = {
-        post_id: 100,
-      };
       const response = await request(app)
-        .get('/reactions/100')
-        .set('Accept', 'application/json')
-        .send({ data });
+        .get('/reactions/1/post/100')
+        .set('Accept', 'application/json');
 
       expect(response.status).to.equal(404);
       expect(response.body.error).to.equal('Post 100 does not exist.');
     });
     test('Should return 200 if post is found with save like and special_like', async () => {
-      const data = {
-        post_id: 3,
-      };
       const response = await request(app)
-        .get('/reactions/1')
+        .get('/reactions/1/post/3')
         .set('Accept', 'application/json')
         .send({ data });
       const desiredResponse = {
