@@ -7,11 +7,7 @@ const USERS_SAVES = 'users_saves';
 const USERS_LIKES_TABLE = 'users_likes';
 
 function read(post_id, user_id, reaction) {
-  let table = reaction;
-  if (reaction !== 'special_likes') {
-    table = `users_${reaction}`;
-  }
-  return knex(table).select('*').where({ post_id, user_id }).first();
+  return knex(reaction).select('*').where({ post_id, user_id }).first();
 }
 
 function readUser(user_id) {

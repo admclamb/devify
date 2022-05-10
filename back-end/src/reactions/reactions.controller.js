@@ -68,6 +68,7 @@ async function createUserReaction(req, res, next) {
   const { post_id } = res.locals.post;
   const { user_id } = req.body.data;
   const { reaction_type } = res.locals;
+  console.log(reaction_type);
   const reaction = await service.createReaction(
     post_id,
     user_id,
