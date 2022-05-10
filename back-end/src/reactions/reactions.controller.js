@@ -29,6 +29,17 @@ function checkQuery(req, res, next) {
 
 const getLastSegment = (path) => path.substring(path.lastIndexOf('/') + 1);
 
+async function read(req, res, next) {
+  const { user_id } = req.params;
+  const { post_id } = res.locals.post;
+  const data = {
+    like: await service.readUserLike(post_id, user_id),
+    save: await service.readUserSave(post_id, user_id),
+    special_like: await service.readUserSpecialLike(post_id, user_id),
+  };
+  res.status(200).json({ data });
+}
+
 async function userHasntReacted(req, res, next) {
   const { post_id } = res.locals.post;
   const { user_id } = res.locals.user;
@@ -85,6 +96,7 @@ async function destroyUserReaction(req, res, next) {
 }
 
 module.exports = {
+  read: [asyncErrorBoundary(postExist), asyncErrorBoundary(userExist), read],
   like: [
     checkQuery,
     asyncErrorBoundary(postExist),

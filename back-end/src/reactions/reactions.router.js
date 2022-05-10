@@ -17,5 +17,5 @@ router
   .post(controller.save)
   .delete(controller.destroySave)
   .all(methodNotAllowed);
-
+router.route('/:user_id').get(controller.read);
 module.exports = router;

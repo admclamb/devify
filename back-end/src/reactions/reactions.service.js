@@ -14,6 +14,19 @@ function read(post_id, user_id, reaction) {
   return knex(table).select('*').where({ post_id, user_id }).first();
 }
 
+function readUserLike(post_id, user_id) {
+  return knex(USERS_LIKES_TABLE).select('*').where({ post_id, user_id });
+}
+function readUserSave(post_id, user_id) {
+  return knex(USERS_SAVES).select('*').where({ post_id, user_id });
+}
+
+function readUserSpecialLike(post_id, user_id) {
+  return knex(USERS_SPECIAL_LIKES_TABLE)
+    .select('*')
+    .where({ post_id, user_id });
+}
+
 function readUser(user_id) {
   return knex(USERS_TABLE).select('*').where({ user_id }).first();
 }
@@ -60,6 +73,9 @@ module.exports = {
   readPost,
   readUser,
   read,
+  readUserLike,
+  readUserSave,
+  readUserSpecialLike,
   createReaction,
   destroyReaction,
 };
