@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
+import { formatAsMonthDay } from '../../utils/formatDate';
 import './PostCard.css';
 
 const PostCard = ({ post }) => {
+  console.log(post);
   const {
     post_id,
     image_url = null,
-    created_at,
+    updated_at,
     first_name = null,
     last_name = null,
     hashtags_array,
@@ -15,7 +17,7 @@ const PostCard = ({ post }) => {
   const hashtags = Array.isArray(hashtags_array)
     ? hashtags_array.join('  ')
     : '';
-
+  console.log(first_name, last_name);
   return (
     <article className="post-card">
       {image_url && (
@@ -33,7 +35,7 @@ const PostCard = ({ post }) => {
                 : 'No Name'}
             </h5>
 
-            <p className="text-sm text-dark">{created_at}</p>
+            <p className="text-sm text-dark">{formatAsMonthDay(updated_at)}</p>
           </div>
         </div>
         <header className="post-card-header">

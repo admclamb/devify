@@ -158,3 +158,13 @@ export async function getPostReactionTotal(post_id, signal) {
   };
   return await fetchJson(url, options, {});
 }
+
+export async function readUserProfile(user_id, signal) {
+  const url = `${API_BASE_URL}/profile/${user_id}`;
+  const options = {
+    method: 'GET',
+    headers,
+    signal,
+  };
+  return await fetchJson(url, options, '');
+}
