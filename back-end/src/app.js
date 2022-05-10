@@ -12,6 +12,7 @@ const commentsRouter = require('./comments/comments.router');
 const loginRouter = require('./login/login.router');
 const registerRouter = require('./register/register.router');
 const reactionsRouter = require('./reactions/reactions.router');
+const profilesRouter = require('./profiles/profiles.router');
 const store = new session.MemoryStore();
 const app = express();
 
@@ -35,6 +36,7 @@ app.use('/comments', commentsRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/reactions', reactionsRouter);
+app.use('/profiles', profilesRouter);
 app.use(notFound);
 app.use(errorHandler);
 
