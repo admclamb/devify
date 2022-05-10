@@ -348,4 +348,55 @@ describe('US-04 likes save  post', () => {
       });
     });
   });
+  describe('Read like save special_like from user_id and post_id', () => {
+    test('Should return 404 if user_id is not found', async () => {
+      const data = {
+        post_id: 1,
+      };
+      const response = await request(app)
+        .get('/reactions/100')
+        .set('Accept', 'application/json')
+        .send({ data });
+
+      expect(response.status).to.equal(404);
+      expect(response.body.error).to.equal('User 100 does not exist.');
+    });
+    test('Should return 404 if post_id is not found', async () => {
+      const data = {
+        post_id: 100,
+      };
+      const response = await request(app)
+        .get('/reactions/100')
+        .set('Accept', 'application/json')
+        .send({ data });
+
+      expect(response.status).to.equal(404);
+      expect(response.body.error).to.equal('Post 100 does not exist.');
+    });
+    test('Should return 200 if post is found with save like and special_like', async () => {
+      const data = {
+        post_id: 3,
+      };
+      const response = await request(app)
+        .get('/reactions/1')
+        .set('Accept', 'application/json')
+        .send({ data });
+      const desiredResponse = {
+        like: {
+          user_id: 1,
+          post_id: 3,
+        },
+        save: {
+          user_id: 1,
+          post_id: 3,
+        },
+        special_like: {
+          user_id: 1,
+          post_id: 3,
+        },
+      };
+      expect(response.status).to.equal(200);
+      expect(response.body.data.like).to.equal(desiredResponse);
+    });
+  });
 });

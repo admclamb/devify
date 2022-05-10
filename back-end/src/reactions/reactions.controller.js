@@ -32,12 +32,13 @@ const getLastSegment = (path) => path.substring(path.lastIndexOf('/') + 1);
 async function read(req, res, next) {
   const { user_id } = req.params;
   const { post_id } = res.locals.post;
-  const data = {
-    like: await service.readUserLike(post_id, user_id),
-    save: await service.readUserSave(post_id, user_id),
-    special_like: await service.readUserSpecialLike(post_id, user_id),
-  };
-  res.status(200).json({ data });
+  const like = (await service.readUserLike(post_id, user_id)) || '';
+  const save = (await service.readUserSave(post_id, user_id)) || '';
+  const special_like =
+    (await service.readUserSpecialLike(post_id, user_id)) || '';
+
+  console.log(data);
+  res.status(200).json({ data: { like, save, special_like } });
 }
 
 async function userHasntReacted(req, res, next) {

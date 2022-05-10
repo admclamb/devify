@@ -15,16 +15,20 @@ function read(post_id, user_id, reaction) {
 }
 
 function readUserLike(post_id, user_id) {
-  return knex(USERS_LIKES_TABLE).select('*').where({ post_id, user_id });
+  return knex(USERS_LIKES_TABLE)
+    .select('*')
+    .where({ post_id, user_id })
+    .first();
 }
 function readUserSave(post_id, user_id) {
-  return knex(USERS_SAVES).select('*').where({ post_id, user_id });
+  return knex(USERS_SAVES).select('*').where({ post_id, user_id }).first();
 }
 
 function readUserSpecialLike(post_id, user_id) {
   return knex(USERS_SPECIAL_LIKES_TABLE)
     .select('*')
-    .where({ post_id, user_id });
+    .where({ post_id, user_id })
+    .first();
 }
 
 function readUser(user_id) {
