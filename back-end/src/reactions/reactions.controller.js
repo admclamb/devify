@@ -74,6 +74,7 @@ async function userHasReacted(req, res, next) {
 }
 
 async function createUserReaction(req, res, next) {
+  console.log('here');
   const { post_id } = res.locals.post;
   const { user_id } = req.params;
   const { reaction_type } = res.locals;
@@ -87,6 +88,7 @@ async function createUserReaction(req, res, next) {
 }
 
 async function destroyUserReaction(req, res, next) {
+  console.log('here destroy');
   const { post_id } = res.locals.post;
   const { user_id } = req.params;
   const { reaction_type } = res.locals;

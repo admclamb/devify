@@ -368,8 +368,8 @@ describe('US-04 likes save  post', () => {
     test('Should return 200 if post is found with save like and special_like', async () => {
       const response = await request(app)
         .get('/reactions/1/post/3')
-        .set('Accept', 'application/json')
-        .send({ data });
+        .set('Accept', 'application/json');
+
       const desiredResponse = {
         like: {
           user_id: 1,

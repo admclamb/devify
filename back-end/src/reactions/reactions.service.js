@@ -43,6 +43,7 @@ function createReaction(post_id, user_id, reaction) {
   if (reaction !== 'special_likes') {
     table = `users_${reaction}`;
   }
+  console.log(post_id);
   return knex.transaction(async (transaction) => {
     const update = {};
     update[reaction] = knex.raw(`${reaction} + 1`);
