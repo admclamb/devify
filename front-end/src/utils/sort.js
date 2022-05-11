@@ -4,5 +4,5 @@
  * sorting by a post udpatedAtTime
  */
 export function sortPosts(posts) {
-  return posts.sort((a, b) => a.updated_at - b.updated_at);
+  return posts.sort((a, b) => a.created_at - b.created_at);
 }

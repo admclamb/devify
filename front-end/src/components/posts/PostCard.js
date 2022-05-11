@@ -7,7 +7,7 @@ const PostCard = ({ post }) => {
   const {
     post_id,
     image_url = null,
-    updated_at,
+    created_at,
     first_name = null,
     last_name = null,
     hashtags_array,
@@ -32,7 +32,7 @@ const PostCard = ({ post }) => {
                 : 'No Name'}
             </h5>
 
-            <p className="text-sm text-dark">{formatAsMonthDay(updated_at)}</p>
+            <p className="text-sm text-dark">{formatAsMonthDay(created_at)}</p>
           </div>
         </div>
         <header className="post-card-header">

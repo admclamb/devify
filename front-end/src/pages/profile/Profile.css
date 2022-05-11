@@ -1,0 +1,34 @@
+.profile {
+  background-color: var(--color-light);
+  position: relative;
+}
+
+.profile-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-pfp {
+  position: absolute;
+  top: -5%;
+  right: 50%;
+  height: 7rem;
+  width: 7rem;
+  background-color: inherit;
+  border: solid 10px black;
+  text-align: center;
+  border-radius: 100%;
+}
+
+.profile-stats {
+  background-color: var(--color-light);
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.profile-stats a {
+  display: flex;
+  align-items: center;
+}

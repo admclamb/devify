@@ -21,3 +21,7 @@ export function formatAsMonthDay(date) {
   const day = new Date(date).getDay();
   return `${MONTHS[month - 1]} ${day}`;
 }
+
+export function formatAsMonthDayYear(date) {
+  return formatAsMonthDay(date) + `, ${new Date(date).getFullYear()}`;
+}

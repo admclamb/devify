@@ -3,6 +3,7 @@ const asyncErrorBoundary = require('../errors/asyncErrorBoundary');
 
 async function profileExist(req, res, next) {
   const { user_id } = req.params;
+  console.log('user_id: ', user_id);
   const profileExist = await service.read(user_id);
   if (profileExist) {
     res.locals.profile = profileExist;
