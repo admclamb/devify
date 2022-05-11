@@ -20,7 +20,9 @@
     "image_url": "https://source.unsplash.com/random",
     "hashtags_array": ["#testing", "#3rdPost", "#Iloveprogramming"],
     "user_id": 3,
-    "likes": 1
+    "likes": 1,
+    "special_likes": 1,
+    "saves": 1
   },
   {
     "post_header": "Testing",
@@ -28,7 +30,9 @@
     "hashtags_array": ["#rick", "#rickAndMorty"],
     "image_url": null,
     "user_id": 2,
-    "likes": 1
+    "likes": 1,
+    "special_likes": 1,
+    "saves": 1
   },
   {
     "post_header": "Final Test",

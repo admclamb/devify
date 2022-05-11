@@ -12,6 +12,7 @@ import './PostSidebar.css';
 const PostSidebar = ({ post, setError }) => {
   const session = useContext(UserContext);
   const { user_id } = session;
+  const { post_id } = post;
   const [userReactions, setUserReactions] = useState({
     like: '',
     save: '',
@@ -27,35 +28,18 @@ const PostSidebar = ({ post, setError }) => {
   }, [post]);
 
   const handleClick = async ({ target }) => {
-    console.log('Here');
     const abortController = new AbortController();
     const signal = abortController.signal;
+    // Use Id To handle which type of reaction to send
     const { id } = target;
-    const { post_id } = post;
+    const repsonse = await handleReactionClick(
+      user_id,
+      post_id,
+      id,
+      abortController.signal
+    );
     let { like, special_like, save } = userReactions;
     console.log(post_id, user_id);
-    if (id === 'like') {
-      like = await handleLike(
-        post_id,
-        user_id,
-        signal,
-        userReactions.like ? 'DELETE' : 'POST'
-      );
-    } else if (id === 'special_like') {
-      special_like = await handleSpecialLike(
-        post_id,
-        user_id,
-        signal,
-        userReactions.special_likes ? 'DELETE' : 'POST'
-      );
-    } else if (id === 'save') {
-      save = await handleSave(
-        post_id,
-        user_id,
-        signal,
-        userReactions.save ? 'DELETE' : 'POST'
-      );
-    }
     setUserReactions({
       like,
       special_like,
