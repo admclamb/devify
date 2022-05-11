@@ -3,7 +3,7 @@ const knex = require('../db/connection');
 const POSTS_TABLE = 'posts';
 const USERS_TABLE = 'users';
 const USERS_SPECIAL_LIKES_TABLE = 'special_likes';
-const USERS_SAVES = 'users_saves';
+const USERS_SAVES_TABLE = 'users_saves';
 const USERS_LIKES_TABLE = 'users_likes';
 
 function read(post_id, user_id, reaction) {
@@ -21,7 +21,10 @@ function readUserLike(post_id, user_id) {
     .first();
 }
 function readUserSave(post_id, user_id) {
-  return knex(USERS_SAVES).select('*').where({ post_id, user_id }).first();
+  return knex(USERS_SAVES_TABLE)
+    .select('*')
+    .where({ post_id, user_id })
+    .first();
 }
 
 function readUserSpecialLike(post_id, user_id) {
@@ -37,43 +40,72 @@ function readUser(user_id) {
 function readPost(post_id) {
   return knex(POSTS_TABLE).select('*').where({ post_id }).first();
 }
-
-function createReaction(post_id, user_id, reaction) {
-  let table = reaction;
-  if (reaction !== 'special_likes') {
-    table = `users_${reaction}`;
-  }
-  console.log(post_id);
+function createLike(post_id, user_id) {
   return knex.transaction(async (transaction) => {
-    const update = {};
-    update[reaction] = knex.raw(`${reaction} + 1`);
     await knex(POSTS_TABLE)
       .where({ post_id })
-      .update(update)
+      .update({ likes: knex.raw('likes + 1') })
       .transacting(transaction);
-    return knex(table)
+    return knex(USERS_LIKES_TABLE)
       .insert({ post_id, user_id })
       .returning('*')
       .then((createdReaction) => createdReaction[0]);
   });
 }
 
-function destroyReaction(post_id, user_id, reaction) {
-  let table = reaction;
-  if (reaction !== 'special_likes') {
-    table = `users_${reaction}`;
-  }
+function destroyLike(post_id, user_id) {
   return knex.transaction(async (transaction) => {
-    const update = {};
-    update[reaction] = knex.raw(`${reaction} -1`);
     await knex(POSTS_TABLE)
       .where({ post_id })
-      .update(update)
+      .update({ likes: knex.raw('likes - 1') })
       .transacting(transaction);
-    return knex(table).where({ post_id, user_id }).del();
+    return knex(USERS_LIKES_TABLE).where({ post_id, user_id }).del();
+  });
+}
+function createSpecial_like(post_id, user_id) {
+  return knex.transaction(async (transaction) => {
+    await knex(POSTS_TABLE)
+      .where({ post_id })
+      .update({ special_likes: knex.raw('special_likes + 1') })
+      .transacting(transaction);
+    return knex(USERS_SPECIAL_LIKES_TABLE)
+      .insert({ post_id, user_id })
+      .returning('*')
+      .then((createdReaction) => createdReaction[0]);
   });
 }
 
+function destroySpecial_like(post_id, user_id) {
+  return knex.transaction(async (transaction) => {
+    await knex(POSTS_TABLE)
+      .where({ post_id })
+      .update({ special_likes: knex.raw('special_likes - 1') })
+      .transacting(transaction);
+    return knex(USERS_SPECIAL_LIKES_TABLE).where({ post_id, user_id }).del();
+  });
+}
+function createSave(post_id, user_id) {
+  return knex.transaction(async (transaction) => {
+    await knex(POSTS_TABLE)
+      .where({ post_id })
+      .update({ saves: knex.raw('saves + 1') })
+      .transacting(transaction);
+    return knex(USERS_SAVES_TABLE)
+      .insert({ post_id, user_id })
+      .returning('*')
+      .then((createdReaction) => createdReaction[0]);
+  });
+}
+
+function destroySave(post_id, user_id) {
+  return knex.transaction(async (transaction) => {
+    await knex(POSTS_TABLE)
+      .where({ post_id })
+      .update({ saves: knex.raw('saves - 1') })
+      .transacting(transaction);
+    return knex(USERS_SAVES_TABLE).where({ post_id, user_id }).del();
+  });
+}
 function readTotal(post_id) {
   return knex(POSTS_TABLE)
     .select('likes', 'special_likes', 'saves')
@@ -88,6 +120,10 @@ module.exports = {
   readUserSave,
   readTotal,
   readUserSpecialLike,
-  createReaction,
-  destroyReaction,
+  createLike,
+  destroyLike,
+  createSpecial_like,
+  destroySpecial_like,
+  createSave,
+  destroySave,
 };

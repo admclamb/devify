@@ -1,3 +1,4 @@
+const { json } = require('body-parser');
 const asyncErrorBoundary = require('../errors/asyncErrorBoundary');
 const service = require('./reactions.service');
 
@@ -73,34 +74,45 @@ async function userHasReacted(req, res, next) {
   });
 }
 
-async function createUserReaction(req, res, next) {
-  console.log('here');
-  const { post_id } = res.locals.post;
-  const { user_id } = req.params;
-  const { reaction_type } = res.locals;
-  console.log(post_id, user_id, reaction_type);
-  const reaction = await service.createReaction(
-    post_id,
-    user_id,
-    reaction_type
-  );
-  res.status(201).json({ data: reaction });
-}
-
-async function destroyUserReaction(req, res, next) {
-  console.log('here destroy');
-  const { post_id } = res.locals.post;
-  const { user_id } = req.params;
-  const { reaction_type } = res.locals;
-  await service.destroyReaction(post_id, user_id, reaction_type);
-  res.sendStatus(204);
-}
-
 async function readTotal(req, res, next) {
   const { post_id } = res.locals.post;
   res.status(200).json({ data: await service.readTotal(post_id) });
 }
 
+async function createLike(req, res, next) {
+  const { post_id } = res.locals.post;
+  const { user_id } = req.params;
+  res.status(201).json({ data: await service.createLike(post_id, user_id) });
+}
+async function deleteLike(req, res, next) {
+  const { post_id } = res.locals.post;
+  const { user_id } = req.params;
+  res.status(204).json({ data: await service.destroyLike(post_id, user_id) });
+}
+async function createSpecial_like(req, res, next) {
+  const { post_id } = res.locals.post;
+  const { user_id } = req.params;
+  res
+    .status(201)
+    .json({ data: await service.createSpecial_like(post_id, user_id) });
+}
+async function deleteSpecial_like(req, res, next) {
+  const { post_id } = res.locals.post;
+  const { user_id } = req.params;
+  res
+    .status(204)
+    .json({ data: await service.destroySpecial_like(post_id, user_id) });
+}
+async function createSave(req, res, next) {
+  const { post_id } = res.locals.post;
+  const { user_id } = req.params;
+  res.status(201).json({ data: await service.createSave(post_id, user_id) });
+}
+async function deleteSave(req, res, next) {
+  const { post_id } = res.locals.post;
+  const { user_id } = req.params;
+  res.status(204).json({ data: await service.destroySave(post_id, user_id) });
+}
 module.exports = {
   read: [asyncErrorBoundary(postExist), asyncErrorBoundary(userExist), read],
   like: [
@@ -108,42 +120,42 @@ module.exports = {
     asyncErrorBoundary(postExist),
     asyncErrorBoundary(userExist),
     asyncErrorBoundary(userHasntReacted),
-    asyncErrorBoundary(createUserReaction),
+    asyncErrorBoundary(createLike),
   ],
   destroyLike: [
     checkQuery,
     asyncErrorBoundary(postExist),
     asyncErrorBoundary(userExist),
     asyncErrorBoundary(userHasReacted),
-    asyncErrorBoundary(destroyUserReaction),
+    asyncErrorBoundary(deleteLike),
   ],
   special_like: [
     checkQuery,
     asyncErrorBoundary(postExist),
     asyncErrorBoundary(userExist),
     asyncErrorBoundary(userHasntReacted),
-    asyncErrorBoundary(createUserReaction),
+    asyncErrorBoundary(createSpecial_like),
   ],
   destroySpecial_like: [
     checkQuery,
     asyncErrorBoundary(postExist),
     asyncErrorBoundary(userExist),
     asyncErrorBoundary(userHasReacted),
-    asyncErrorBoundary(destroyUserReaction),
+    asyncErrorBoundary(deleteSpecial_like),
   ],
   save: [
     checkQuery,
     asyncErrorBoundary(postExist),
     asyncErrorBoundary(userExist),
     asyncErrorBoundary(userHasntReacted),
-    asyncErrorBoundary(createUserReaction),
+    asyncErrorBoundary(createSave),
   ],
   destroySave: [
     checkQuery,
     asyncErrorBoundary(postExist),
     asyncErrorBoundary(userExist),
     asyncErrorBoundary(userHasReacted),
-    asyncErrorBoundary(destroyUserReaction),
+    asyncErrorBoundary(deleteSave),
   ],
   readTotal: [asyncErrorBoundary(postExist), asyncErrorBoundary(readTotal)],
 };
