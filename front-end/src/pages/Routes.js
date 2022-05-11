@@ -7,6 +7,7 @@ import Signup from './signup/Signup';
 import About from './about/About';
 import ProfileSetup from './signup/ProfileSetup';
 import Profile from './profile/Profile';
+import Settings from './settings/Settings';
 const PageRoutes = ({ setSession, session }) => {
   return (
     <Routes>
@@ -26,6 +27,7 @@ const PageRoutes = ({ setSession, session }) => {
       />
       <Route exact={true} path="/profileCreation" element={<ProfileSetup />} />
       <Route exact={true} path="/about" element={<About />} />
+      <Route exact={true} path="/settings" element={<Settings />} />
     </Routes>
   );
 };
