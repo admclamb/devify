@@ -12,6 +12,7 @@ const PageRoutes = ({ setSession, session }) => {
   return (
     <Routes>
       <Route exact={true} path="/" element={<Home />} />
+      <Route path="/settings" element={<Settings />} />
       <Route exact={true} path="/post/:post_id" element={<Post />} />
       <Route exact={true} path="/profile/:username" element={<Profile />} />
       <Route exact={true} path="/:user_id/create" element={<CreatePost />} />
@@ -27,7 +28,6 @@ const PageRoutes = ({ setSession, session }) => {
       />
       <Route exact={true} path="/profileCreation" element={<ProfileSetup />} />
       <Route exact={true} path="/about" element={<About />} />
-      <Route exact={true} path="/settings" element={<Settings />} />
     </Routes>
   );
 };

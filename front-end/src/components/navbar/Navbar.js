@@ -18,7 +18,9 @@ const Navbar = ({ darkMode, setDarkMode, session, logoutUser }) => {
         <li>
           <Link to={`${user_id}/create`}>Create Post</Link>
         </li>
-        <li>Settings</li>
+        <li>
+          <Link to="/settings">Settings</Link>
+        </li>
       </ul>
       <hr />
       <Link to="/" className="navbar__modal-profile" onClick={logoutUser}>
