@@ -27,11 +27,13 @@ const PostSidebar = ({ post, setError }) => {
   }, [post]);
 
   const handleClick = async ({ target }) => {
+    console.log('Here');
     const abortController = new AbortController();
     const signal = abortController.signal;
     const { id } = target;
     const { post_id } = post;
     let { like, special_like, save } = userReactions;
+    console.log(post_id, user_id);
     if (id === 'like') {
       like = await handleLike(
         post_id,

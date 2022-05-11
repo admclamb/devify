@@ -33,10 +33,11 @@ const getLastSegment = (path) => path.substring(path.lastIndexOf('/') + 1);
 async function read(req, res, next) {
   const { user_id } = req.params;
   const { post_id } = res.locals.post;
-  const like = (await service.readUserLike(post_id, user_id)) || '';
-  const save = (await service.readUserSave(post_id, user_id)) || '';
+  const like = (await service.readUserLike(post_id, user_id)) || null;
+  const save = (await service.readUserSave(post_id, user_id)) || null;
   const special_like =
-    (await service.readUserSpecialLike(post_id, user_id)) || '';
+    (await service.readUserSpecialLike(post_id, user_id)) || null;
+  console.log('like: ', like, 'save: ', save, 'special_like: ', special_like);
   res.status(200).json({ data: { like, save, special_like } });
 }
 
@@ -114,7 +115,11 @@ async function deleteSave(req, res, next) {
   res.status(204).json({ data: await service.destroySave(post_id, user_id) });
 }
 module.exports = {
-  read: [asyncErrorBoundary(postExist), asyncErrorBoundary(userExist), read],
+  read: [
+    asyncErrorBoundary(postExist),
+    asyncErrorBoundary(userExist),
+    asyncErrorBoundary(read),
+  ],
   like: [
     checkQuery,
     asyncErrorBoundary(postExist),
