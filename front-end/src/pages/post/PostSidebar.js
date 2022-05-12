@@ -1,10 +1,8 @@
 import { useEffect, useState, useContext } from 'react';
 import {
-  getPostReactionTotal,
-  handleLike,
-  handleSave,
-  handleSpecialLike,
   readPostReaction,
+  handleReaction,
+  getPostReactionTotal,
 } from '../../utils/api';
 import { UserContext } from '../../utils/UserContext';
 import './PostSidebar.css';
@@ -13,43 +11,60 @@ const PostSidebar = ({ post, setError }) => {
   const session = useContext(UserContext);
   const { user_id } = session;
   const { post_id } = post;
-  const [userReactions, setUserReactions] = useState({
-    like: '',
-    save: '',
-    special_likes: '',
-  });
-  let { likes = 0, special_likes = 0, saves = 0 } = post;
+  const initReaction = {
+    like: null,
+    save: null,
+    special_like: null,
+  };
+  const [userReactions, setUserReactions] = useState(initReaction);
+  const [likes, setLikes] = useState(0);
+  const [special_likes, setSpecial_likes] = useState(0);
+  const [saves, setSaves] = useState(0);
   useEffect(() => {
+    if (!post_id) return;
     const abortController = new AbortController();
-    readPostReaction(user_id, post.post_id, abortController.signal)
+    readPostReaction(user_id, post_id, abortController.signal)
       .then(setUserReactions)
       .catch(setError);
     return () => abortController.abort();
+  }, [post_id]);
+  useEffect(() => {
+    setLikes(post.likes);
+    setSpecial_likes(post.special_likes);
+    setSaves(post.saves);
   }, [post]);
-
   const handleClick = async ({ target }) => {
     const abortController = new AbortController();
     const signal = abortController.signal;
-    // Use Id To handle which type of reaction to send
-    const { id } = target;
-    const repsonse = await handleReactionClick(
-      user_id,
-      post_id,
-      id,
-      abortController.signal
-    );
-    let { like, special_like, save } = userReactions;
-    console.log(post_id, user_id);
-    setUserReactions({
-      like,
-      special_like,
-      save,
-    });
-    const response = await getPostReactionTotal(post_id, signal);
-    likes = response.likes;
-    special_likes = response.special_likes;
-    saves = response.saves;
-    console.log(target, id, user_id);
+    setError(null);
+    try {
+      const { id } = target;
+      if (userReactions[id]) {
+        await handleReaction(post_id, user_id, signal, id, 'DELETE');
+        setUserReactions({
+          ...userReactions,
+          [id]: null,
+        });
+      } else {
+        const reaction = await handleReaction(
+          post_id,
+          user_id,
+          signal,
+          id,
+          'POST'
+        );
+        setUserReactions({
+          ...userReactions,
+          [id]: reaction,
+        });
+      }
+      const total = await getPostReactionTotal(post_id, signal);
+      setLikes(total[0].likes);
+      setSpecial_likes(total[0].special_likes);
+      setSaves(total[0].saves);
+    } catch (error) {
+      setError(error);
+    }
   };
   const likeButton = (
     <button className={`btn ${userReactions.like ? 'text-like' : ''}`}>
@@ -80,6 +95,7 @@ const PostSidebar = ({ post, setError }) => {
       ></i>
     </button>
   );
+  console.log(userReactions);
   return (
     <ul className="post-sidebar">
       <li className="text-center">

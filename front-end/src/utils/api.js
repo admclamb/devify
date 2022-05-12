@@ -107,38 +107,24 @@ export async function createPost(post, signal) {
   return await fetchJson(url, options, {});
 }
 
-export async function handleLike(post_id, user_id, signal, type) {
-  const url = `${API_BASE_URL}/reactions/${user_id}/likes`;
+export async function handleReaction(
+  post_id,
+  user_id,
+  signal,
+  reaction,
+  method
+) {
+  const url = `${API_BASE_URL}/reactions/${user_id}/${reaction}s`;
   const options = {
-    method: type,
-    body: JSON.stringify({ data: post_id }),
+    method,
+    body: JSON.stringify({ data: { post_id } }),
     headers,
     signal,
   };
+  console.log(url, options);
   return await fetchJson(url, options, {});
 }
 
-export async function handleSave(post_id, user_id, signal, type) {
-  const url = `${API_BASE_URL}/reactions/${user_id}/saves`;
-  const options = {
-    method: type,
-    body: JSON.stringify({ data: post_id }),
-    headers,
-    signal,
-  };
-  return await fetchJson(url, options, {});
-}
-
-export async function handleSpecialLike(post_id, user_id, signal, type) {
-  const url = `${API_BASE_URL}/reactions/${user_id}/special_likes`;
-  const options = {
-    method: type,
-    body: JSON.stringify({ data: post_id }),
-    headers,
-    signal,
-  };
-  return await fetchJson(url, options, {});
-}
 export async function readPostReaction(user_id, post_id, signal) {
   const url = `${API_BASE_URL}/reactions/${user_id}/post/${post_id}`;
   const options = {
@@ -146,6 +132,7 @@ export async function readPostReaction(user_id, post_id, signal) {
     headers,
     signal,
   };
+  console.log('here', url, options);
   return await fetchJson(url, options, []);
 }
 

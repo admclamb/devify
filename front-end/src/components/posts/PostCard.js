@@ -3,7 +3,6 @@ import { formatAsMonthDay } from '../../utils/formatDate';
 import './PostCard.css';
 
 const PostCard = ({ post }) => {
-  console.log(post);
   const {
     post_id,
     image_url = null,
@@ -17,7 +16,6 @@ const PostCard = ({ post }) => {
   const hashtags = Array.isArray(hashtags_array)
     ? hashtags_array.join('  ')
     : '';
-  console.log(first_name, last_name);
   const pfp = <img src={'default-pfp.png'} width="100%" className="mb-4" />;
   return (
     <article className="post-card">

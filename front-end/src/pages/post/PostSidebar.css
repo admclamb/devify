@@ -8,14 +8,17 @@
   margin-bottom: 4rem;
 }
 
-.text-like {
+.text-like,
+.text-like:hover {
   color: #dc2626;
 }
 
-.text-special_like {
+.text-special_like,
+.text-special_like:hover {
   color: #059669;
 }
 
-.text-save {
+.text-save,
+.text-save:hover {
   color: #4f46e5;
 }

@@ -41,7 +41,6 @@ const CreatePost = () => {
       setError(error);
     }
   };
-  console.log(post, body);
   return (
     <>
       <div className="row container-lg">

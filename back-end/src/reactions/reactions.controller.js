@@ -4,6 +4,9 @@ const service = require('./reactions.service');
 
 async function postExist(req, res, next) {
   const { post_id } = req.method === 'GET' ? req.params : req.body.data;
+  console.log(req.body.data);
+  console.log('post_id', post_id);
+  console.log(req.originalUrl, req.method);
   const postExist = await service.readPost(post_id);
   if (postExist) {
     res.locals.post = postExist;
@@ -37,7 +40,6 @@ async function read(req, res, next) {
   const save = (await service.readUserSave(post_id, user_id)) || null;
   const special_like =
     (await service.readUserSpecialLike(post_id, user_id)) || null;
-  console.log('like: ', like, 'save: ', save, 'special_like: ', special_like);
   res.status(200).json({ data: { like, save, special_like } });
 }
 
@@ -88,7 +90,8 @@ async function createLike(req, res, next) {
 async function deleteLike(req, res, next) {
   const { post_id } = res.locals.post;
   const { user_id } = req.params;
-  res.status(204).json({ data: await service.destroyLike(post_id, user_id) });
+  await service.destroyLike(post_id, user_id);
+  res.status(200).json({ data: { post_id, user_id } });
 }
 async function createSpecial_like(req, res, next) {
   const { post_id } = res.locals.post;
@@ -100,9 +103,8 @@ async function createSpecial_like(req, res, next) {
 async function deleteSpecial_like(req, res, next) {
   const { post_id } = res.locals.post;
   const { user_id } = req.params;
-  res
-    .status(204)
-    .json({ data: await service.destroySpecial_like(post_id, user_id) });
+  await service.destroySpecial_like(post_id, user_id);
+  res.status(200).json({ data: { post_id, user_id } });
 }
 async function createSave(req, res, next) {
   const { post_id } = res.locals.post;
@@ -112,7 +114,8 @@ async function createSave(req, res, next) {
 async function deleteSave(req, res, next) {
   const { post_id } = res.locals.post;
   const { user_id } = req.params;
-  res.status(204).json({ data: await service.destroySave(post_id, user_id) });
+  await service.destroySave(post_id, user_id);
+  res.status(200).json({ data: { post_id, user_id } });
 }
 module.exports = {
   read: [

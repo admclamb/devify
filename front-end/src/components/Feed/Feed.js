@@ -8,7 +8,6 @@ import { sortPosts } from '../../utils/sort';
 const Feed = () => {
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
-  console.log(error);
   useEffect(() => {
     const abortController = new AbortController();
     setPosts([]);
@@ -19,7 +18,6 @@ const Feed = () => {
       .catch(setError);
     return () => abortController.abort();
   }, []);
-  console.log(posts);
   const content =
     posts.length > 0 ? (
       <Posts posts={posts} setError={setError} />

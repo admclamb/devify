@@ -16,7 +16,6 @@ const Login = ({ setSession }) => {
     });
   };
   const handleSubmit = async (event) => {
-    console.log('here');
     event.preventDefault();
     setError(null);
     setLoginBtnText('Loading...');
