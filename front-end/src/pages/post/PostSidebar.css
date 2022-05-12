@@ -5,20 +5,51 @@
 }
 
 .post-sidebar li:not(:last-child) {
-  margin-bottom: 4rem;
+  margin-bottom: 1rem;
 }
 
 .text-like,
 .text-like:hover {
   color: #dc2626;
+  background-color: #f2e0e0;
+  border: solid 2px #dc2626;
 }
 
 .text-special_like,
 .text-special_like:hover {
   color: #059669;
+  background-color: #ddebe7;
+  border: solid 2px #059669;
 }
 
 .text-save,
 .text-save:hover {
   color: #4f46e5;
+  background-color: #e4e3f3;
+  border: solid 2px #4f46e5;
+}
+
+.sidebar-btn {
+  /* background-color: red; */
+  border-radius: 100%;
+  height: 42px;
+  width: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0;
+}
+
+.sidebar-heart {
+  padding-top: 10px;
+}
+
+.sidebar-save {
+  padding-top: 10px;
+}
+
+.post-sidebar__li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

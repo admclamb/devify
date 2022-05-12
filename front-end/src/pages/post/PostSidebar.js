@@ -67,9 +67,13 @@ const PostSidebar = ({ post, setError }) => {
     }
   };
   const likeButton = (
-    <button className={`btn ${userReactions.like ? 'text-like' : ''}`}>
+    <button
+      className={`sidebar-btn sidebar-heart btn ${
+        userReactions.like ? 'text-like' : ''
+      }`}
+    >
       <i
-        className="fa-solid fa-heart fa-2x mb-1"
+        className="fa-solid fa-heart fa-lg mb-1"
         id="like"
         onClick={handleClick}
       ></i>
@@ -77,19 +81,25 @@ const PostSidebar = ({ post, setError }) => {
   );
   const special_likeButton = (
     <button
-      className={`btn ${userReactions.special_like ? 'text-special_like' : ''}`}
+      className={`sidebar-btn btn ${
+        userReactions.special_like ? 'text-special_like' : ''
+      }`}
     >
       <i
-        className="fa-solid fa-narwhal fa-2x mb-1"
+        className="fa-solid fa-narwhal fa-lg mb-1"
         id="special_like"
         onClick={handleClick}
       ></i>
     </button>
   );
   const saveButton = (
-    <button className={`btn ${userReactions.save ? 'text-save' : ''}`}>
+    <button
+      className={`sidebar-btn  sidebar-save btn ${
+        userReactions.save ? 'text-save' : ''
+      }`}
+    >
       <i
-        className="fa-duotone fa-book-bookmark fa-2x mb-1"
+        className="fa-duotone fa-book-bookmark fa-lg mb-1"
         id="save"
         onClick={handleClick}
       ></i>
@@ -98,15 +108,15 @@ const PostSidebar = ({ post, setError }) => {
   console.log(userReactions);
   return (
     <ul className="post-sidebar">
-      <li className="text-center">
+      <li className="post-sidebar__li">
         {likeButton}
         <p value="likes">{likes}</p>
       </li>
-      <li className="text-center">
+      <li className="post-sidebar__li">
         {special_likeButton}
         <p value="special_likes">{special_likes}</p>
       </li>
-      <li className="text-center">
+      <li className="post-sidebar__li">
         {saveButton}
         <p value="saves">{saves}</p>
       </li>
