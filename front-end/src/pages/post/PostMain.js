@@ -42,7 +42,8 @@ const PostMain = ({ post, comments }) => {
           <div className="post-main-content">
             <p>{post_body}</p>
           </div>
-          <PostMainComments comments={comments} />
+
+          <PostMainComments comments={comments} post_id={post_id} />
         </div>
       </article>
     </>

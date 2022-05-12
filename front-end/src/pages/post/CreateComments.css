@@ -1,0 +1,8 @@
+.comment-text-input {
+  width: 100%;
+  min-height: 5rem;
+  resize: none;
+  border: 1px var(--color-gray) solid;
+  border-radius: 6px;
+  padding: 0.6rem;
+}

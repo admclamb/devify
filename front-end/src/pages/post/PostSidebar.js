@@ -20,6 +20,7 @@ const PostSidebar = ({ post, setError }) => {
   const [likes, setLikes] = useState(0);
   const [special_likes, setSpecial_likes] = useState(0);
   const [saves, setSaves] = useState(0);
+
   useEffect(() => {
     if (!post_id) return;
     const abortController = new AbortController();
@@ -105,7 +106,7 @@ const PostSidebar = ({ post, setError }) => {
       ></i>
     </button>
   );
-  console.log(userReactions);
+
   return (
     <ul className="post-sidebar">
       <li className="post-sidebar__li">
