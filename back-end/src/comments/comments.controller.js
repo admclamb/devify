@@ -44,7 +44,7 @@ async function readForPost(req, res, next) {
 }
 
 async function destroyComment(req, res, next) {
-  const { comment_id } = res.locals.comment;
+  const { comment_id } = req.body.data;
   await service.destroy(comment_id);
   res.sendStatus(204);
 }
@@ -58,7 +58,6 @@ function isNumber(req, res, next) {
   const { user_id } = req.body.data;
   const { post_id } = req.body.data;
   const { comment_id } = req.body.data;
-  console.log(user_id);
   if (user_id && typeof user_id !== 'number') {
     return next({
       status: 400,
@@ -82,6 +81,9 @@ function isNumber(req, res, next) {
 
 function validateComment(req, res, next) {
   const { comment } = req.body.data;
+  if (!comment) {
+    return next({ status: 400, message: 'Comment is not defined' });
+  }
   if (comment.length > 50) {
     return next({
       status: 400,
@@ -113,7 +115,6 @@ module.exports = {
     hasOnlyValidProperties(['comment_id']),
     hasRequiredProperties(['comment_id']),
     isNumber,
-    validateComment,
     asyncErrorBoundary(commentExist),
     asyncErrorBoundary(destroyComment),
   ],

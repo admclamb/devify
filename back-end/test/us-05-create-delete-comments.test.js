@@ -233,9 +233,8 @@ describe('US-02 create post', () => {
           .delete('/comments')
           .set('Accept', 'application/json')
           .send({ data });
-        console.log(response.body.error);
         expect(response.status).to.equal(400);
-        expect(response.body.error).to.equal('Comment_id must be a number');
+        expect(response.body.error).to.equal('Comment_id 1 is not a number.');
       });
       test('Should return 404 if comment_id is not found', async () => {
         const data = { comment_id: 100 };
@@ -254,6 +253,7 @@ describe('US-02 create post', () => {
           .delete('/comments')
           .set('Accept', 'application/json')
           .send({ data });
+        console.log(response.body.error);
         expect(response.status).to.equal(204);
         expect(response.body.error).to.be.undefined;
       });
