@@ -39,7 +39,9 @@ async function postExist(req, res, next) {
 }
 
 async function list(req, res) {
-  res.status(200).json({ data: await service.list() });
+  const posts = await service.listWithAll();
+  console.log(posts);
+  res.status(200).json({ data: posts });
 }
 
 async function read(req, res) {

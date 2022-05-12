@@ -9,13 +9,13 @@ function list() {
 }
 
 /**
- * function that list the post with author and comments
+ * function that list the post with author ordered in descending order
  */
 function listWithAll() {
   return knex(`${TABLE} as p`)
     .join(`${USERS_PROFILES_TABLE} as up`, 'p.user_id', 'up.user_id')
-    .join(`${COMMENTS_TABLE} as c`, 'p.user_id', 'c.user_id')
-    .select('p.*', 'up.first_name', 'up.last_name', 'c.*');
+    .select('*')
+    .orderBy('p.created_at', 'desc');
 }
 
 function readWithAll(post_id) {
