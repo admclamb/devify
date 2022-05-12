@@ -65,7 +65,9 @@ describe('US-02 create post', () => {
           .set('Accept', 'application/json')
           .send({ data });
         expect(response.status).to.equal(400);
-        expect(response.body.error).to.contain('user_id');
+        expect(response.body.error).to.equal(
+          `User_id ${data.user_id} is not a number.`
+        );
       });
       test('Should return 404 if user_id not found', async () => {
         const data = {
@@ -78,7 +80,9 @@ describe('US-02 create post', () => {
           .set('Accept', 'application/json')
           .send({ data });
         expect(response.status).to.equal(404);
-        expect(response.body.error).to.equal(`User ${user_id} not found.`);
+        expect(response.body.error).to.equal(
+          `User ${data.user_id} does not exist.`
+        );
       });
       test('Should return 400 if post_id is missing', async () => {
         const data = {
@@ -90,7 +94,7 @@ describe('US-02 create post', () => {
           .set('Accept', 'application/json')
           .send({ data });
         expect(response.status).to.equal(400);
-        expect(response.body.error).to.equal('post_id');
+        expect(response.body.error).to.contain('post_id');
       });
       test('Should return 400 if post_id is empty', async () => {
         const data = {
@@ -103,7 +107,7 @@ describe('US-02 create post', () => {
           .set('Accept', 'application/json')
           .send({ data });
         expect(response.status).to.equal(400);
-        expect(response.body.error).to.equal('post_id');
+        expect(response.body.error).to.contain('post_id');
       });
       test('Should return 400 if post_id is not a number', async () => {
         const data = {
@@ -116,7 +120,7 @@ describe('US-02 create post', () => {
           .set('Accept', 'application/json')
           .send({ data });
         expect(response.status).to.equal(400);
-        expect(response.body.error).to.equal('post_id');
+        expect(response.body.error).to.contain('Post_id 1 is not a number.');
       });
       test('Should return 404 if post_id not found', async () => {
         const data = {
@@ -129,24 +133,26 @@ describe('US-02 create post', () => {
           .set('Accept', 'application/json')
           .send({ data });
         expect(response.status).to.equal(404);
-        expect(response.body.error).to.equal(`Post ${post_id} not found.`);
+        expect(response.body.error).to.equal(
+          `Post ${data.post_id} does not exist.`
+        );
       });
       test('Should return 400 if comment is missing', async () => {
         const data = {
           user_id: 1,
-          post_id: 100,
+          post_id: 1,
         };
         const response = await request(app)
           .post('/comments')
           .set('Accept', 'application/json')
           .send({ data });
         expect(response.status).to.equal(400);
-        expect(response.body.error).to.equal('comment');
+        expect(response.body.error).to.contain('comment');
       });
       test('Should return 400 if comment is empty', async () => {
         const data = {
           user_id: 1,
-          post_id: 100,
+          post_id: 1,
           comment: '',
         };
         const response = await request(app)
@@ -154,12 +160,12 @@ describe('US-02 create post', () => {
           .set('Accept', 'application/json')
           .send({ data });
         expect(response.status).to.equal(400);
-        expect(response.body.error).to.equal('comment');
+        expect(response.body.error).to.contain('comment');
       });
       test('Should return 400 if comment is not a string', async () => {
         const data = {
           user_id: 1,
-          post_id: 100,
+          post_id: 1,
           comment: 129872198,
         };
         const response = await request(app)
@@ -181,7 +187,7 @@ describe('US-02 create post', () => {
           .set('Accept', 'application/json')
           .send({ data });
         expect(response.status).to.equal(400);
-        expect(response.body.error).to.equal('Comment too long');
+        expect(response.body.error).to.equal('Comment is too long.');
       });
       test('Should return 200 if a comment is created', async () => {
         const data = {
@@ -227,6 +233,7 @@ describe('US-02 create post', () => {
           .delete('/comments')
           .set('Accept', 'application/json')
           .send({ data });
+        console.log(response.body.error);
         expect(response.status).to.equal(400);
         expect(response.body.error).to.equal('Comment_id must be a number');
       });
@@ -238,7 +245,7 @@ describe('US-02 create post', () => {
           .send({ data });
         expect(response.status).to.equal(404);
         expect(response.body.error).to.equal(
-          `Comment ${data.comment_id} not found.`
+          `Comment ${data.comment_id} does not exist.`
         );
       });
       test('Shoud return 204 if comment is deleted', async () => {

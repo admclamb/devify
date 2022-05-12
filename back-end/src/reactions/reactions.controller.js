@@ -4,9 +4,6 @@ const service = require('./reactions.service');
 
 async function postExist(req, res, next) {
   const { post_id } = req.method === 'GET' ? req.params : req.body.data;
-  console.log(req.body.data);
-  console.log('post_id', post_id);
-  console.log(req.originalUrl, req.method);
   const postExist = await service.readPost(post_id);
   if (postExist) {
     res.locals.post = postExist;
