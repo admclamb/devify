@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { UserContext } from '../../utils/UserContext';
-import './CreateComments.css';
+import './CreateComment.css';
 const CreateComment = ({ post_id }) => {
   const session = useContext(UserContext);
   const { user_id } = session;

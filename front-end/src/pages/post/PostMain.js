@@ -27,7 +27,7 @@ const PostMain = ({ post, comments }) => {
             </div>
           )}
         </header>
-        <div className="post-main-body">
+        <div className="post-main-body border-bottom">
           <div className="mt-4">
             <div className="post-card-head d-flex align-items-center mb-3">
               <div className="post-card-pfp"></div>
@@ -42,9 +42,8 @@ const PostMain = ({ post, comments }) => {
           <div className="post-main-content">
             <p>{post_body}</p>
           </div>
-
-          <PostMainComments comments={comments} post_id={post_id} />
         </div>
+        <PostMainComments comments={comments} post_id={post_id} />
       </article>
     </>
   );

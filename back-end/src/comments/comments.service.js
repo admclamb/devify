@@ -3,6 +3,7 @@ const knex = require('../db/connection');
 const TABLE = 'comments';
 const USERS_TABLE = 'users';
 const POSTS_TABLE = 'posts';
+const USERS_PROFILES_TABLE = 'users_profiles';
 function list() {
   return knex(TABLE).select('*');
 }
@@ -13,7 +14,10 @@ function list() {
  * @return get all comments for a post
  */
 function readPostComments(post_id) {
-  return knex(TABLE).select('*').where({ post_id });
+  return knex(`${TABLE} as c`)
+    .leftJoin(`${USERS_PROFILES_TABLE} as up`, 'c.user_id', 'up.user_id')
+    .select('c*')
+    .where({ post_id });
 }
 
 function readUser(user_id) {
