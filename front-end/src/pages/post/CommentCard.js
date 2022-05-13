@@ -11,13 +11,16 @@ const CommentCard = ({ comment_data }) => {
           P
         </Link>
       </aside>
+
       <main className="comment-card__main">
         <div className="comment-card-main border p-3 rounded">
           <header className="comment-header">
             <p className="text-sm">{`${first_name} ${last_name}`}</p>
             <p className="ms-4 text-sm">{formatAsMonthDay(created_at)}</p>
           </header>
-          <article>{comment}</article>
+          <article>
+            <p>{comment}</p>
+          </article>
         </div>
         <div className="buttons">
           <button className="btn me-2 comment-button">
