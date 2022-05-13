@@ -7,6 +7,7 @@ import { createPost } from '../../utils/api';
 import ErrorAlert from '../../errors/ErrorAlert';
 const CreatePost = () => {
   const { user_id } = useParams();
+  const [publishBtnText, setPublishBtnText] = useState('Publish');
   const navigate = useNavigate();
   const initPost = {
     post_header: '',
@@ -28,6 +29,7 @@ const CreatePost = () => {
 
   const handleSubmit = async (event) => {
     try {
+      setPublishBtnText('Loading...');
       event.preventDefault();
       setError(null);
       const abortController = new AbortController();
@@ -37,8 +39,10 @@ const CreatePost = () => {
       };
       await createPost(outPost, abortController.signal);
       navigate('/');
+      setPublishBtnText('Publish');
     } catch (error) {
       setError(error);
+      setPublishBtnText('Publish');
     }
   };
   return (
@@ -82,8 +86,9 @@ const CreatePost = () => {
             className="submit btn btn-primary"
             type="submit"
             onClick={handleSubmit}
+            disabled={publishBtnText !== 'Publish'}
           >
-            Publish
+            {publishBtnText}
           </button>
         </div>
       </section>
