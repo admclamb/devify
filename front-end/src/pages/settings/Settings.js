@@ -8,7 +8,6 @@ import SettingsRoutes from './SettingsRoutes';
 
 const Settings = () => {
   const session = useContext(UserContext);
-  console.log(session);
   const username = '1111';
   return (
     <div className="container-lg">

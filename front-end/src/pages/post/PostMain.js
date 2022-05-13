@@ -1,4 +1,5 @@
 import FeedLoading from '../../components/Feed/FeedLoading';
+import { formatAsMonthDay, formatAsMonthDayYear } from '../../utils/formatDate';
 import './PostMain.css';
 import PostMainComments from './PostMainComments';
 const PostMain = ({ post, comments, setComments }) => {
@@ -32,8 +33,12 @@ const PostMain = ({ post, comments, setComments }) => {
             <div className="post-card-head d-flex align-items-center mb-3">
               <div className="post-card-pfp"></div>
               <div className="name_date">
-                <h5 className="text-sm">{first_name + '   ' + last_name}</h5>
-                <p className="text-sm">{created_at}</p>
+                <h5 className="text-sm">
+                  {first_name && last_name
+                    ? first_name + '   ' + last_name
+                    : 'No Name'}
+                </h5>
+                <p className="text-sm">{formatAsMonthDayYear(created_at)}</p>
               </div>
             </div>
           </div>

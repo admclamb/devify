@@ -27,7 +27,6 @@ export async function fetchJson(url, options, onCancel) {
     }
 
     const payload = await response.json();
-    console.log(payload);
     if (payload.error) {
       return Promise.reject({ message: payload.error });
     }
@@ -121,7 +120,6 @@ export async function handleReaction(
     headers,
     signal,
   };
-  console.log(url, options);
   return await fetchJson(url, options, {});
 }
 
@@ -132,7 +130,6 @@ export async function readPostReaction(user_id, post_id, signal) {
     headers,
     signal,
   };
-  console.log('here', url, options);
   return await fetchJson(url, options, []);
 }
 
@@ -161,6 +158,16 @@ export async function createComment(comment, signal) {
   const options = {
     method: 'POST',
     body: JSON.stringify({ data: comment }),
+    headers,
+    signal,
+  };
+  return await fetchJson(url, options, {});
+}
+
+export async function readProfile(user_id, signal) {
+  const url = `${API_BASE_URL}/profiles/${user_id}`;
+  const options = {
+    method: 'GET',
     headers,
     signal,
   };

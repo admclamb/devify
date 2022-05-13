@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import { getUserReactions, readComments, readPost } from '../../utils/api';
 import PostSidebar from './PostSidebar';
 import PostMain from './PostMain';
-import PostBio from './PostBio';
 import FeedLoading from '../../components/Feed/FeedLoading';
 import ErrorAlert from '../../errors/ErrorAlert';
+import ProfileBio from '../../components/Profile/ProfileBio';
 const Post = () => {
   const { post_id } = useParams();
   const [post, setPost] = useState({});
@@ -23,7 +23,7 @@ const Post = () => {
   }, [post_id]);
   if (!post && !error) return <FeedLoading />;
   return (
-    <main className="row container-lg gx-0">
+    <main className="row container-lg gx-4">
       <ErrorAlert error={error} />
       <aside className="col-sm-1">
         <PostSidebar post={post} setError={setError} />
@@ -31,8 +31,8 @@ const Post = () => {
       <section className="col-sm-8">
         <PostMain post={post} comments={comments} setComments={setComments} />
       </section>
-      <section className="col-sm-4">
-        <PostBio />
+      <section className="col-sm-3">
+        <ProfileBio post_user_id={post.user_id} />
       </section>
     </main>
   );

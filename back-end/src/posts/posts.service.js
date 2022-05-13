@@ -28,7 +28,11 @@ function readWithAll(post_id) {
 }
 
 function read(post_id) {
-  return knex(TABLE).select('*').where({ post_id }).first();
+  return knex(`${TABLE} as p`)
+    .leftJoin(`${USERS_PROFILES_TABLE} as up`, 'up.user_id', 'p.user_id')
+    .select('*')
+    .where({ post_id })
+    .first();
 }
 
 function readUser(user_id) {

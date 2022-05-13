@@ -5,7 +5,6 @@ import { UserContext } from '../../utils/UserContext';
 import './CreateComment.css';
 const CreateComment = ({ post_id, setError, setComments, comments }) => {
   const session = useContext(UserContext);
-  console.log(session);
   const { user_id, first_name } = session;
   const [comment, setComment] = useState('');
   const [submitBtnText, setSubmitBtnText] = useState('Submit');
@@ -14,14 +13,12 @@ const CreateComment = ({ post_id, setError, setComments, comments }) => {
     setSubmitBtnText('Loading...');
     try {
       event.preventDefault();
-      console.log({ post_id, user_id, comment });
       const abortController = new AbortController();
       await createComment(
         { post_id, user_id, comment },
         abortController.signal
       );
       const comments = await readComments(post_id, abortController.signal);
-      console.log(comments);
       setComments(comments.reverse());
       setComment('');
       setSubmitBtnText('Submit');
