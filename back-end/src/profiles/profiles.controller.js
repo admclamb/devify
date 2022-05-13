@@ -14,7 +14,12 @@ async function profileExist(req, res, next) {
 function read(req, res, next) {
   res.status(200).json({ data: res.locals.profile });
 }
+async function readStats(req, res, next) {
+  const { user_id } = res.locals.profile;
+  res.status(200).json({ data: await service.readStats(user_id) });
+}
 
 module.exports = {
   read: [asyncErrorBoundary(profileExist), read],
+  readStats: [asyncErrorBoundary(profileExist), asyncErrorBoundary(readStats)],
 };
