@@ -173,3 +173,13 @@ export async function readProfile(user_id, signal) {
   };
   return await fetchJson(url, options, {});
 }
+
+export async function readProfileStats(user_id, signal) {
+  const url = `${API_BASE_URL}/profiles/${user_id}/stats`;
+  const options = {
+    method: 'GET',
+    headers,
+    signal,
+  };
+  return await fetchJson(url, options, {});
+}

@@ -31,15 +31,20 @@ const Profile = () => {
     work,
   } = profile;
   return (
-    <>
+    <div className="profile-bg">
+      <div className="profile-bg_brand_1"></div>
       <div className="row container-lg pt-3 ">
         <ErrorAlert error={error} />
         <section className="profile border rounded p-4">
-          <img
-            src="../../../public/images/default-pfp.png"
-            alt="Profile Pic"
-            className="profile-pfp"
-          />
+          <div className="profile-pfp">
+            <h3>P</h3>
+            {/* <img
+              src="../../../public/images/default-pfp.png"
+              alt="Profile Pic"
+              className="profile-pfp__img"
+            /> */}
+          </div>
+
           <header className="profile-header__actions d-flex">
             <Link to="/settings" className="btn btn-primary ms-auto">
               Edit Profile
@@ -57,7 +62,7 @@ const Profile = () => {
       <div className="row container-lg">
         <ProfileStats user_id={user_id} />
       </div>
-    </>
+    </div>
   );
 };
 

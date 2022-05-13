@@ -1,6 +1,7 @@
 .profile {
   background-color: var(--color-light);
   position: relative;
+  margin-top: 5rem;
 }
 
 .profile-body {
@@ -11,14 +12,18 @@
 
 .profile-pfp {
   position: absolute;
-  top: -5%;
-  right: 50%;
-  height: 7rem;
-  width: 7rem;
+  top: -30%;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 10rem;
+  width: 10rem;
   background-color: inherit;
   border: solid 10px black;
   text-align: center;
   border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .profile-stats {
@@ -31,4 +36,12 @@
 .profile-stats a {
   display: flex;
   align-items: center;
+}
+
+.profile-bg_brand_1 {
+  position: absolute;
+  top: 0;
+  height: 14rem;
+  width: 100%;
+  background-color: #000;
 }
