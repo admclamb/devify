@@ -17,7 +17,7 @@ const Post = () => {
     setError(null);
     readPost(post_id, abortController.signal).then(setPost).catch(setError);
     readComments(post_id, abortController.signal)
-      .then(setComments)
+      .then((res) => setComments(res.reverse()))
       .catch(setError);
     return () => abortController.abort();
   }, [post_id]);
@@ -29,7 +29,7 @@ const Post = () => {
         <PostSidebar post={post} setError={setError} />
       </aside>
       <section className="col-sm-8">
-        <PostMain post={post} comments={comments} />
+        <PostMain post={post} comments={comments} setComments={setComments} />
       </section>
       <section className="col-sm-4">
         <PostBio />

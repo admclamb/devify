@@ -1,7 +1,7 @@
 import FeedLoading from '../../components/Feed/FeedLoading';
 import './PostMain.css';
 import PostMainComments from './PostMainComments';
-const PostMain = ({ post, comments }) => {
+const PostMain = ({ post, comments, setComments }) => {
   if (!post) return <FeedLoading />;
   const {
     post_id = null,
@@ -43,7 +43,11 @@ const PostMain = ({ post, comments }) => {
             <p>{post_body}</p>
           </div>
         </div>
-        <PostMainComments comments={comments} post_id={post_id} />
+        <PostMainComments
+          comments={comments}
+          setComments={setComments}
+          post_id={post_id}
+        />
       </article>
     </>
   );

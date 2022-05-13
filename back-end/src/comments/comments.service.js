@@ -16,8 +16,9 @@ function list() {
 function readPostComments(post_id) {
   return knex(`${TABLE} as c`)
     .leftJoin(`${USERS_PROFILES_TABLE} as up`, 'c.user_id', 'up.user_id')
-    .select('c*')
-    .where({ post_id });
+    .select('c*', 'c.created_at')
+    .where({ post_id })
+    .orderBy('c.created_at', 'asc');
 }
 
 function readUser(user_id) {

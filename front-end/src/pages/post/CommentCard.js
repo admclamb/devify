@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { formatAsMonthDay } from '../../utils/formatDate';
 import './CommentCard.css';
 const CommentCard = ({ comment_data }) => {
-  console.log('Comment: ', comment_data);
   const { comment, first_name, last_name, user_id, created_at } = comment_data;
   return (
     <article className="comment-card">

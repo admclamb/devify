@@ -155,3 +155,14 @@ export async function readUserProfile(user_id, signal) {
   };
   return await fetchJson(url, options, '');
 }
+
+export async function createComment(comment, signal) {
+  const url = `${API_BASE_URL}/comments`;
+  const options = {
+    method: 'POST',
+    body: JSON.stringify({ data: comment }),
+    headers,
+    signal,
+  };
+  return await fetchJson(url, options, {});
+}
