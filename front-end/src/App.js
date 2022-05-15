@@ -61,7 +61,12 @@ function App() {
             logoutUser={logoutUser}
           />
         </header>
-        <PageRoutes setSession={setSession} session={session} />
+        <PageRoutes
+          setSession={setSession}
+          session={session}
+          darkMode={darkMode}
+          setDarkMode={setDarkMode}
+        />
       </UserContext.Provider>
     </>
   );

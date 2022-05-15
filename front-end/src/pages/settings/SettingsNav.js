@@ -40,20 +40,7 @@ const SettingsNav = () => {
               Customization
             </Link>
           </li>
-          <li
-            className={`settings-nav__li ${
-              currPath === 'notification' ? 'settings-nav__active' : ''
-            }`}
-          >
-            <Link
-              to="notification"
-              className="settings-nav__li-a"
-              onClick={onClick}
-              id="notification"
-            >
-              Notification
-            </Link>
-          </li>
+
           <li
             className={`settings-nav__li ${
               currPath === 'account' ? 'settings-nav__active' : ''

@@ -13,14 +13,22 @@ import SettingsProfile from './settings/SettingsProfile';
 import SettingsCustomization from './settings/SettingsCustomization';
 import SettingsNotifications from './settings/SettingsNotifications';
 import SettingsAccount from './settings/SettingsAccount';
-const PageRoutes = ({ setSession, session }) => {
+const PageRoutes = ({ setSession, session, darkMode, setDarkMode }) => {
   return (
     <Routes>
       <Route index exact={true} path="/" element={<Home />} />
       <Route exact={true} path="/settings" element={<Settings />}>
         <Route index element={<SettingsProfile />} />
         <Route path="profile" element={<SettingsProfile />} />
-        <Route path="customization" element={<SettingsCustomization />} />
+        <Route
+          path="customization"
+          element={
+            <SettingsCustomization
+              darkMode={darkMode}
+              setDarkMode={setDarkMode}
+            />
+          }
+        />
         <Route path="notification" element={<SettingsNotifications />} />
         <Route path="account" element={<SettingsAccount />} />
       </Route>
