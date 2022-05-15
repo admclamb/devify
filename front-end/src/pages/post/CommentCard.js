@@ -1,8 +1,44 @@
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { formatAsMonthDay } from '../../utils/formatDate';
+import Modal from '../../utils/Modal';
+import ModalButton from '../../utils/ModalButton';
+import { UserContext } from '../../utils/UserContext';
 import './CommentCard.css';
-const CommentCard = ({ comment_data }) => {
-  const { comment, first_name, last_name, user_id, created_at } = comment_data;
+const CommentCard = ({ comment_data, deleteComment }) => {
+  const session = useContext(UserContext);
+  const { user_id } = session;
+  const {
+    comment,
+    first_name,
+    last_name,
+    user_id: commentUser_id,
+    created_at,
+    comment_id,
+  } = comment_data;
+  const [openModal, setOpenModal] = useState(false);
+  const handleEllipse = () => {
+    setOpenModal((currState) => !currState);
+  };
+  console.log(comment_id);
+  const commentModal = (
+    <div className="comment-modal border rounded">
+      <ul>
+        <li>
+          <button className="btn">Report Abuse</button>
+        </li>
+        {user_id === commentUser_id && (
+          <ModalButton text={'Delete Comment'} btnClasses={'btn'} />
+        )}
+      </ul>
+      <Modal
+        title="Delete this comment?"
+        body="This cannot be undone."
+        helperFunction={() => deleteComment(comment_id)}
+      />
+    </div>
+  );
+
   return (
     <article className="comment-card">
       <aside>
@@ -16,6 +52,13 @@ const CommentCard = ({ comment_data }) => {
           <header className="comment-header">
             <p className="text-sm">{`${first_name} ${last_name}`}</p>
             <p className="ms-4 text-sm">{formatAsMonthDay(created_at)}</p>
+            <button
+              className="btn ms-auto comment-ellipse"
+              onClick={handleEllipse}
+            >
+              <i className="fa-solid fa-ellipsis"></i>
+            </button>
+            {openModal && commentModal}
           </header>
           <article>
             <p>{comment}</p>

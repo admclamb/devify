@@ -40,7 +40,7 @@ const ProfileBio = ({ post_user_id }) => {
     <section className="post-bio border rounded">
       <div
         className="bio-header-color rounded-top"
-        style={{ 'background-color': brandColor1 }}
+        style={{ backgroundColor: brandColor1 }}
       >
         {' '}
       </div>

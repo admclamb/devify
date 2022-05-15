@@ -28,6 +28,10 @@ function readPost(post_id) {
   return knex(POSTS_TABLE).select('*').where({ post_id }).first();
 }
 
+function read(comment_id) {
+  return knex(TABLE).select('*').where({ comment_id }).first();
+}
+
 function destroy(comment_id) {
   return knex(TABLE).where({ comment_id }).del();
 }
@@ -41,6 +45,7 @@ function create(comment) {
 
 module.exports = {
   list,
+  read,
   readPost,
   readUser,
   readPostComments,

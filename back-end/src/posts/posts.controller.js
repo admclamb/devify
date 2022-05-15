@@ -40,7 +40,6 @@ async function postExist(req, res, next) {
 
 async function list(req, res) {
   const posts = await service.listWithAll();
-  console.log(posts);
   res.status(200).json({ data: posts });
 }
 

@@ -17,6 +17,8 @@
 
 .comment-header {
   display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .comment-card__main {
@@ -34,5 +36,33 @@
   padding: 0.2rem 0.5rem;
 }
 .comment-button:hover {
+  background-color: var(--color-gray);
+}
+
+.comment-ellipse:hover {
+  background-color: var(--color-gray);
+}
+
+.comment-modal {
+  position: absolute;
+  background-color: var(--color-light);
+  top: 120%;
+  right: 0%;
+  padding: 0.4rem;
+}
+
+.comment-modal ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 0;
+  width: 10rem;
+}
+
+.comment-modal ul button {
+  text-align: start;
+  padding-left: 0.3rem;
+  width: 100%;
+}
+.comment-modal ul button:hover {
   background-color: var(--color-gray);
 }

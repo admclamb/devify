@@ -21,6 +21,7 @@ const Post = () => {
       .catch(setError);
     return () => abortController.abort();
   }, [post_id]);
+
   if (!post && !error) return <FeedLoading />;
   return (
     <main className="row container-lg gx-4">

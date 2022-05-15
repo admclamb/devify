@@ -26,7 +26,7 @@ async function userExist(req, res, next) {
 
 async function commentExist(req, res, next) {
   const { comment_id } = req.body.data;
-  const commentExist = await service.readPost(comment_id);
+  const commentExist = await service.read(comment_id);
   if (commentExist) {
     res.locals.comment = commentExist;
     return next();
@@ -45,6 +45,7 @@ async function readForPost(req, res, next) {
 
 async function destroyComment(req, res, next) {
   const { comment_id } = req.body.data;
+  console.log('here', comment_id);
   await service.destroy(comment_id);
   res.sendStatus(204);
 }

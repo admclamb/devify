@@ -164,6 +164,19 @@ export async function createComment(comment, signal) {
   return await fetchJson(url, options, {});
 }
 
+export async function destroyComment(comment_id, signal) {
+  console.log(comment_id);
+  const url = `${API_BASE_URL}/comments`;
+  const options = {
+    method: 'DELETE',
+    body: JSON.stringify({ data: { comment_id } }),
+    headers,
+    signal,
+  };
+  console.log(options);
+  return await fetchJson(url, options, {});
+}
+
 export async function readProfile(user_id, signal) {
   const url = `${API_BASE_URL}/profiles/${user_id}`;
   const options = {
