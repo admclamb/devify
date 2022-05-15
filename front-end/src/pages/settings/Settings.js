@@ -1,10 +1,8 @@
 import { useContext } from 'react';
-
+import { Outlet } from 'react-router-dom';
 import { UserContext } from '../../utils/UserContext';
 
 import SettingsNav from './SettingsNav';
-
-import SettingsRoutes from './SettingsRoutes';
 
 const Settings = () => {
   const session = useContext(UserContext);
@@ -15,7 +13,7 @@ const Settings = () => {
       <div className="row">
         <SettingsNav />
         <section>
-          <SettingsRoutes />
+          <Outlet />
         </section>
       </div>
     </div>

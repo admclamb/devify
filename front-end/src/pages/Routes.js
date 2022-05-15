@@ -5,14 +5,25 @@ import Post from './post/Post';
 import Login from './login/Login';
 import Signup from './signup/Signup';
 import About from './about/About';
-import ProfileSetup from './signup/ProfileSetup';
 import Profile from './profile/Profile';
+import ProfileSetup from './signup/ProfileSetup';
 import Settings from './settings/Settings';
+import NoMatch from '../errors/NoMatch';
+import SettingsProfile from './settings/SettingsProfile';
+import SettingsCustomization from './settings/SettingsCustomization';
+import SettingsNotifications from './settings/SettingsNotifications';
+import SettingsAccount from './settings/SettingsAccount';
 const PageRoutes = ({ setSession, session }) => {
   return (
     <Routes>
-      <Route exact={true} path="/" element={<Home />} />
-      <Route path="/settings" element={<Settings />} />
+      <Route index exact={true} path="/" element={<Home />} />
+      <Route exact={true} path="/settings" element={<Settings />}>
+        <Route index element={<SettingsProfile />} />
+        <Route path="profile" element={<SettingsProfile />} />
+        <Route path="customization" element={<SettingsCustomization />} />
+        <Route path="notification" element={<SettingsNotifications />} />
+        <Route path="account" element={<SettingsAccount />} />
+      </Route>
       <Route exact={true} path="/post/:post_id" element={<Post />} />
       <Route exact={true} path="/profile/:username" element={<Profile />} />
       <Route exact={true} path="/:user_id/create" element={<CreatePost />} />
@@ -28,6 +39,7 @@ const PageRoutes = ({ setSession, session }) => {
       />
       <Route exact={true} path="/profileCreation" element={<ProfileSetup />} />
       <Route exact={true} path="/about" element={<About />} />
+      <Route path="*" element={<NoMatch />} />
     </Routes>
   );
 };
