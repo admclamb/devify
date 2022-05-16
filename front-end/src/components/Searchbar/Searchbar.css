@@ -18,3 +18,7 @@
   width: 25em;
   background-color: var(--color-light);
 }
+
+.search-button__icon {
+  background-color: red !important;
+}

@@ -66,7 +66,7 @@
   z-index: 150;
   position: absolute;
   display: block;
-  left: 50%;
+  right: 100%;
   top: 150%;
   background-color: var(--color-light);
   padding: 0.8rem;

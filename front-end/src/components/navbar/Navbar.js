@@ -3,6 +3,10 @@ import Searchbar from '../Searchbar/Searchbar';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import OutsideAlerter from '../../hooks/OutsideAlerter';
+import OffCanvasNav from './OffCanvasNav';
+import OffCanvasNavButton from './OffCanvasNavButton';
+import SignedInNav from './SignedInNav';
+import NotSignedInNav from './NotSignedInNav';
 const Navbar = ({ darkMode, setDarkMode, session, logoutUser }) => {
   const { user_id = '', username = '' } = session;
   const [openModal, setOpenModal] = useState(false);
@@ -40,39 +44,27 @@ const Navbar = ({ darkMode, setDarkMode, session, logoutUser }) => {
       </section>
     </OutsideAlerter>
   );
-  const signedInNavbar = (
-    <div className="navbar__profile-container">
-      <Link to={`${user_id}/create`} className="btn btn-outline-primary">
-        Create Post
-      </Link>
-      <i className="fa-thin fa-bell fa-lg"></i>
-      <div
-        className="profile-picture"
-        id="modal-toggle-btn"
-        onClick={() => setOpenModal((prev) => !prev)}
-      ></div>
-      {openModal ? modal : ''}
-    </div>
-  );
-  const notSignedInNavbar = (
-    <div className="navbar__profile-container">
-      <Link to="/login" className="me-3 btn login">
-        Log in
-      </Link>
-      <Link to="/signup" className="btn btn-outline-primary">
-        Create account
-      </Link>
-    </div>
-  );
 
   return (
     <nav className="navbar ps-4 ps-sm-0 pe-sm-0 pe-4">
       <div className="container">
+        <div className="d-block d-md-none">
+          <OffCanvasNavButton />
+          <OffCanvasNav />
+        </div>
         <Link to="/" className="navbar__logo">
           <h1 className="navbar__logo text-size-p">Devify</h1>
         </Link>
         <Searchbar />
-        {user_id ? signedInNavbar : notSignedInNavbar}
+        {user_id ? (
+          <SignedInNav
+            openModal={openmodal}
+            setOpenModal={setOpenModal}
+            modal={modal}
+          />
+        ) : (
+          <NotSignedInNav />
+        )}
         <button
           className="color-mode-toggle rounded bg-dark btn text-light ms-3 d-none"
           onClick={() => setDarkMode((currMode) => !currMode)}
