@@ -56,6 +56,7 @@ const CommentCard = ({ comment_data, deleteComment }) => {
             <p className="text-sm">{`${first_name} ${last_name}`}</p>
             <p className="ms-4 text-sm">{formatAsMonthDay(created_at)}</p>
             <button
+              id="modal-toggle-btn"
               className="btn ms-auto comment-ellipse"
               onClick={handleEllipse}
             >

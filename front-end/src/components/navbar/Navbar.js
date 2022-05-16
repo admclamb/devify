@@ -39,6 +39,7 @@ const Navbar = ({ darkMode, setDarkMode, session, logoutUser }) => {
       <i className="fa-thin fa-bell fa-lg"></i>
       <div
         className="profile-picture"
+        id="modal-toggle-btn"
         onClick={() => setOpenModal((prev) => !prev)}
       ></div>
       {openModal ? modal : ''}
