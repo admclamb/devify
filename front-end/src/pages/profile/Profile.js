@@ -33,7 +33,7 @@ const Profile = () => {
   return (
     <div className="profile-bg">
       <div className="profile-bg_brand_1"></div>
-      <div className="row container-lg pt-3 ">
+      <div className="row container pt-3 ">
         <ErrorAlert error={error} />
         <section className="profile border rounded p-4">
           <div className="profile-pfp">
@@ -59,7 +59,7 @@ const Profile = () => {
           </article>
         </section>
       </div>
-      <div className="row container-lg">
+      <div className="row container">
         <ProfileStats user_id={user_id} />
       </div>
     </div>

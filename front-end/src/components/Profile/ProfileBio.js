@@ -37,45 +37,47 @@ const ProfileBio = ({ post_user_id }) => {
     ? skills_languages.join(' / ')
     : null;
   return (
-    <section className="post-bio border rounded">
-      <div
-        className="bio-header-color rounded-top"
-        style={{ backgroundColor: brandColor1 }}
-      >
-        {' '}
-      </div>
-      <div className="ps-3 pb-3 pe-3">
-        <header className="mb-3">
-          <div className="bio-pfp">
-            {first_name ? first_name[0].toUpperCase() : 'P'}
-          </div>
-          <Link to={'/'}>
-            <h4 className="bio-name">{`${first_name} ${last_name}`}</h4>
-          </Link>
+    profile && (
+      <section className="post-bio border rounded">
+        <div
+          className="bio-header-color rounded-top"
+          style={{ backgroundColor: brandColor1 }}
+        >
+          {' '}
+        </div>
+        <div className="ps-3 pb-3 pe-3">
+          <header className="mb-3">
+            <div className="bio-pfp">
+              {first_name ? first_name[0].toUpperCase() : 'P'}
+            </div>
+            <Link to={'/'}>
+              <h4 className="bio-name">{`${first_name} ${last_name}`}</h4>
+            </Link>
 
-          <div className="bio-header__button">
-            <button className="bio-follow btn btn-primary d-block bio-button">
-              Follow
-            </button>
-          </div>
-        </header>
-        <main>
-          <section className="mb-3">
-            <h5>SKILLS</h5>
-            <p className="text-sm">{skillsText ? skillsText : ''}</p>
-          </section>
+            <div className="bio-header__button">
+              <button className="bio-follow btn btn-primary d-block bio-button">
+                Follow
+              </button>
+            </div>
+          </header>
+          <main>
+            <section className="mb-3">
+              <h5>SKILLS</h5>
+              <p className="text-sm">{skillsText ? skillsText : ''}</p>
+            </section>
 
-          <section className="mb-3">
-            <h5>WORK</h5>
-            <p>{work}</p>
-          </section>
-          <section>
-            <h5>JOINED</h5>
-            <p>{formatAsMonthDayYear(created_at)}</p>
-          </section>
-        </main>
-      </div>
-    </section>
+            <section className="mb-3">
+              <h5>WORK</h5>
+              <p>{work}</p>
+            </section>
+            <section>
+              <h5>JOINED</h5>
+              <p>{formatAsMonthDayYear(created_at)}</p>
+            </section>
+          </main>
+        </div>
+      </section>
+    )
   );
 };
 

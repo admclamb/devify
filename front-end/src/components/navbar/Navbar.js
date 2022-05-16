@@ -15,13 +15,22 @@ const Navbar = ({ darkMode, setDarkMode, session, logoutUser }) => {
         <hr />
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" onClick={() => setOpenModal((p) => !p)}>
+              Home
+            </Link>
           </li>
           <li>
-            <Link to={`${user_id}/create`}>Create Post</Link>
+            <Link
+              to={`${user_id}/create`}
+              onClick={() => setOpenModal((p) => !p)}
+            >
+              Create Post
+            </Link>
           </li>
           <li>
-            <Link to="/settings">Settings</Link>
+            <Link to="/settings" onClick={() => setOpenModal((p) => !p)}>
+              Settings
+            </Link>
           </li>
         </ul>
         <hr />
@@ -57,8 +66,8 @@ const Navbar = ({ darkMode, setDarkMode, session, logoutUser }) => {
   );
 
   return (
-    <nav className="navbar">
-      <div className="container-lg ">
+    <nav className="navbar ps-4 ps-sm-0 pe-sm-0 pe-4">
+      <div className="container">
         <Link to="/" className="navbar__logo">
           <h1 className="navbar__logo text-size-p">Devify</h1>
         </Link>

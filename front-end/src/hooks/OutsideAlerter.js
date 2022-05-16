@@ -10,7 +10,7 @@ function useOutsideAlerter(ref, setState) {
       if (
         ref.current &&
         !ref.current.contains(event.target) &&
-        allowedTargets.includes(event.target.id)
+        !allowedTargets.includes(event.target.id)
       ) {
         setState(false);
       }

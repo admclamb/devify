@@ -8,7 +8,7 @@ const Settings = () => {
   const session = useContext(UserContext);
   const username = '1111';
   return (
-    <div className="container-lg">
+    <div className="container">
       <h2>Settings for @{username} </h2>
       <div className="row">
         <SettingsNav />

@@ -72,14 +72,6 @@ textarea {
   font-family: 'Roboto', sans-serif;
 }
 
-.container {
-  margin-inline: 10%;
-}
-
-.container-lg {
-  margin-inline: 17%;
-}
-
 .text-container {
   width: 100%;
 }
@@ -103,28 +95,4 @@ input {
 a {
   color: inherit;
   text-decoration: none;
-}
-
-@media all and (max-width: 480px) {
-  .container-lg {
-    margin-inline: 5%;
-  }
-}
-
-@media all and (max-width: 768px) {
-  .container-lg {
-    margin-inline: 10%;
-  }
-}
-
-@media all and (max-width: 1024px) {
-  .container-lg {
-    margin-inline: 12%;
-  }
-}
-
-@media all and (max-width: 1200px) {
-  .container-lg {
-    margin-inline: 14%;
-  }
 }

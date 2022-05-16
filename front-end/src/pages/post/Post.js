@@ -24,18 +24,20 @@ const Post = () => {
 
   if (!post && !error) return <FeedLoading />;
   return (
-    <main className="row container-lg gx-4">
-      <ErrorAlert error={error} />
-      <aside className="col-sm-1">
-        <PostSidebar post={post} setError={setError} />
-      </aside>
-      <section className="col-sm-8">
-        <PostMain post={post} comments={comments} setComments={setComments} />
-      </section>
-      <section className="col-sm-3">
-        <ProfileBio post_user_id={post.user_id} />
-      </section>
-    </main>
+    <div className="container">
+      <main className="row gx-4">
+        <ErrorAlert error={error} />
+        <aside className="col-sm-1">
+          <PostSidebar post={post} setError={setError} />
+        </aside>
+        <section className="col-sm-8">
+          <PostMain post={post} comments={comments} setComments={setComments} />
+        </section>
+        <section className="col-sm-3">
+          <ProfileBio post_user_id={post.user_id} />
+        </section>
+      </main>
+    </div>
   );
 };
 

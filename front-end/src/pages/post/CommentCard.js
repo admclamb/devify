@@ -27,7 +27,12 @@ const CommentCard = ({ comment_data, deleteComment }) => {
       <div className="comment-modal border rounded">
         <ul>
           <li>
-            <button className="btn">Report Abuse</button>
+            <button
+              className="btn"
+              onClick={() => setOpenModal((prevState) => !prevState)}
+            >
+              Report Abuse
+            </button>
           </li>
           {user_id === commentUser_id && (
             <ModalButton text={'Delete Comment'} btnClasses={'btn'} />

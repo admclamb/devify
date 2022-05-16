@@ -47,17 +47,17 @@ const CreatePost = () => {
   };
   return (
     <>
-      <div className="row container-lg">
+      <div className="row container">
         <ErrorAlert error={error} />
       </div>
 
-      <nav className="row container-lg">
+      <nav className="row container">
         <div className="create-post-top-nav d-flex mb-3">
           <button className="btn ms-auto me-4">Edit</button>
           <button className="btn ">Preview</button>
         </div>
       </nav>
-      <article className="row container-lg create-post-container rounded gx-0">
+      <article className="row container create-post-container rounded gx-0">
         <header>
           <div className="create-post-header-main">
             <button className="btn btn-lg btn-outline-dark mb-4">
@@ -80,7 +80,7 @@ const CreatePost = () => {
           <PostBody body={body} setBody={setBody} />
         </main>
       </article>
-      <section className="footer row container-lg">
+      <section className="footer row container">
         <div className="publish-buttons mt-4">
           <button
             className="submit btn btn-primary"
