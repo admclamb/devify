@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import OutsideAlerter from '../../hooks/OutsideAlerter';
 import { formatAsMonthDay } from '../../utils/formatDate';
 import Modal from '../../utils/Modal';
 import ModalButton from '../../utils/ModalButton';
@@ -22,21 +23,23 @@ const CommentCard = ({ comment_data, deleteComment }) => {
   };
   console.log(comment_id);
   const commentModal = (
-    <div className="comment-modal border rounded">
-      <ul>
-        <li>
-          <button className="btn">Report Abuse</button>
-        </li>
-        {user_id === commentUser_id && (
-          <ModalButton text={'Delete Comment'} btnClasses={'btn'} />
-        )}
-      </ul>
-      <Modal
-        title="Delete this comment?"
-        body="This cannot be undone."
-        helperFunction={() => deleteComment(comment_id)}
-      />
-    </div>
+    <OutsideAlerter setState={setOpenModal}>
+      <div className="comment-modal border rounded">
+        <ul>
+          <li>
+            <button className="btn">Report Abuse</button>
+          </li>
+          {user_id === commentUser_id && (
+            <ModalButton text={'Delete Comment'} btnClasses={'btn'} />
+          )}
+        </ul>
+        <Modal
+          title="Delete this comment?"
+          body="This cannot be undone."
+          helperFunction={() => deleteComment(comment_id)}
+        />
+      </div>
+    </OutsideAlerter>
   );
 
   return (

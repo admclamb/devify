@@ -2,31 +2,34 @@ import { useEffect, useState } from 'react';
 import Searchbar from '../Searchbar/Searchbar';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import OutsideAlerter from '../../hooks/OutsideAlerter';
 const Navbar = ({ darkMode, setDarkMode, session, logoutUser }) => {
   const { user_id = '', username = '' } = session;
   const [openModal, setOpenModal] = useState(false);
   const modal = (
-    <section className="navbar__modal rounded border">
-      <Link to={`profile/${username}`} className="navbar__modal-profile">
-        {username ? `@${username}` : 'Profile'}
-      </Link>
-      <hr />
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to={`${user_id}/create`}>Create Post</Link>
-        </li>
-        <li>
-          <Link to="/settings">Settings</Link>
-        </li>
-      </ul>
-      <hr />
-      <Link to="/" className="navbar__modal-profile" onClick={logoutUser}>
-        Logout
-      </Link>
-    </section>
+    <OutsideAlerter setState={setOpenModal}>
+      <section className="navbar__modal rounded border">
+        <Link to={`profile/${username}`} className="navbar__modal-profile">
+          {username ? `@${username}` : 'Profile'}
+        </Link>
+        <hr />
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to={`${user_id}/create`}>Create Post</Link>
+          </li>
+          <li>
+            <Link to="/settings">Settings</Link>
+          </li>
+        </ul>
+        <hr />
+        <Link to="/" className="navbar__modal-profile" onClick={logoutUser}>
+          Logout
+        </Link>
+      </section>
+    </OutsideAlerter>
   );
   const signedInNavbar = (
     <div className="navbar__profile-container">
