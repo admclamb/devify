@@ -5,7 +5,7 @@
 }
 
 .sidebar-nav li {
-  padding: 0.8rem 0.5rem;
+  padding: 0.4rem 0.5rem;
   border-radius: 10px;
   width: 65%;
   color: var(--color-dark);
@@ -18,5 +18,4 @@
 }
 
 .sidebar-nav li:not(:last-child) {
-  margin-bottom: 1rem;
 }

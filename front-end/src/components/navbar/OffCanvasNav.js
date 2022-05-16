@@ -1,6 +1,21 @@
 import SidebarNav from '../sidebarNav/SidebarNav';
 import { Link } from 'react-router-dom';
-const OffCanvasNav = () => {
+const OffCanvasNav = ({ user_id }) => {
+  const signedInButtons = (
+    <div className="post-buttons">
+      <button className="btn btn-primary w-100">CreatePost</button>
+    </div>
+  );
+  const notSignedInButtons = (
+    <div className="post-buttons">
+      <Link to="/login" className="btn btn-secondary w-50">
+        Log in
+      </Link>
+      <Link to="/signup" className="btn btn-outline-primary w-50">
+        Create account
+      </Link>
+    </div>
+  );
   return (
     <div
       className="offcanvas offcanvas-start"
@@ -20,15 +35,15 @@ const OffCanvasNav = () => {
         ></button>
       </div>
       <div className="offcanvas-body">
-        <div className="post-buttons"></div>
-        <form className="d-flex">
+        {user_id ? signedInButtons : ''}
+        <form className="d-flex mb-4 mt-4">
           <input
             className="form-control me-2"
             type="search"
             placeholder="Search"
             aria-label="Search"
           />
-          <button className="btn btn-outline-success" type="submit">
+          <button className="btn btn-outline-primary" type="submit">
             Search
           </button>
         </form>

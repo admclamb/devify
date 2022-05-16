@@ -26,7 +26,6 @@
 }
 
 .navbar__profile-container {
-  margin-left: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -66,7 +65,7 @@
   z-index: 150;
   position: absolute;
   display: block;
-  right: 100%;
+  right: 0%;
   top: 150%;
   background-color: var(--color-light);
   padding: 0.8rem;

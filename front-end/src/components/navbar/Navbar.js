@@ -50,7 +50,7 @@ const Navbar = ({ darkMode, setDarkMode, session, logoutUser }) => {
       <div className="container">
         <div className="d-block d-md-none">
           <OffCanvasNavButton />
-          <OffCanvasNav />
+          <OffCanvasNav user_id={user_id} />
         </div>
         <Link to="/" className="navbar__logo">
           <h1 className="navbar__logo text-size-p">Devify</h1>
@@ -58,9 +58,10 @@ const Navbar = ({ darkMode, setDarkMode, session, logoutUser }) => {
         <Searchbar />
         {user_id ? (
           <SignedInNav
-            openModal={openmodal}
+            openModal={openModal}
             setOpenModal={setOpenModal}
             modal={modal}
+            user_id={user_id}
           />
         ) : (
           <NotSignedInNav />

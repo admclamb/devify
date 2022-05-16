@@ -1,3 +1,5 @@
+import './OffCanvasNavButton.css';
+
 const OffCanvasNavButton = () => {
   return (
     <button

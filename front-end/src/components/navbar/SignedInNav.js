@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
-const SignedInNav = ({ openModal, setOpenModal, modal }) => {
+const SignedInNav = ({ openModal, setOpenModal, modal, user_id }) => {
   return (
-    <div className="navbar__profile-container">
+    <div className="navbar__profile-container ms-md-auto">
       <Link
         to={`${user_id}/create`}
         className="btn btn-outline-primary d-none d-md-block"
@@ -19,4 +19,4 @@ const SignedInNav = ({ openModal, setOpenModal, modal }) => {
     </div>
   );
 };
-import SignedInNav from './NotSignedInNav';
+export default SignedInNav;
