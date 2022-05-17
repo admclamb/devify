@@ -9,10 +9,10 @@ const OffCanvasNav = ({ user_id }) => {
   );
   const notSignedInButtons = (
     <div className="post-buttons">
-      <Link to="/login" className="btn btn-secondary w-50">
+      <Link to="/login" className="btn btn-secondary w-100 mb-2">
         Log in
       </Link>
-      <Link to="/signup" className="btn btn-outline-primary w-50">
+      <Link to="/signup" className="btn btn-outline-primary w-100">
         Create account
       </Link>
     </div>
@@ -36,7 +36,7 @@ const OffCanvasNav = ({ user_id }) => {
         ></button>
       </div>
       <div className="offcanvas-body">
-        {user_id ? signedInButtons : ''}
+        {user_id ? signedInButtons : notSignedInButtons}
         <form className="d-flex mb-4 mt-4">
           <input
             className="form-control me-2"

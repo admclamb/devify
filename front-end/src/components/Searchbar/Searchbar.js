@@ -12,7 +12,10 @@ const Searchbar = () => {
           className="searchbar search-container__input"
         />
       </div>
-      <Link to="/search" className="d-block d-md-none ms-auto btn">
+      <Link
+        to="/search"
+        className="searchbar-small d-block d-md-none ms-auto btn"
+      >
         <i className="fa-thin fa-magnifying-glass fa-lg"></i>
       </Link>
     </>

@@ -42,7 +42,10 @@ const PostCard = ({ post }) => {
         <div className="post-card-main">
           <p className="text-dark">{hashtags}</p>
           <div className="footer d-flex align-items-center mt-5">
-            <Link to={`/post/${post_id}`} className="me-5 text-dark post-like">
+            <Link
+              to={`/post/${post_id}`}
+              className="me-md-5 me-1 text-dark post-like"
+            >
               <i className="fa-light fa-heart text-dark"></i> {likes} Likes
             </Link>
             <Link to={`/post/${post_id}`} className="text-dark post-comment">

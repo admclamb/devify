@@ -22,3 +22,15 @@
 .search-button__icon {
   background-color: red !important;
 }
+
+@media screen and (max-width: 350px) {
+  .searchbar-small {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 1026px) {
+  .searchbar {
+    width: 15rem;
+  }
+}

@@ -5,7 +5,7 @@
 }
 
 .post-card-container {
-  padding: 1.4rem;
+  padding: 0.9rem;
 }
 
 .post-card-pfp {
@@ -22,7 +22,7 @@
 }
 
 .post-card-main {
-  margin-left: 7%;
+  margin-left: 0%;
 }
 
 .post-header-link {
@@ -51,4 +51,14 @@
 .post-like:hover,
 .post-comment:hover {
   background-color: var(--color-gray);
+}
+
+@media screen and (min-width: 390px) {
+  .post-card-container {
+    padding: 1.4rem;
+  }
+
+  .post-card-main {
+    margin-left: 7%;
+  }
 }
