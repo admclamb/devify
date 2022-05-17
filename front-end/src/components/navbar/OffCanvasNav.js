@@ -1,7 +1,7 @@
 import SidebarNav from '../sidebarNav/SidebarNav';
 import { Link } from 'react-router-dom';
 import './OffCanvasNav.css';
-const OffCanvasNav = ({ user_id }) => {
+const OffCanvasNav = ({ user_id, search, setSearch }) => {
   const signedInButtons = (
     <div className="post-buttons">
       <button className="btn btn-primary w-100">CreatePost</button>
@@ -41,12 +41,19 @@ const OffCanvasNav = ({ user_id }) => {
           <input
             className="form-control me-2"
             type="search"
-            placeholder="Search"
+            placeholder="Search..."
             aria-label="Search"
+            value={search}
+            onChange={({ target }) => setSearch(target.value)}
           />
-          <button className="btn btn-outline-primary" type="submit">
+          <Link
+            to="/search"
+            className="btn btn-outline-primary"
+            data-bs-dismiss="offcanvas"
+            aria-label="Search"
+          >
             Search
-          </button>
+          </Link>
         </form>
         <SidebarNav />
         <ul className="offcanvas-nav__other">

@@ -1,15 +1,19 @@
 import { Link } from 'react-router-dom';
 import './Searchbar.css';
 
-const Searchbar = () => {
+const Searchbar = ({ search, setSearch }) => {
   return (
     <>
       <div className="search-container d-none d-md-block">
-        <i className="fa-thin fa-magnifying-glass search-container__icon fa-lg"></i>
+        <Link to="/search">
+          <i className="fa-thin fa-magnifying-glass search-container__icon fa-lg"></i>
+        </Link>
         <input
           type="text"
           placeholder="Search..."
           className="searchbar search-container__input"
+          value={search}
+          onChange={({ target }) => setSearch(target.value)}
         />
       </div>
       <Link

@@ -5,6 +5,8 @@ import { UserContext } from './utils/UserContext';
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [session, setSession] = useState({});
+  //Search term used for navbar and search page
+  const [search, setSearch] = useState('');
   useEffect(() => {
     if (session.hasOwnProperty('user_id')) {
       localStorage.setItem('session', JSON.stringify(session));
@@ -59,11 +61,15 @@ function App() {
             setDarkMode={setDarkMode}
             session={session}
             logoutUser={logoutUser}
+            search={search}
+            setSearch={setSearch}
           />
         </header>
         <PageRoutes
           setSession={setSession}
           session={session}
+          search={search}
+          setSearch={setSearch}
           darkMode={darkMode}
           setDarkMode={setDarkMode}
         />

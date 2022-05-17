@@ -7,7 +7,14 @@ import OffCanvasNav from './OffCanvasNav';
 import OffCanvasNavButton from './OffCanvasNavButton';
 import SignedInNav from './SignedInNav';
 import NotSignedInNav from './NotSignedInNav';
-const Navbar = ({ darkMode, setDarkMode, session, logoutUser }) => {
+const Navbar = ({
+  darkMode,
+  setDarkMode,
+  session,
+  logoutUser,
+  search,
+  setSearch,
+}) => {
   const { user_id = '', username = '' } = session;
   const [openModal, setOpenModal] = useState(false);
   const modal = (
@@ -50,12 +57,16 @@ const Navbar = ({ darkMode, setDarkMode, session, logoutUser }) => {
       <div className="container">
         <div className="d-block d-md-none">
           <OffCanvasNavButton />
-          <OffCanvasNav user_id={user_id} />
+          <OffCanvasNav
+            user_id={user_id}
+            search={search}
+            setSearch={setSearch}
+          />
         </div>
         <Link to="/" className="navbar__logo">
           <h1 className="navbar__logo text-size-p">Devify</h1>
         </Link>
-        <Searchbar />
+        <Searchbar setSearch={setSearch} search={search} />
         {user_id ? (
           <SignedInNav
             openModal={openModal}
