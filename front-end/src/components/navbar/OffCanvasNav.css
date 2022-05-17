@@ -1,3 +1,22 @@
 .offcanvas {
   background-color: var(--color-light);
 }
+
+.offcanvas-nav__other {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.offcanvas-nav__other li {
+  padding: 0.4rem 0.5rem;
+  border-radius: 10px;
+  width: 65%;
+  color: var(--color-dark);
+}
+
+.offcanvas-nav__other li:hover {
+  background-color: var(--color-main-hover);
+  color: var(--color-main);
+  text-decoration: underline;
+}

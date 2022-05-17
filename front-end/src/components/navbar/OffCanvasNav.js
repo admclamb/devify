@@ -49,19 +49,21 @@ const OffCanvasNav = ({ user_id }) => {
           </button>
         </form>
         <SidebarNav />
-        <h4>Other</h4>
-        <ul>
+        <ul className="offcanvas-nav__other">
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/">
+              <i class="fa-duotone fa-pen-paintbrush fa-lg"></i> Create Post
+            </Link>
           </li>
           <li>
-            <Link to="/">Create Post</Link>
+            <Link to="/">
+              <i class="fa-duotone fa-gear fa-lg"></i> Settings
+            </Link>
           </li>
           <li>
-            <Link to="/">Settings</Link>
-          </li>
-          <li>
-            <Link to="/">Logout</Link>
+            <Link to="/">
+              <i class="fa-duotone fa-right-from-bracket fa-lg"></i> Logout
+            </Link>
           </li>
         </ul>
       </div>

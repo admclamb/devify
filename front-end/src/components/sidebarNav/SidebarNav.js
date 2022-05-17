@@ -6,12 +6,12 @@ const SidebarNav = () => {
     <ul className="sidebar-nav">
       <li>
         <Link to="/">
-          <i className="fa-duotone fa-house me-1"></i> Home
+          <i className="fa-duotone fa-house fa-lg me-1"></i> Home
         </Link>
       </li>
       <li>
         <Link to="/about">
-          <i className="fa-duotone fa-address-card me-1"></i> About
+          <i className="fa-duotone fa-address-card  fa-lg me-1"></i> About
         </Link>
       </li>
       <li>
