@@ -20,7 +20,7 @@ const PostMain = ({ post, comments, setComments }) => {
     : '';
   return (
     <>
-      <article className="post-main-container">
+      <article className="post-main-container border">
         <header>
           {image_url && (
             <div className="img-wrapper">

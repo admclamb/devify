@@ -1,5 +1,6 @@
 import SidebarNav from '../sidebarNav/SidebarNav';
 import { Link } from 'react-router-dom';
+import './OffCanvasNav.css';
 const OffCanvasNav = ({ user_id }) => {
   const signedInButtons = (
     <div className="post-buttons">

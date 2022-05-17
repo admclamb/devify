@@ -7,10 +7,10 @@ const Home = () => {
     <>
       <div className="container">
         <main className="row gx-0">
-          <aside className="col-0 d-none d-sm-block col-sm-2">
+          <aside className="col-0 d-none d-md-block col-sm-2">
             <SidebarNav />
           </aside>
-          <section className="col-12 col-sm-8">
+          <section className="col-12 col-md-8">
             <Feed />
           </section>
         </main>

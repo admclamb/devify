@@ -80,6 +80,10 @@ input {
   background-color: var(--color-light);
 }
 
+i {
+  color: var(--color-dark);
+}
+
 /* Resets */
 .text-dark {
   color: var(--color-dark) !important;
