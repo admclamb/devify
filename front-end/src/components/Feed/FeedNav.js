@@ -1,4 +1,4 @@
-import "./FeedNav.css";
+import './FeedNav.css';
 
 const FeedNav = () => {
   return (
