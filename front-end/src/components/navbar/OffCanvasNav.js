@@ -4,15 +4,29 @@ import './OffCanvasNav.css';
 const OffCanvasNav = ({ user_id, search, setSearch }) => {
   const signedInButtons = (
     <div className="post-buttons">
-      <button className="btn btn-primary w-100">CreatePost</button>
+      <Link
+        to={`${user_id}/create`}
+        className="btn btn-primary w-100"
+        data-bs-dismiss="offcanvas"
+      >
+        CreatePost
+      </Link>
     </div>
   );
   const notSignedInButtons = (
     <div className="post-buttons">
-      <Link to="/login" className="btn btn-secondary w-100 mb-2">
+      <Link
+        to="/login"
+        className="btn btn-secondary w-100 mb-2"
+        data-bs-dismiss="offcanvas"
+      >
         Log in
       </Link>
-      <Link to="/signup" className="btn btn-outline-primary w-100">
+      <Link
+        to="/signup"
+        className="btn btn-outline-primary w-100"
+        data-bs-dismiss="offcanvas"
+      >
         Create account
       </Link>
     </div>
@@ -58,17 +72,17 @@ const OffCanvasNav = ({ user_id, search, setSearch }) => {
         <SidebarNav />
         <ul className="offcanvas-nav__other">
           <li>
-            <Link to="/">
+            <Link to="/" data-bs-dismiss="offcanvas">
               <i class="fa-duotone fa-pen-paintbrush fa-lg"></i> Create Post
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/" data-bs-dismiss="offcanvas">
               <i class="fa-duotone fa-gear fa-lg"></i> Settings
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/" data-bs-dismiss="offcanvas">
               <i class="fa-duotone fa-right-from-bracket fa-lg"></i> Logout
             </Link>
           </li>
