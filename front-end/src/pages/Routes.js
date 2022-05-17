@@ -13,6 +13,7 @@ import SettingsProfile from './settings/SettingsProfile';
 import SettingsCustomization from './settings/SettingsCustomization';
 import SettingsNotifications from './settings/SettingsNotifications';
 import SettingsAccount from './settings/SettingsAccount';
+import Search from './search/Search';
 const PageRoutes = ({ setSession, session, darkMode, setDarkMode }) => {
   return (
     <Routes>
@@ -47,6 +48,7 @@ const PageRoutes = ({ setSession, session, darkMode, setDarkMode }) => {
       />
       <Route exact={true} path="/profileCreation" element={<ProfileSetup />} />
       <Route exact={true} path="/about" element={<About />} />
+      <Route exact={true} path="/search" element={<Search />} />
       <Route path="*" element={<NoMatch />} />
     </Routes>
   );

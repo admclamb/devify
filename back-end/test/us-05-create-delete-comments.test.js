@@ -4,7 +4,7 @@ const request = require('supertest');
 const app = require('../src/app');
 const knex = require('../src/db/connection');
 
-describe('US-02 create post', () => {
+describe('US-05 create post', () => {
   beforeAll(() => {
     return knex.migrate
       .forceFreeMigrationsLock()
