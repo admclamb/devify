@@ -13,7 +13,7 @@ const columns = {
  */
 function getQueryParams(req, res, next) {
   const { type } = req.params;
-  const { search } = req.query;
+  const { search } = req.body.data;
   if (!type) {
     return next({ status: 400, message: 'A type of search is required' });
   }
@@ -37,10 +37,10 @@ async function listSearch(req, res, next) {
   const column_names = columns[type];
   const list =
     type === 'posts'
-      ? await service.listPosts(type, search, column_names)
+      ? await service.listPosts(search, column_names)
       : type === 'users'
-      ? await service.listUsers(type, search, column_names)
-      : await service.listTags(type, search, column_names);
+      ? await service.listUsers(search, column_names)
+      : await service.listTags(search, column_names);
   console.log(list);
   res.status(200).json({ data: 'yo' });
 }
