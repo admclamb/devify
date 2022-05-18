@@ -4,7 +4,7 @@ const service = require('./search.service');
 const columns = {
   posts: ['post_header', 'post_body'],
   users: ['username', 'first_name', 'last_name'],
-  tags: ['hastags_array'],
+  tags: ['hashtags_array'],
 };
 
 /**
@@ -42,7 +42,7 @@ async function listSearch(req, res, next) {
       ? await service.listUsers(search, column_names)
       : await service.listTags(search, column_names);
   console.log(list);
-  res.status(200).json({ data: 'yo' });
+  res.status(200).json({ data: list });
 }
 
 module.exports = {

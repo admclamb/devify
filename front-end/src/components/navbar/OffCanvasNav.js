@@ -74,17 +74,17 @@ const OffCanvasNav = ({ user_id, searchBar, setSearchBar, onSearchSubmit }) => {
         <ul className="offcanvas-nav__other">
           <li>
             <Link to="/" data-bs-dismiss="offcanvas">
-              <i class="fa-duotone fa-pen-paintbrush fa-lg"></i> Create Post
+              <i className="fa-duotone fa-pen-paintbrush fa-lg"></i> Create Post
             </Link>
           </li>
           <li>
             <Link to="/" data-bs-dismiss="offcanvas">
-              <i class="fa-duotone fa-gear fa-lg"></i> Settings
+              <i className="fa-duotone fa-gear fa-lg"></i> Settings
             </Link>
           </li>
           <li>
             <Link to="/" data-bs-dismiss="offcanvas">
-              <i class="fa-duotone fa-right-from-bracket fa-lg"></i> Logout
+              <i className="fa-duotone fa-right-from-bracket fa-lg"></i> Logout
             </Link>
           </li>
         </ul>

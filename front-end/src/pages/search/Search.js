@@ -6,6 +6,7 @@ import SearchResults from './SearchResults';
 import './Search.css';
 const Search = ({ search }) => {
   const [query, setQuery] = useState('posts');
+  const [error, setError] = useState(null);
   const handleClick = ({ target }) => {
     setQuery(target.id);
   };
@@ -34,7 +35,7 @@ const Search = ({ search }) => {
                 Posts
               </li>
               <li
-                id="people"
+                id="users"
                 className={`p-2 rounded ${
                   query === 'people' ? 'search-page-nav__active' : ''
                 }`}
@@ -54,7 +55,14 @@ const Search = ({ search }) => {
             </ul>
           </nav>
         </aside>
-        <SearchResults search={search} query={query} />
+        <div className="col-12 col-md-6">
+          <SearchResults
+            search={search}
+            query={query}
+            setError={setError}
+            error={error}
+          />
+        </div>
       </main>
     </section>
   );

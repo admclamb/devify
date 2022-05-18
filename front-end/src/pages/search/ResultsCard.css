@@ -1,0 +1,18 @@
+.result-card {
+  background-color: var(--color-light);
+}
+.result-card-container {
+}
+.result-card-header {
+}
+.result-card-main {
+}
+
+.result-card:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
+.result-profile {
+  display: flex;
+  margin-bottom: 0.5rem;
+}

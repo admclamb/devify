@@ -5,9 +5,10 @@ const Searchbar = ({ searchBar, setSearchBar, onSearchSubmit }) => {
   return (
     <>
       <div className="search-container d-none d-md-block">
-        <Link to="/search">
+        <Link to="/search" onClick={onSearchSubmit}>
           <i className="fa-thin fa-magnifying-glass search-container__icon fa-lg"></i>
         </Link>
+
         <input
           type="text"
           placeholder="Search..."
@@ -19,7 +20,6 @@ const Searchbar = ({ searchBar, setSearchBar, onSearchSubmit }) => {
       <Link
         to="/search"
         className="searchbar-small d-block d-md-none ms-auto btn"
-        onClick={onSearchSubmit}
       >
         <i className="fa-thin fa-magnifying-glass fa-lg"></i>
       </Link>
