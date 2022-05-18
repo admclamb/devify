@@ -1,4 +1,3 @@
-const { json } = require('body-parser');
 const asyncErrorBoundary = require('../errors/asyncErrorBoundary');
 const service = require('./reactions.service');
 

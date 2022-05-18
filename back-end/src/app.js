@@ -14,6 +14,7 @@ const registerRouter = require('./register/register.router');
 const reactionsRouter = require('./reactions/reactions.router');
 const profilesRouter = require('./profiles/profiles.router');
 const searchRouter = require('./search/search.router');
+const imagesRouter = require('./images/images.router');
 const store = new session.MemoryStore();
 const app = express();
 
@@ -39,6 +40,7 @@ app.use('/register', registerRouter);
 app.use('/reactions', reactionsRouter);
 app.use('/profiles', profilesRouter);
 app.use('/search', searchRouter);
+app.use('/images', imagesRouter);
 app.use(notFound);
 app.use(errorHandler);
 
