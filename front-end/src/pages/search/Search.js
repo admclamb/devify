@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import SearchResultCard from './SearchResultCard';
+
 import SearchResultNav from './SearchResultNav';
 import SearchSearchBar from './SearchSearchbar';
+import SearchResults from './SearchResults';
 import './Search.css';
 const Search = ({ search }) => {
-  const [results, setResults] = useState([]);
   const [query, setQuery] = useState('posts');
   const handleClick = ({ target }) => {
     setQuery(target.id);
@@ -54,9 +54,7 @@ const Search = ({ search }) => {
             </ul>
           </nav>
         </aside>
-        <section className="col-12 col-md-10">
-          <SearchResultCard />
-        </section>
+        <SearchResults search={search} query={query} />
       </main>
     </section>
   );

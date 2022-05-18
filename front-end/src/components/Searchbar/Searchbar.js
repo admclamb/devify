@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import './Searchbar.css';
 
-const Searchbar = ({ search, setSearch }) => {
+const Searchbar = ({ searchBar, setSearchBar, onSearchSubmit }) => {
   return (
     <>
       <div className="search-container d-none d-md-block">
@@ -12,13 +12,14 @@ const Searchbar = ({ search, setSearch }) => {
           type="text"
           placeholder="Search..."
           className="searchbar search-container__input"
-          value={search}
-          onChange={({ target }) => setSearch(target.value)}
+          value={searchBar}
+          onChange={({ target }) => setSearchBar(target.value)}
         />
       </div>
       <Link
         to="/search"
         className="searchbar-small d-block d-md-none ms-auto btn"
+        onClick={onSearchSubmit}
       >
         <i className="fa-thin fa-magnifying-glass fa-lg"></i>
       </Link>

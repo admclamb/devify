@@ -1,7 +1,7 @@
 import SidebarNav from '../sidebarNav/SidebarNav';
 import { Link } from 'react-router-dom';
 import './OffCanvasNav.css';
-const OffCanvasNav = ({ user_id, search, setSearch }) => {
+const OffCanvasNav = ({ user_id, searchBar, setSearchBar, onSearchSubmit }) => {
   const signedInButtons = (
     <div className="post-buttons">
       <Link
@@ -57,14 +57,15 @@ const OffCanvasNav = ({ user_id, search, setSearch }) => {
             type="search"
             placeholder="Search..."
             aria-label="Search"
-            value={search}
-            onChange={({ target }) => setSearch(target.value)}
+            value={searchBar}
+            onChange={({ target }) => setSearchBar(target.value)}
           />
           <Link
             to="/search"
             className="btn btn-outline-primary"
             data-bs-dismiss="offcanvas"
             aria-label="Search"
+            onClick={onSearchSubmit}
           >
             Search
           </Link>

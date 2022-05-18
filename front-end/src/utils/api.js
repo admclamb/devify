@@ -196,3 +196,14 @@ export async function readProfileStats(user_id, signal) {
   };
   return await fetchJson(url, options, {});
 }
+
+export async function searchData(type, search, signal) {
+  const url = `${API_BASE_URL}/search/${type}`;
+  const options = {
+    method: 'PUT',
+    body: JSON.stringify({ data: { search } }),
+    headers,
+    signal,
+  };
+  return await fetchJson(url, options, []);
+}

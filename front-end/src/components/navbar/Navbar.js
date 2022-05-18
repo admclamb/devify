@@ -7,16 +7,14 @@ import OffCanvasNav from './OffCanvasNav';
 import OffCanvasNavButton from './OffCanvasNavButton';
 import SignedInNav from './SignedInNav';
 import NotSignedInNav from './NotSignedInNav';
-const Navbar = ({
-  darkMode,
-  setDarkMode,
-  session,
-  logoutUser,
-  search,
-  setSearch,
-}) => {
+const Navbar = ({ darkMode, setDarkMode, session, logoutUser, setSearch }) => {
   const { user_id = '', username = '' } = session;
   const [openModal, setOpenModal] = useState(false);
+  const [searchBar, setSearchBar] = useState('');
+  const onSearchSubmit = (event) => {
+    event.preventDefault();
+    setSearch(searchBar);
+  };
   const modal = (
     <OutsideAlerter setState={setOpenModal}>
       <section className="navbar__modal rounded border">
@@ -59,14 +57,19 @@ const Navbar = ({
           <OffCanvasNavButton />
           <OffCanvasNav
             user_id={user_id}
-            search={search}
-            setSearch={setSearch}
+            setSearchBar={setSearchBar}
+            searchBar={searchBar}
+            onSearchSubmit={onSearchSubmit}
           />
         </div>
         <Link to="/" className="navbar__logo">
           <h1 className="navbar__logo text-size-p">Devify</h1>
         </Link>
-        <Searchbar setSearch={setSearch} search={search} />
+        <Searchbar
+          setSearchBar={setSearchBar}
+          searchBar={searchBar}
+          onSearchSubmit={onSearchSubmit}
+        />
         {user_id ? (
           <SignedInNav
             openModal={openModal}
