@@ -1,10 +1,17 @@
 import { useState } from 'react';
-
+import { postAvatar } from '../../utils/api';
 const SettingsProfile = () => {
   const [file, setFile] = useState('');
   const fileSelected = ({ target }) => {
     const file = target.files[0];
-    SettingsProfile(file);
+    setFile(file);
+  };
+  const postPfp = async () => {
+    console.log(file);
+    if (file) {
+      const response = await postAvatar(file);
+      console.log(response);
+    }
   };
   return (
     <div className="settings-container border rounded p-3">
@@ -30,7 +37,11 @@ const SettingsProfile = () => {
         </div>
       </form>
       <div>
-        <button type="submit" className="submit btn btn-primary w-100">
+        <button
+          type="submit"
+          className="submit btn btn-primary w-100"
+          onClick={postPfp}
+        >
           Save Profile Information
         </button>
       </div>
