@@ -83,9 +83,12 @@ const OffCanvasNav = ({ user_id, searchBar, setSearchBar, onSearchSubmit }) => {
             </Link>
           </li>
           <li>
-            <Link to="/" data-bs-dismiss="offcanvas">
-              <i className="fa-duotone fa-right-from-bracket fa-lg"></i> Logout
-            </Link>
+            {user_id && (
+              <Link to="/" data-bs-dismiss="offcanvas">
+                <i className="fa-duotone fa-right-from-bracket fa-lg"></i>{' '}
+                Logout
+              </Link>
+            )}
           </li>
         </ul>
       </div>

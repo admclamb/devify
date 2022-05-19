@@ -7,7 +7,8 @@
     "skills_languages": ["HTML", "CSS", "JavaScript", "Python"],
     "work": "Doing Everything",
     "brand_color1": "#000000",
-    "brand_color2": "#ffffff"
+    "brand_color2": "#ffffff",
+    "avatar": "https://devify-app-development.s3.amazonaws.com/rick-sanchez-2.jpg"
   },
   {
     "user_id": 2,
@@ -17,7 +18,8 @@
     "skills_languages": ["Python"],
     "work": "Lawyer",
     "brand_color1": "#000000",
-    "brand_color2": "#ffffff"
+    "brand_color2": "#ffffff",
+    "avatar": "https://devify-app-development.s3.amazonaws.com/bird-person.jpg"
   },
   {
     "user_id": 3,
@@ -27,6 +29,7 @@
     "skills_languages": ["Python", "Java", "C++"],
     "work": "Doing Everything",
     "brand_color1": "#000000",
-    "brand_color2": "#ffffff"
+    "brand_color2": "#ffffff",
+    "avatar": "https://devify-app-development.s3.amazonaws.com/joe-dirt.jpg"
   }
 ]

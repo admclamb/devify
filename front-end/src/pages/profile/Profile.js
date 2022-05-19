@@ -29,6 +29,7 @@ const Profile = () => {
     created_at,
     skills_languages,
     work,
+    avatar = null,
   } = profile;
   return (
     <div className="profile-bg">
@@ -38,11 +39,12 @@ const Profile = () => {
         <section className="profile border rounded p-4">
           <div className="profile-pfp">
             <h3>P</h3>
-            {/* <img
-              src="../../../public/images/default-pfp.png"
+            <img
+              src={avatar && avatar}
+              width="100%"
               alt="Profile Pic"
-              className="profile-pfp__img"
-            /> */}
+              className="profile-pfp__img pfp-img"
+            />
           </div>
 
           <header className="profile-header__actions d-flex">
