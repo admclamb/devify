@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const SignedInNav = ({ openModal, setOpenModal, modal, user_id }) => {
+const SignedInNav = ({ openModal, setOpenModal, modal, user_id, avatar }) => {
   return (
     <div className="navbar__profile-container ms-md-auto">
       <Link
@@ -10,11 +10,15 @@ const SignedInNav = ({ openModal, setOpenModal, modal, user_id }) => {
         Create Post
       </Link>
       <i className="fa-thin fa-bell fa-lg"></i>
-      <div
-        className="profile-picture"
-        id="modal-toggle-btn"
-        onClick={() => setOpenModal((prev) => !prev)}
-      ></div>
+      <div>
+        <img
+          src={avatar ? avatar : ''}
+          width="100%"
+          className="profile-picture pfp-img"
+          id="modal-toggle-btn"
+          onClick={() => setOpenModal((prev) => !prev)}
+        />
+      </div>
       {openModal ? modal : ''}
     </div>
   );

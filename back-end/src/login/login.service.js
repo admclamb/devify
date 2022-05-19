@@ -1,6 +1,7 @@
 const knex = require('../db/connection');
 const TABLE = 'sessions';
 const USERS_TABLE = 'users';
+const USERS_PROFILES_TABLE = 'users_profiles';
 function create(user_id) {
   return knex(TABLE)
     .insert({ user_id })
@@ -8,8 +9,8 @@ function create(user_id) {
     .then((createdPost) => createdPost[0]);
 }
 
-function readFromUser(user_id) {
-  return knex(TABLE).select('*').where({ user_id }).first();
+function readFromUserProfile(user_id) {
+  return knex(USERS_PROFILES_TABLE).select('*').where({ user_id }).first();
 }
 
 function read(email) {
@@ -23,6 +24,6 @@ function destroy(session_id) {
 module.exports = {
   create,
   read,
-  readFromUser,
+  readFromUserProfile,
   destroy,
 };

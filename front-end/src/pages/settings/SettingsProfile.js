@@ -1,16 +1,20 @@
 import { useState } from 'react';
 import { postAvatar } from '../../utils/api';
-const SettingsProfile = () => {
+
+const SettingsProfile = ({ session, setSession }) => {
   const [file, setFile] = useState('');
+  const { user_id } = session;
   const fileSelected = ({ target }) => {
     const file = target.files[0];
     setFile(file);
   };
   const postPfp = async () => {
-    console.log(file);
+    console.log(file, session);
+    console.log('here');
     if (file) {
-      const response = await postAvatar(file);
-      console.log(response);
+      const response = await postAvatar(file, user_id);
+      const newSession = await response.json();
+      console.log('response: ', newSession);
     }
   };
   return (

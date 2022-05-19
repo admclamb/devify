@@ -6,7 +6,7 @@ import SettingsNav from './SettingsNav';
 import './Settings.css';
 const Settings = () => {
   const session = useContext(UserContext);
-  const username = '1111';
+  const { username } = session;
   return (
     <div className="container">
       <h2>Settings for @{username} </h2>

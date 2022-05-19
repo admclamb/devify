@@ -210,8 +210,9 @@ export async function searchData(type, search, signal) {
   return await fetchJson(url, options, []);
 }
 
-export async function postAvatar(avatar) {
-  const url = `${API_BASE_URL}/images/avatar`;
+export async function postAvatar(avatar, user_id) {
+  const url = `${API_BASE_URL}/images/avatar/${user_id}`;
+  console.log(avatar, user_id, url);
   const formData = new FormData();
   formData.append('avatar', avatar);
   return await axios.post(url, formData, {

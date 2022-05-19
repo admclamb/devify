@@ -10,6 +10,7 @@ const VALID_PROPERTIES = ['email', 'password', 'username'];
 const REQUIRED_PROPERTIES = ['email', 'password'];
 
 async function userExist(req, res, next) {
+  console.log('user exist');
   const { email } = req.body.data;
   const userExist = (await service.read(email)) || null;
   if (userExist) {
@@ -17,6 +18,15 @@ async function userExist(req, res, next) {
     return next();
   }
   next({ status: 401, message: 'Email and or password is incorrect.' });
+}
+
+async function readUsersProfile(req, res, next) {
+  const { user_id } = res.locals.user;
+  const profile = (await service.readFromUserProfile(user_id)) || {};
+  console.log(profile);
+  res.locals.profile = profile;
+
+  next();
 }
 
 async function validatePassword(req, res, next) {
@@ -31,12 +41,14 @@ async function validatePassword(req, res, next) {
 
 async function createToken(req, res, next) {
   const { user } = res.locals;
-  const { email, user_id, username } = user;
+  const { user_id, email, username } = user;
+  const { profile } = res.locals;
+  console.log('profile: ', profile);
   const token = jwt.sign({ user_id, email }, process.env.TOKEN_KEY, {
     expiresIn: '2h',
   });
   user.token = token;
-  res.status(200).json({ data: { user_id, token, username } });
+  res.status(200).json({ data: { email, username, ...profile } });
 }
 
 async function destroy(req, res, next) {
@@ -50,6 +62,7 @@ module.exports = {
     hasOnlyValidProperties(VALID_PROPERTIES),
     hasRequiredProperties(REQUIRED_PROPERTIES),
     asyncErrorBoundary(userExist),
+    asyncErrorBoundary(readUsersProfile),
     asyncErrorBoundary(validatePassword),
     asyncErrorBoundary(createToken),
   ],

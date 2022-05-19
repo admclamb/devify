@@ -5,6 +5,7 @@ import './PostCard.css';
 const PostCard = ({ post }) => {
   const {
     post_id,
+    avatar,
     image_url = null,
     created_at,
     first_name = null,
@@ -16,13 +17,19 @@ const PostCard = ({ post }) => {
   const hashtags = Array.isArray(hashtags_array)
     ? hashtags_array.join('  ')
     : '';
-  const pfp = <img src={'default-pfp.png'} width="100%" className="mb-4" />;
+  const pfp = (
+    <img src={avatar} width="100%" className="post-card-pfp pfp-img" />
+  );
   return (
     <article className="post-card">
-      {image_url && <div className="post-card-image">{pfp}</div>}
+      {image_url && (
+        <div className="post-card-image">
+          <img src={image_url} width="100%" />
+        </div>
+      )}
       <div className="post-card-container">
         <div className="post-card-head d-flex align-items-center mb-3">
-          <div className="post-card-pfp"></div>
+          <div className="post-card-pfp">{avatar && pfp}</div>
           <div className="name_date">
             <h5 className="text-sm">
               {first_name && last_name

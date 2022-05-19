@@ -100,3 +100,7 @@ a {
   color: inherit;
   text-decoration: none;
 }
+.pfp-img {
+  object-fit: cover;
+  object-position: top;
+}

@@ -15,6 +15,7 @@ exports.up = function (knex) {
       .references('user_id')
       .inTable('users')
       .onDelete('CASCADE');
+
     table.integer('likes').defaultTo(0).notNullable();
     table.integer('special_likes').defaultTo(0).notNullable();
     table.integer('saves').defaultTo(0).notNullable();

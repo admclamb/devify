@@ -25,8 +25,17 @@ const PageRoutes = ({
   return (
     <Routes>
       <Route index exact={true} path="/" element={<Home />} />
-      <Route exact={true} path="/settings" element={<Settings />}>
-        <Route index element={<SettingsProfile />} />
+      <Route
+        exact={true}
+        path="/settings"
+        element={<Settings session={session} setSession={setSession} />}
+      >
+        <Route
+          index
+          element={
+            <SettingsProfile session={session} setSession={setSession} />
+          }
+        />
         <Route path="profile" element={<SettingsProfile />} />
         <Route
           path="customization"
