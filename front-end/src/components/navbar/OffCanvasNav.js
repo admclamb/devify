@@ -17,7 +17,7 @@ const OffCanvasNav = ({ user_id, searchBar, setSearchBar, onSearchSubmit }) => {
     <div className="post-buttons">
       <Link
         to="/login"
-        className="btn btn-secondary w-100 mb-2"
+        className="btn btn-primary w-100 mb-2"
         data-bs-dismiss="offcanvas"
       >
         Log in

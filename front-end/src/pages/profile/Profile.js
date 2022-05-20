@@ -34,35 +34,37 @@ const Profile = () => {
   return (
     <div className="profile-bg">
       <div className="profile-bg_brand_1"></div>
-      <div className="row container pt-3 ">
-        <ErrorAlert error={error} />
-        <section className="profile border rounded p-4">
-          <div className="profile-pfp">
-            <h3>P</h3>
-            <img
-              src={avatar && avatar}
-              width="100%"
-              alt="Profile Pic"
-              className="profile-pfp__img pfp-img"
-            />
-          </div>
+      <div className="container">
+        <div className="row pt-3 ">
+          <ErrorAlert error={error} />
+          <section className="profile border rounded p-4">
+            <div className="profile-pfp">
+              <h3>P</h3>
+              <img
+                src={avatar && avatar}
+                width="100%"
+                alt="Profile Pic"
+                className="profile-pfp__img pfp-img"
+              />
+            </div>
 
-          <header className="profile-header__actions d-flex">
-            <Link to="/settings" className="btn btn-primary ms-auto">
-              Edit Profile
-            </Link>
-          </header>
-          <article className="profile-body mt-5">
-            <h2>{`${first_name} ${last_name}`}</h2>
-            <p>{about_you || 'Bio Not Found'}</p>
-            <p className="text-sm">{`Joined on ${formatAsMonthDayYear(
-              created_at
-            )}`}</p>
-          </article>
-        </section>
-      </div>
-      <div className="row container">
-        <ProfileStats user_id={user_id} />
+            <header className="profile-header__actions d-flex">
+              <Link to="/settings" className="btn btn-primary ms-auto">
+                Edit Profile
+              </Link>
+            </header>
+            <article className="profile-body mt-5">
+              <h2>{`${first_name} ${last_name}`}</h2>
+              <p>{about_you || 'Bio Not Found'}</p>
+              <p className="text-sm">{`Joined on ${formatAsMonthDayYear(
+                created_at
+              )}`}</p>
+            </article>
+          </section>
+        </div>
+        <div className="row">
+          <ProfileStats user_id={user_id} />
+        </div>
       </div>
     </div>
   );

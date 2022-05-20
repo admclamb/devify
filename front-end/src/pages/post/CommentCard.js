@@ -7,6 +7,7 @@ import ModalButton from '../../utils/ModalButton';
 import { UserContext } from '../../utils/UserContext';
 import './CommentCard.css';
 const CommentCard = ({ comment_data, deleteComment }) => {
+  console.log(comment_data);
   const session = useContext(UserContext);
   const { user_id } = session;
   const {
@@ -16,6 +17,7 @@ const CommentCard = ({ comment_data, deleteComment }) => {
     user_id: commentUser_id,
     created_at,
     comment_id,
+    avatar = null,
   } = comment_data;
   const [openModal, setOpenModal] = useState(false);
   const handleEllipse = () => {
@@ -51,7 +53,7 @@ const CommentCard = ({ comment_data, deleteComment }) => {
     <article className="comment-card">
       <aside>
         <Link to={`/`} className="comment-pfp">
-          P
+          <img src={avatar ? avatar : 'A'} width="100%" />
         </Link>
       </aside>
 

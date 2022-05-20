@@ -101,8 +101,7 @@ async function createUsersProfile(req, res, next) {
 async function createToken(req, res, next) {
   const { createdUser } = res.locals;
   const { email, user_id, username } = createdUser;
-  const { first_name } = res.locals.profile;
-  const { last_name } = res.locals.profile;
+  const { profile } = res.locals;
   const token = jwt.sign({ user_id, email }, process.env.TOKEN_KEY, {
     expiresIn: '2h',
   });
@@ -110,8 +109,8 @@ async function createToken(req, res, next) {
     user_id,
     token,
     username,
-    first_name,
-    last_name,
+    email,
+    ...profile,
   };
   res.status(201).json({ data });
 }
