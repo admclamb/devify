@@ -8,14 +8,14 @@ import OffCanvasNavButton from './OffCanvasNavButton';
 import SignedInNav from './SignedInNav';
 import NotSignedInNav from './NotSignedInNav';
 const Navbar = ({ darkMode, setDarkMode, session, logoutUser, setSearch }) => {
-  const { user_id = '', username = '', avatar = '' } = session;
+  const { user_id = '', username = '', avatar = null } = session;
   const [openModal, setOpenModal] = useState(false);
   const [searchBar, setSearchBar] = useState('');
   const onSearchSubmit = (event) => {
     setSearch(searchBar);
     setSearchBar('');
   };
-
+  console.log(avatar);
   const modal = (
     <OutsideAlerter setState={setOpenModal}>
       <section className="navbar__modal rounded border">

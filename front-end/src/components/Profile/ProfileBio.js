@@ -72,13 +72,21 @@ const ProfileBio = ({ post_user_id }) => {
             </header>
             <main>
               <section className="mb-3">
-                <h5>SKILLS</h5>
-                <p className="text-sm">{skillsText ? skillsText : ''}</p>
+                {skillsText && (
+                  <>
+                    <h5>SKILLS</h5>
+                    <p className="text-sm">{skillsText}</p>
+                  </>
+                )}
               </section>
 
               <section className="mb-3">
-                <h5>WORK</h5>
-                <p>{work}</p>
+                {work && (
+                  <>
+                    <h5>WORK</h5>
+                    <p>{work}</p>
+                  </>
+                )}
               </section>
               <section>
                 <h5>JOINED</h5>
