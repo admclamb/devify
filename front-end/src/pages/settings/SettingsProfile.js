@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { postAvatar } from '../../utils/api';
+import { postAvatar, updateUserProfile } from '../../utils/api';
 import ErrorAlert from '../../errors/ErrorAlert';
 const SettingsProfile = ({ session, setSession }) => {
   const {
@@ -11,16 +11,19 @@ const SettingsProfile = ({ session, setSession }) => {
   } = session;
   const [error, setError] = useState(null);
   const [file, setFile] = useState('');
+  const [id, setId] = useState(user_id);
   const [profileForm, setProfileForm] = useState({
     first_name: '',
     last_name: '',
+    username: '',
   });
   useEffect(() => {
     setProfileForm({
       first_name,
       last_name,
+      username,
     });
-    setProfileUsername(username);
+    setId(user_id);
   }, [session]);
   const fileSelected = ({ target }) => {
     const file = target.files[0];
@@ -29,12 +32,12 @@ const SettingsProfile = ({ session, setSession }) => {
   const postPfp = async () => {
     setError(null);
     try {
-      if (!user_id) {
+      if (!id) {
         setError({ message: 'No user_id found' });
         return;
       }
       if (file) {
-        const response = await postAvatar(file, user_id);
+        const response = await postAvatar(file, id);
         console.log(response);
       }
     } catch (error) {
@@ -50,8 +53,17 @@ const SettingsProfile = ({ session, setSession }) => {
   };
   const handleSubmit = async (event) => {
     try {
+      const abortController = new AbortController();
       event.preventDefault();
       setError(null);
+      console.log('sending: ', profileForm);
+      const response = await updateUserProfile(
+        profileForm,
+        id,
+        abortController.signal
+      );
+      console.log(response);
+      console.log(profileForm);
     } catch (error) {
       setError(error);
     }

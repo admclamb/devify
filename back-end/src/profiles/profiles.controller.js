@@ -35,12 +35,11 @@ async function readStats(req, res, next) {
 async function checkAndUpdateUsername(req, res, next) {
   const { username = null } = req.body.data;
   if (username) {
-    const usernameExist = await checkUsername(username);
-    if (usernameExist) {
-      return next({ status: 400, message: 'Username already exists' });
+    const usernameExist = await service.checkUsername(username);
+    if (!usernameExist) {
+      const updatedUsername = await service.updateUsername(user_id, username);
+      res.locals.username = updatedUsername;
     }
-    const updatedUsername = await updateUsername(user_id, username);
-    res.locals.username = updatedUsername;
   }
   next();
 }
@@ -48,12 +47,13 @@ async function checkAndUpdateUsername(req, res, next) {
 async function update(req, res, next) {
   const { data } = req.body;
   const { username = null } = res.locals;
+  const { user_id } = res.locals.profile;
   if (username) {
     delete data.username;
-    const updatedProfile = await service.update(data);
+    const updatedProfile = await service.update(data, user_id);
     res.status(200).json({ data: { ...updatedProfile, username } });
   } else {
-    const updatedProfile = await service.update(data);
+    const updatedProfile = await service.update(data, user_id);
     res.status(200).json({ data: updatedProfile });
   }
 }
