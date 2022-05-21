@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { formatAsMonthDay } from '../../utils/formatDate';
 import './ResultsCard.css';
 const ResultsCard = ({ result }) => {
-  console.log(result);
   const {
     post_id,
     image_url = null,

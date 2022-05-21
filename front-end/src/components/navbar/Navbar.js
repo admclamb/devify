@@ -11,7 +11,6 @@ const Navbar = ({ darkMode, setDarkMode, session, logoutUser, setSearch }) => {
   const { user_id = '', username = '', avatar = '' } = session;
   const [openModal, setOpenModal] = useState(false);
   const [searchBar, setSearchBar] = useState('');
-  console.log('searchbar: ', searchBar);
   const onSearchSubmit = (event) => {
     setSearch(searchBar);
     setSearchBar('');

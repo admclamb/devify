@@ -11,11 +11,8 @@ const PostMainComments = ({ comments, setComments, post_id }) => {
 
   const deleteComment = async (comment_id) => {
     try {
-      console.log('deleting comment');
-      console.log(comment_id);
       const abortController = new AbortController();
       const res = await destroyComment(comment_id, abortController.signal);
-      console.log(res);
       const comments = await readComments(post_id, abortController.signal);
       setComments(comments);
     } catch (error) {

@@ -37,7 +37,7 @@ const CreateComment = ({ post_id, setError, setComments, comments }) => {
       </button>
     </div>
   );
-  const img = <img src={avatar} />;
+  const img = <img src={avatar} widht="100%" className="pfp-img" />;
   return (
     <article className="comment-card">
       <aside>

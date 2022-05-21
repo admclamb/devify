@@ -167,7 +167,6 @@ export async function createComment(comment, signal) {
 }
 
 export async function destroyComment(comment_id, signal) {
-  console.log(comment_id);
   const url = `${API_BASE_URL}/comments`;
   const options = {
     method: 'DELETE',
@@ -175,7 +174,6 @@ export async function destroyComment(comment_id, signal) {
     headers,
     signal,
   };
-  console.log(options);
   return await fetchJson(url, options, {});
 }
 
@@ -220,7 +218,6 @@ export async function postImage(image) {
 
 export async function postAvatar(avatar, user_id) {
   const url = `${API_BASE_URL}/images/avatar/${user_id}`;
-  console.log(avatar, user_id, url);
   const formData = new FormData();
   formData.append('avatar', avatar);
   return await axios.post(url, formData, {

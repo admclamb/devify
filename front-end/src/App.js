@@ -7,7 +7,6 @@ function App() {
   const [session, setSession] = useState({});
   //Search term used for navbar and search page
   const [search, setSearch] = useState('');
-  console.log('Search: ', search);
   useEffect(() => {
     if (session.hasOwnProperty('user_id')) {
       localStorage.setItem('session', JSON.stringify(session));

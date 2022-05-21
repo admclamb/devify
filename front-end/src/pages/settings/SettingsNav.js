@@ -6,7 +6,6 @@ const SettingsNav = () => {
   const onClick = ({ target }) => {
     const { id } = target;
     setCurrPath(id);
-    console.log(id);
   };
   return (
     <aside className="col-2 settings-nav__container">

@@ -14,14 +14,12 @@ const Profile = () => {
   useEffect(() => {
     const abortController = new AbortController();
     if (!user_id) return () => abortController.abort();
-    console.log(user_id);
     readUserProfile(user_id, abortController.signal)
       .then(setProfile)
       .catch(setError);
 
     return () => abortController.abort();
   }, [user_id]);
-  console.log(profile);
   const {
     first_name,
     last_name,

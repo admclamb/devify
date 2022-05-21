@@ -22,7 +22,6 @@ const ProfileBio = ({ post_user_id }) => {
     }
     return () => abortController.abort();
   }, [post_user_id]);
-  console.log(profile);
   const {
     user_id,
     first_name,
@@ -33,12 +32,13 @@ const ProfileBio = ({ post_user_id }) => {
     brand_color2 = '#ffffff',
     created_at,
     skills_languages,
+    avatar = null,
   } = profile;
   const skillsText = Array.isArray(skills_languages)
     ? skills_languages.join(' / ')
     : null;
   return (
-    profile && (
+    profile.hasOwnProperty('user_id') && (
       <>
         <ErrorAlert error={error} />
         <section className="post-bio border rounded">
@@ -52,7 +52,13 @@ const ProfileBio = ({ post_user_id }) => {
           <div className="ps-3 pb-3 pe-3">
             <header className="mb-3">
               <div className="bio-pfp">
-                {first_name ? first_name[0].toUpperCase() : 'P'}
+                {avatar ? (
+                  <img src={avatar} className="pfp-img" width="100%" />
+                ) : first_name ? (
+                  first_name[0].toUpperCase()
+                ) : (
+                  'P'
+                )}
               </div>
               <Link to={'/'}>
                 <h4 className="bio-name">{`${first_name} ${last_name}`}</h4>

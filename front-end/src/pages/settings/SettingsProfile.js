@@ -9,12 +9,9 @@ const SettingsProfile = ({ session, setSession }) => {
     setFile(file);
   };
   const postPfp = async () => {
-    console.log(file, session);
-    console.log('here');
     if (file) {
       const response = await postAvatar(file, user_id);
       const newSession = await response.json();
-      console.log('response: ', newSession);
     }
   };
   return (

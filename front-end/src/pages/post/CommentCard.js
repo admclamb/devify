@@ -7,7 +7,6 @@ import ModalButton from '../../utils/ModalButton';
 import { UserContext } from '../../utils/UserContext';
 import './CommentCard.css';
 const CommentCard = ({ comment_data, deleteComment }) => {
-  console.log(comment_data);
   const session = useContext(UserContext);
   const { user_id } = session;
   const {
@@ -23,7 +22,6 @@ const CommentCard = ({ comment_data, deleteComment }) => {
   const handleEllipse = () => {
     setOpenModal((currState) => !currState);
   };
-  console.log(comment_id);
   const commentModal = (
     <OutsideAlerter setState={setOpenModal}>
       <div className="comment-modal border rounded">

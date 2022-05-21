@@ -34,7 +34,6 @@ const CreatePost = () => {
       setError(null);
       setPublishBtnText('Publishing...');
       const imageResponse = await postImage(coverImage);
-      console.log('image response: ', imageResponse.data.data);
       const abortController = new AbortController();
       const outPost = {
         ...post,
