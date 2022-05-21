@@ -8,7 +8,7 @@ const SettingsNav = () => {
     setCurrPath(id);
   };
   return (
-    <aside className="col-2 settings-nav__container">
+    <aside className="col-12 col-md-2 settings-nav__container mb-2">
       <nav>
         <ul className="settings-nav">
           <li

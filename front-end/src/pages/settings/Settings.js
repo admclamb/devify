@@ -11,7 +11,7 @@ const Settings = ({ session, setSession }) => {
       <h2>Settings for @{username} </h2>
       <div className="row">
         <SettingsNav />
-        <section className="col-8">
+        <section className="col-12 col-md-8">
           <Outlet session={session} setSession={setSession} />
         </section>
       </div>
