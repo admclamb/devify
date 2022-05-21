@@ -209,6 +209,14 @@ export async function searchData(type, search, signal) {
   };
   return await fetchJson(url, options, []);
 }
+export async function postImage(image) {
+  const url = `${API_BASE_URL}/images`;
+  const formData = new FormData();
+  formData.append('image', image);
+  return await axios.post(url, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+}
 
 export async function postAvatar(avatar, user_id) {
   const url = `${API_BASE_URL}/images/avatar/${user_id}`;

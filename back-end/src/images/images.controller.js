@@ -20,6 +20,10 @@ async function uploadTo(req, res, next) {
   next();
 }
 
+function returnUrl(req, res, next) {
+  res.status(201).json({ data: res.locals.location });
+}
+
 async function updateProfile(req, res, next) {
   console.log('here in updateProfile');
   const { user_id } = req.params;
@@ -37,4 +41,5 @@ module.exports = {
     asyncErrorBoundary(uploadTo),
     asyncErrorBoundary(updateProfile),
   ],
+  create: [upload.single('image'), asyncErrorBoundary(uploadTo), returnUrl],
 };

@@ -53,7 +53,7 @@ const CommentCard = ({ comment_data, deleteComment }) => {
     <article className="comment-card">
       <aside>
         <Link to={`/`} className="comment-pfp">
-          <img src={avatar ? avatar : 'A'} width="100%" />
+          <img src={avatar ? avatar : 'A'} width="100%" className=".pfp-img" />
         </Link>
       </aside>
 

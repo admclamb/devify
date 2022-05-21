@@ -5,7 +5,7 @@ import { UserContext } from '../../utils/UserContext';
 import './CreateComment.css';
 const CreateComment = ({ post_id, setError, setComments, comments }) => {
   const session = useContext(UserContext);
-  const { user_id, first_name } = session;
+  const { user_id, first_name, avatar = null } = session;
   const [comment, setComment] = useState('');
   const [submitBtnText, setSubmitBtnText] = useState('Submit');
   const handleSubmit = async (event) => {
@@ -37,11 +37,12 @@ const CreateComment = ({ post_id, setError, setComments, comments }) => {
       </button>
     </div>
   );
+  const img = <img src={avatar} />;
   return (
     <article className="comment-card">
       <aside>
         <Link to={`/`} className="comment-pfp">
-          {first_name ? first_name[0].toUpperCase() : 'P'}
+          {avatar ? img : first_name ? first_name[0].toUpperCase() : 'P'}
         </Link>
       </aside>
       <main className="comment-card__main">

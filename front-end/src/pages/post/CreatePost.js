@@ -3,7 +3,7 @@ import CreatePostNav from './CreatePostNav';
 import PostBody from './PostBody';
 import './CreatePost.css';
 import { useState } from 'react';
-import { createPost } from '../../utils/api';
+import { createPost, postImage } from '../../utils/api';
 import ErrorAlert from '../../errors/ErrorAlert';
 const CreatePost = () => {
   const { user_id } = useParams();
@@ -30,14 +30,16 @@ const CreatePost = () => {
 
   const handleSubmit = async (event) => {
     try {
-      setPublishBtnText('Loading...');
-      console.log(coverImage);
       event.preventDefault();
       setError(null);
+      setPublishBtnText('Publishing...');
+      const imageResponse = await postImage(coverImage);
+      console.log('image response: ', imageResponse.data.data);
       const abortController = new AbortController();
       const outPost = {
         ...post,
         post_body: body,
+        image_url: imageResponse.data.data,
       };
       await createPost(outPost, abortController.signal);
       navigate('/');
