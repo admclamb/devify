@@ -145,6 +145,17 @@ export async function getPostReactionTotal(post_id, signal) {
   return await fetchJson(url, options, {});
 }
 
+export async function updateUserProfile(user, user_id, signal) {
+  const url = `${API_BASE_URL}/profiles/${user_id}`;
+  const options = {
+    method: 'PUT',
+    body: JSON.stringify({ data: user }),
+    headers,
+    signal,
+  };
+  return await fetchJson(url, options, {});
+}
+
 export async function readUserProfile(user_id, signal) {
   const url = `${API_BASE_URL}/profiles/${user_id}`;
   const options = {

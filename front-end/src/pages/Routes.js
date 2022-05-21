@@ -36,7 +36,12 @@ const PageRoutes = ({
             <SettingsProfile session={session} setSession={setSession} />
           }
         />
-        <Route path="profile" element={<SettingsProfile />} />
+        <Route
+          path="profile"
+          element={
+            <SettingsProfile session={session} setSession={setSession} />
+          }
+        />
         <Route
           path="customization"
           element={
