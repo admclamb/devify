@@ -12,7 +12,7 @@ const s3 = new S3({
 });
 
 function uploadFile(file) {
-  const fileStream = fs.createReadStream(file.path);
+  const fileStream = fs.readFileSync(file.path);
 
   const uploadParams = {
     Bucket: bucketName,

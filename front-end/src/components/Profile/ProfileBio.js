@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import ErrorAlert from '../../errors/ErrorAlert';
 import { readProfile } from '../../utils/api';
 import { formatAsMonthDayYear } from '../../utils/formatDate';
 import './ProfileBio.css';
@@ -38,45 +39,49 @@ const ProfileBio = ({ post_user_id }) => {
     : null;
   return (
     profile && (
-      <section className="post-bio border rounded">
-        <div
-          className="bio-header-color rounded-top"
-          style={{ backgroundColor: brandColor1 }}
-        >
-          {' '}
-        </div>
-        <div className="ps-3 pb-3 pe-3">
-          <header className="mb-3">
-            <div className="bio-pfp">
-              {first_name ? first_name[0].toUpperCase() : 'P'}
-            </div>
-            <Link to={'/'}>
-              <h4 className="bio-name">{`${first_name} ${last_name}`}</h4>
-            </Link>
+      <>
+        <ErrorAlert error={error} />
+        <section className="post-bio border rounded">
+          <div
+            className="bio-header-color rounded-top"
+            style={{ backgroundColor: brandColor1 }}
+          >
+            {' '}
+          </div>
 
-            <div className="bio-header__button">
-              <button className="bio-follow btn btn-primary d-block bio-button">
-                Follow
-              </button>
-            </div>
-          </header>
-          <main>
-            <section className="mb-3">
-              <h5>SKILLS</h5>
-              <p className="text-sm">{skillsText ? skillsText : ''}</p>
-            </section>
+          <div className="ps-3 pb-3 pe-3">
+            <header className="mb-3">
+              <div className="bio-pfp">
+                {first_name ? first_name[0].toUpperCase() : 'P'}
+              </div>
+              <Link to={'/'}>
+                <h4 className="bio-name">{`${first_name} ${last_name}`}</h4>
+              </Link>
 
-            <section className="mb-3">
-              <h5>WORK</h5>
-              <p>{work}</p>
-            </section>
-            <section>
-              <h5>JOINED</h5>
-              <p>{formatAsMonthDayYear(created_at)}</p>
-            </section>
-          </main>
-        </div>
-      </section>
+              <div className="bio-header__button">
+                <button className="bio-follow btn btn-primary d-block bio-button">
+                  Follow
+                </button>
+              </div>
+            </header>
+            <main>
+              <section className="mb-3">
+                <h5>SKILLS</h5>
+                <p className="text-sm">{skillsText ? skillsText : ''}</p>
+              </section>
+
+              <section className="mb-3">
+                <h5>WORK</h5>
+                <p>{work}</p>
+              </section>
+              <section>
+                <h5>JOINED</h5>
+                <p>{formatAsMonthDayYear(created_at)}</p>
+              </section>
+            </main>
+          </div>
+        </section>
+      </>
     )
   );
 };

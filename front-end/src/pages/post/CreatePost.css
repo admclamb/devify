@@ -17,3 +17,24 @@
   border: none;
   font-size: var(--font-lg);
 }
+
+/* .create-post__add-cover-image::-webkit-file-upload-button {
+  visibility: hidden;
+} */
+
+/* .create-post__add-cover-image {
+  padding: 0.6rem 0.8rem;
+}
+
+.create-post__add-cover-image::before {
+  content: 'Add a cover image';
+  border: 1px solid var(--color-dark);
+  border-radius: 5px;
+  margin-top: 1rem;
+  padding: 0.6rem 0.8rem;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  width: 30%;
+} */

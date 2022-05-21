@@ -6,19 +6,22 @@ const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 const { uploadFile } = require('../s3/s3');
 const VALID_PROPERTIES = [];
+
+async function read(req, res, next) {}
+
 async function uploadTo(req, res, next) {
   const { file } = req;
   console.log(file);
   const result = await uploadFile(file);
   console.log(result);
-  const { Location } = await result.json();
+  const { Location } = result;
   console.log(Location);
   res.locals.location = Location;
   next();
 }
 
 async function updateProfile(req, res, next) {
-  console.log('here');
+  console.log('here in updateProfile');
   const { user_id } = req.params;
   const { location } = res.locals;
   console.log(location);
@@ -26,6 +29,7 @@ async function updateProfile(req, res, next) {
   res.status(203).json({ data: updatedUserProfile });
 }
 module.exports = {
+  get: [asyncErrorBoundary(read)],
   update: [
     hasOnlyValidProperties(VALID_PROPERTIES),
     hasRequiredProperties(VALID_PROPERTIES),

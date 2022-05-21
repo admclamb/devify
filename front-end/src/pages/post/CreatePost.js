@@ -16,6 +16,7 @@ const CreatePost = () => {
     user_id: parseInt(user_id) || null,
   };
   const [post, setPost] = useState(initPost);
+  const [coverImage, setCoverImage] = useState('');
   const [error, setError] = useState(null);
   const [body, setBody] = useState('');
 
@@ -30,6 +31,7 @@ const CreatePost = () => {
   const handleSubmit = async (event) => {
     try {
       setPublishBtnText('Loading...');
+      console.log(coverImage);
       event.preventDefault();
       setError(null);
       const abortController = new AbortController();
@@ -60,9 +62,16 @@ const CreatePost = () => {
       <article className="row create-post-container rounded gx-0">
         <header>
           <div className="create-post-header-main">
-            <button className="btn btn-lg btn-outline-dark mb-4">
+            <form>
+              <input
+                type="file"
+                className="create-post__add-cover-image form-control mb-3"
+                onChange={({ target }) => setCoverImage(target.files[0])}
+              />
+            </form>
+            {/* <button className="btn btn-lg btn-outline-dark mb-4">
               Add a cover image
-            </button>
+            </button> */}
             <form>
               <input
                 placeholder="New post title here..."
