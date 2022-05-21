@@ -34,12 +34,23 @@ async function readStats(req, res, next) {
  */
 async function checkAndUpdateUsername(req, res, next) {
   const { username = null } = req.body.data;
-  if (username) {
+  console.log('req.body.data : => ', req.body.data);
+  const { user_id } = res.locals.profile;
+  console.log(username);
+  if (username && username !== res.locals.profile.username) {
     const usernameExist = await service.checkUsername(username);
-    if (!usernameExist) {
-      const updatedUsername = await service.updateUsername(user_id, username);
-      res.locals.username = updatedUsername;
+    if (usernameExist) {
+      if (user_id === usernameExist.user_id) {
+        return next();
+      } else {
+        return next({
+          status: 400,
+          message: 'Username already in use. Please try again.',
+        });
+      }
     }
+    const updatedUsername = await service.updateUsername(user_id, username);
+    res.locals.username = updatedUsername;
   }
   next();
 }
@@ -50,11 +61,21 @@ async function update(req, res, next) {
   const { user_id } = res.locals.profile;
   if (username) {
     delete data.username;
-    const updatedProfile = await service.update(data, user_id);
-    res.status(200).json({ data: { ...updatedProfile, username } });
+
+    const updatedProfile = {
+      ...res.locals.profile,
+      ...data,
+    };
+    const response = await service.update(updatedProfile, user_id);
+    res.status(200).json({ data: { ...response, username } });
   } else {
-    const updatedProfile = await service.update(data, user_id);
-    res.status(200).json({ data: updatedProfile });
+    delete data.username;
+    const updatedProfile = {
+      ...res.locals.profile,
+      ...data,
+    };
+    const response = await service.update(updatedProfile, user_id);
+    res.status(200).json({ data: { ...response, username } });
   }
 }
 

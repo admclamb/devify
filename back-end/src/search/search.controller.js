@@ -41,7 +41,6 @@ async function listSearch(req, res, next) {
       : type === 'users'
       ? await service.listUsers(search, column_names)
       : await service.listTags(search, column_names);
-  console.log(list);
   res.status(200).json({ data: list });
 }
 

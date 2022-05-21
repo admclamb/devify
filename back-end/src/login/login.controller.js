@@ -10,7 +10,6 @@ const VALID_PROPERTIES = ['email', 'password', 'username'];
 const REQUIRED_PROPERTIES = ['email', 'password'];
 
 async function userExist(req, res, next) {
-  console.log('user exist');
   const { email } = req.body.data;
   const userExist = (await service.read(email)) || null;
   if (userExist) {
@@ -23,7 +22,6 @@ async function userExist(req, res, next) {
 async function readUsersProfile(req, res, next) {
   const { user_id } = res.locals.user;
   const profile = (await service.readFromUserProfile(user_id)) || {};
-  console.log(profile);
   res.locals.profile = profile;
 
   next();
@@ -43,7 +41,6 @@ async function createToken(req, res, next) {
   const { user } = res.locals;
   const { user_id, email, username } = user;
   const { profile } = res.locals;
-  console.log('profile: ', profile);
   const token = jwt.sign({ user_id, email }, process.env.TOKEN_KEY, {
     expiresIn: '2h',
   });

@@ -4,8 +4,7 @@ import { UserContext } from '../../utils/UserContext';
 
 import SettingsNav from './SettingsNav';
 import './Settings.css';
-const Settings = () => {
-  const session = useContext(UserContext);
+const Settings = ({ session, setSession }) => {
   const { username } = session;
   return (
     <div className="container">
@@ -13,7 +12,7 @@ const Settings = () => {
       <div className="row">
         <SettingsNav />
         <section className="col-8">
-          <Outlet />
+          <Outlet session={session} setSession={setSession} />
         </section>
       </div>
     </div>

@@ -5,7 +5,6 @@ const POSTS = 'posts';
 const COMMENTS = 'comments';
 
 function listPosts(search, column_names) {
-  console.log('8', column_names, search);
   return knex(`${POSTS} as p`)
     .leftJoin(`${USERS_PROFILES_TABLE} as up`, 'p.user_id', 'up.user_id')
     .select('p.*', 'up.first_name', 'up.last_name')
@@ -14,7 +13,6 @@ function listPosts(search, column_names) {
 }
 
 function listUsers(search, column_names) {
-  console.log('16', column_names, search);
   return knex(`${USERS} as u`)
     .join(`${USERS_PROFILES_TABLE} as up`, 'u.user_id', 'up.user_id')
     .select('u.username', 'up.*')
@@ -25,7 +23,6 @@ function listUsers(search, column_names) {
 }
 
 function listTags(search, column_names) {
-  console.log('26', column_names, search);
   return knex(POSTS).select('*').whereLike(column_names[0], `%${search}%`);
 }
 

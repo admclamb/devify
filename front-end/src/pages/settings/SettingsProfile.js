@@ -12,6 +12,10 @@ const SettingsProfile = ({ session, setSession }) => {
   const [error, setError] = useState(null);
   const [file, setFile] = useState('');
   const [id, setId] = useState(user_id);
+  const [imageBtnText, setImageBtnText] = useState('Update Profile Image');
+  const [profileBtnText, setProfileBtnText] = useState(
+    'Save Profile Information'
+  );
   const [profileForm, setProfileForm] = useState({
     first_name: '',
     last_name: '',
@@ -31,6 +35,7 @@ const SettingsProfile = ({ session, setSession }) => {
   };
   const postPfp = async () => {
     setError(null);
+    setImageBtnText('Loading...');
     try {
       if (!id) {
         setError({ message: 'No user_id found' });
@@ -38,10 +43,15 @@ const SettingsProfile = ({ session, setSession }) => {
       }
       if (file) {
         const response = await postAvatar(file, id);
-        console.log(response);
+        setSession((currSession) => ({
+          ...currSession,
+          ['avatar']: response.data.data,
+        }));
+        setImageBtnText('Update Profile Image');
       }
     } catch (error) {
       setError(error);
+      setImageBtnText('Update Profile Image');
     }
   };
   const handleChange = ({ target }) => {
@@ -52,6 +62,7 @@ const SettingsProfile = ({ session, setSession }) => {
     });
   };
   const handleSubmit = async (event) => {
+    setProfileBtnText('Loading...');
     try {
       const abortController = new AbortController();
       event.preventDefault();
@@ -63,9 +74,14 @@ const SettingsProfile = ({ session, setSession }) => {
         abortController.signal
       );
       console.log(response);
-      console.log(profileForm);
+      setSession((currSession) => ({
+        ...currSession,
+        ...response,
+      }));
+      setProfileBtnText('Save Profile Information');
     } catch (error) {
       setError(error);
+      setProfileBtnText('Save Profile Information');
     }
   };
   console.log(profileForm);
@@ -106,8 +122,9 @@ const SettingsProfile = ({ session, setSession }) => {
             type="submit"
             className="submit btn btn-primary w-100"
             onClick={handleSubmit}
+            disabled={profileBtnText !== 'Save Profile Information'}
           >
-            Save Profile Information
+            {profileBtnText}
           </button>
         </div>
       </div>
@@ -130,8 +147,9 @@ const SettingsProfile = ({ session, setSession }) => {
           type="submit"
           className="submit btn btn-primary w-100 mt-2"
           onClick={postPfp}
+          disabled={imageBtnText !== 'Update Profile Image'}
         >
-          Update Profile Image
+          {imageBtnText}
         </button>
       </div>
     </>

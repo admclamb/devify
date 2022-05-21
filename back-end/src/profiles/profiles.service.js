@@ -7,18 +7,15 @@ function read(user_id) {
 }
 
 function checkUsername(username) {
-  return knex(USERS_TABLE).select('*').where({ username });
+  return knex(USERS_TABLE).select('*').where({ username }).first();
 }
 
 function updateUsername(user_id, username) {
   return knex(USERS_TABLE).select('*').where({ user_id }).update({ username });
 }
 
-function update(updatedProfile) {
-  return knex(TABLE)
-    .select('*')
-    .where({ user_id: updatedProfile.user_id })
-    .update(updatedProfile, '*');
+function update(updatedProfile, user_id) {
+  return knex(TABLE).select('*').where({ user_id }).update(updatedProfile, '*');
 }
 function readStats(user_id) {
   return knex.raw('');
