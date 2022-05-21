@@ -52,7 +52,6 @@ function App() {
       color.lightDarker
     );
   }, [darkMode]);
-  console.log('session: ', session);
   return (
     <>
       <UserContext.Provider value={session}>

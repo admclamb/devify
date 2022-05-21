@@ -147,7 +147,6 @@ export async function getPostReactionTotal(post_id, signal) {
 
 export async function updateUserProfile(user, user_id, signal) {
   const url = `${API_BASE_URL}/profiles/${user_id}`;
-  console.log('user: ', user, 'uset_id: ', user_id);
   const options = {
     method: 'PUT',
     body: JSON.stringify({ data: user }),

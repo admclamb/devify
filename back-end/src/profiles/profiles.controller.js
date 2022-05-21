@@ -33,11 +33,9 @@ async function readStats(req, res, next) {
  * Checks to see if being passed a username to update and if so update the username
  */
 async function checkAndUpdateUsername(req, res, next) {
-  const { username = null } = req.body.data;
-  console.log('req.body.data : => ', req.body.data);
+  const { username } = req.body.data;
   const { user_id } = res.locals.profile;
-  console.log(username);
-  if (username && username !== res.locals.profile.username) {
+  if (username !== res.locals.profile.username) {
     const usernameExist = await service.checkUsername(username);
     if (usernameExist) {
       if (user_id === usernameExist.user_id) {
@@ -49,34 +47,23 @@ async function checkAndUpdateUsername(req, res, next) {
         });
       }
     }
-    const updatedUsername = await service.updateUsername(user_id, username);
-    res.locals.username = updatedUsername;
+    await service.updateUsername(user_id, username);
   }
+  res.locals.username = username;
   next();
 }
 
 async function update(req, res, next) {
   const { data } = req.body;
-  const { username = null } = res.locals;
+  const { username } = res.locals;
   const { user_id } = res.locals.profile;
-  if (username) {
-    delete data.username;
-
-    const updatedProfile = {
-      ...res.locals.profile,
-      ...data,
-    };
-    const response = await service.update(updatedProfile, user_id);
-    res.status(200).json({ data: { ...response, username } });
-  } else {
-    delete data.username;
-    const updatedProfile = {
-      ...res.locals.profile,
-      ...data,
-    };
-    const response = await service.update(updatedProfile, user_id);
-    res.status(200).json({ data: { ...response, username } });
-  }
+  delete data.username;
+  const updatedProfile = {
+    ...res.locals.profile,
+    ...data,
+  };
+  const response = await service.update(updatedProfile, user_id);
+  res.status(200).json({ data: { ...response, username } });
 }
 
 module.exports = {

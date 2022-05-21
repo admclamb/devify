@@ -67,16 +67,14 @@ const SettingsProfile = ({ session, setSession }) => {
       const abortController = new AbortController();
       event.preventDefault();
       setError(null);
-      console.log('sending: ', profileForm);
       const response = await updateUserProfile(
         profileForm,
         id,
         abortController.signal
       );
-      console.log(response);
       setSession((currSession) => ({
         ...currSession,
-        ...response,
+        ...response[0],
       }));
       setProfileBtnText('Save Profile Information');
     } catch (error) {
@@ -84,8 +82,6 @@ const SettingsProfile = ({ session, setSession }) => {
       setProfileBtnText('Save Profile Information');
     }
   };
-  console.log(profileForm);
-  console.log(first_name, last_name, username);
   return (
     <>
       <ErrorAlert error={error} />

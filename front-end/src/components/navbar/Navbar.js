@@ -15,7 +15,6 @@ const Navbar = ({ darkMode, setDarkMode, session, logoutUser, setSearch }) => {
     setSearch(searchBar);
     setSearchBar('');
   };
-  console.log(avatar);
   const modal = (
     <OutsideAlerter setState={setOpenModal}>
       <section className="navbar__modal rounded border">

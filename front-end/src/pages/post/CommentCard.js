@@ -7,7 +7,6 @@ import ModalButton from '../../utils/ModalButton';
 import { UserContext } from '../../utils/UserContext';
 import './CommentCard.css';
 const CommentCard = ({ comment_data, deleteComment }) => {
-  console.log(comment_data);
   const session = useContext(UserContext);
   const { user_id } = session;
   const {
