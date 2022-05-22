@@ -52,6 +52,7 @@ function App() {
       color.lightDarker
     );
   }, [darkMode]);
+  console.log(process.env.REACT_APP_API_BASE_URL);
   return (
     <>
       <UserContext.Provider value={session}>
