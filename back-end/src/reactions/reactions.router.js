@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const controller = require('./reactions.controller');
 const methodNotAllowed = require('../errors/methodNotAllowed');
+router.route('/:user_id').get(controller.read).all(methodNotAllowed);
 
 router
   .route('/:user_id/likes')

@@ -53,7 +53,12 @@ const ProfileBio = ({ post_user_id }) => {
             <header className="mb-3">
               <div className="bio-pfp">
                 {avatar ? (
-                  <img src={avatar} className="pfp-img" width="100%" />
+                  <img
+                    src={avatar}
+                    className="pfp-img bio-avatar"
+                    width="100%"
+                    height="100%"
+                  />
                 ) : first_name ? (
                   first_name[0].toUpperCase()
                 ) : (

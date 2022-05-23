@@ -72,6 +72,15 @@ async function userHasReacted(req, res, next) {
     )}d this post.`,
   });
 }
+async function read(req, res, next) {
+  const { user_id } = req.params;
+  const data = {
+    likes: (await service.readLikes(user_id)) || [],
+    special_likes: (await service.readSpecialLikes(user_id)) || [],
+    saves: (await service.readSaves(user_id)) || [],
+  };
+  res.status(200).json({ data });
+}
 
 async function readTotal(req, res, next) {
   const { post_id } = res.locals.post;
@@ -168,6 +177,7 @@ module.exports = {
     asyncErrorBoundary(userHasReacted),
     asyncErrorBoundary(deleteSave),
   ],
+  read: [asyncErrorBoundary(userExist), asyncErrorBoundary(read)],
   readTotal: [asyncErrorBoundary(postExist), asyncErrorBoundary(readTotal)],
   readSaves: [asyncErrorBoundary(userExist), asyncErrorBoundary(readSaves)],
 };

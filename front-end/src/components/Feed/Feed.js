@@ -10,6 +10,7 @@ const Feed = () => {
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
   const [userSaves, setUserSaves] = useState([]);
+  const [userReactions, setUserReactions] = useState({});
   const [updatedSave, setUpdatedSave] = useState({});
   const session = useContext(UserContext);
   const { user_id } = session;
@@ -41,7 +42,7 @@ const Feed = () => {
   console.log('user_saves: ', userSaves);
   const content =
     posts.length > 0 ? (
-      <Posts posts={posts} setError={setError} />
+      <Posts posts={posts} setError={setError} userSaves={userSaves} />
     ) : !error ? (
       <FeedLoading />
     ) : (

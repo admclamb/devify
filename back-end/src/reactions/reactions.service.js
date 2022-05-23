@@ -115,7 +115,15 @@ function readTotal(post_id) {
 function readSaves(user_id) {
   return knex(USERS_SAVES_TABLE).select('*').where({ user_id });
 }
-
+function readLikes(user_id) {
+  return knex(USERS_LIKES_TABLE).select('*').where({ user_id });
+}
+function readSpecialLikes(user_id) {
+  return knex(USERS_SPECIAL_LIKES_TABLE).select('*').where({ user_id });
+}
+function readSaves(user_id) {
+  return knex(USERS_SAVES_TABLE).select('*').where({ user_id });
+}
 module.exports = {
   readPost,
   readUser,
@@ -130,5 +138,8 @@ module.exports = {
   destroySpecial_like,
   createSave,
   destroySave,
+  readSaves,
+  readLikes,
+  readSpecialLikes,
   readSaves,
 };

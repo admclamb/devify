@@ -1,11 +1,12 @@
-import { useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { handleReaction } from '../../utils/api';
 import { formatAsMonthDay } from '../../utils/formatDate';
 import { UserContext } from '../../utils/UserContext';
 import './PostCard.css';
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, userSaves }) => {
+  const [saveBtnText, setSaveBtnText] = useState('Save');
   const {
     post_id,
     avatar,
@@ -35,6 +36,11 @@ const PostCard = ({ post }) => {
       'POST'
     );
   };
+
+  useEffect(() => {
+    const saves = userSaves.some((save) => save.post_id === post_id);
+    setSaveBtnText(saves ? 'Saved' : 'Save');
+  }, [userSaves]);
   return (
     <article className="post-card">
       {image_url && (
@@ -74,7 +80,7 @@ const PostCard = ({ post }) => {
               <i className="fa-light fa-comment"></i> Add Comment
             </Link>
             <button className=" ms-auto btn btn-secondary" onClick={handleSave}>
-              Save
+              {saveBtnText}
             </button>
           </div>
         </div>
