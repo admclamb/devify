@@ -113,6 +113,13 @@ async function deleteSave(req, res, next) {
   await service.destroySave(post_id, user_id);
   res.status(200).json({ data: { post_id, user_id } });
 }
+
+async function readSaves(req, res, next) {
+  const { user_id } = req.params;
+  console.log('in here: ', user_id);
+  const saves = await service.readSaves(user_id);
+  res.status(200).json({ data: saves });
+}
 module.exports = {
   read: [
     asyncErrorBoundary(postExist),
@@ -162,4 +169,5 @@ module.exports = {
     asyncErrorBoundary(deleteSave),
   ],
   readTotal: [asyncErrorBoundary(postExist), asyncErrorBoundary(readTotal)],
+  readSaves: [asyncErrorBoundary(userExist), asyncErrorBoundary(readSaves)],
 };

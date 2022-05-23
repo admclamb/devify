@@ -1,5 +1,8 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { handleReaction } from '../../utils/api';
 import { formatAsMonthDay } from '../../utils/formatDate';
+import { UserContext } from '../../utils/UserContext';
 import './PostCard.css';
 
 const PostCard = ({ post }) => {
@@ -14,12 +17,24 @@ const PostCard = ({ post }) => {
     post_header,
     likes = 0,
   } = post;
+  const session = useContext(UserContext);
+  const { user_id } = session;
   const hashtags = Array.isArray(hashtags_array)
     ? hashtags_array.join('  ')
     : '';
   const pfp = (
     <img src={avatar} width="100%" className="post-card-pfp pfp-img" />
   );
+  const handleSave = async () => {
+    const abortController = new AbortController();
+    await handleReaction(
+      post_id,
+      user_id,
+      abortController.signal,
+      'save',
+      'POST'
+    );
+  };
   return (
     <article className="post-card">
       {image_url && (
@@ -58,7 +73,9 @@ const PostCard = ({ post }) => {
             <Link to={`/post/${post_id}`} className="text-dark post-comment">
               <i className="fa-light fa-comment"></i> Add Comment
             </Link>
-            <button className=" ms-auto btn btn-secondary">Save</button>
+            <button className=" ms-auto btn btn-secondary" onClick={handleSave}>
+              Save
+            </button>
           </div>
         </div>
       </div>

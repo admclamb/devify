@@ -14,6 +14,7 @@ router
   .all(methodNotAllowed);
 router
   .route('/:user_id/saves')
+  .get(controller.readSaves)
   .post(controller.save)
   .delete(controller.destroySave)
   .all(methodNotAllowed);

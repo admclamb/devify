@@ -144,6 +144,17 @@ export async function getPostReactionTotal(post_id, signal) {
   return await fetchJson(url, options, {});
 }
 
+export async function readSaves(user_id, signal) {
+  const url = `${API_BASE_URL}/reactions/${user_id}/saves`;
+  console.log(url);
+  const options = {
+    method: 'GET',
+    headers,
+    signal,
+  };
+  return await fetchJson(url, options, []);
+}
+
 export async function updateUserProfile(user, user_id, signal) {
   const url = `${API_BASE_URL}/profiles/${user_id}`;
   const options = {
