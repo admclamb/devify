@@ -1,0 +1,22 @@
+.post-sidebar-nav {
+  background-color: var(--color-light);
+  padding-block: 0.4rem;
+  border-top: var(--color-border) 1px solid;
+}
+.post-sidebar-nav .post-sidebar {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0;
+}
+
+.post-sidebar-nav .post-sidebar li {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.post-sidebar-nav .post-sidebar li {
+  margin-bottom: 0 !important;
+}

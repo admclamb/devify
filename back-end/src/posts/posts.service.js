@@ -18,6 +18,20 @@ function listWithAll() {
     .orderBy('p.created_at', 'desc');
 }
 
+function listWithAllLatest() {
+  return knex(`${TABLE} as p`)
+    .join(`${USERS_PROFILES_TABLE} as up`, 'p.user_id', 'up.user_id')
+    .select('*')
+    .orderBy('p.created_at', 'desc');
+}
+
+function listWithAllTop() {
+  return knex(`${TABLE} as p`)
+    .join(`${USERS_PROFILES_TABLE} as up`, 'p.user_id', 'up.user_id')
+    .select('*')
+    .orderBy('p.likes', 'desc');
+}
+
 function readWithAll(post_id) {
   return knex(`${TABLE} as p`)
     .join(`${USERS_PROFILES_TABLE} as up`, 'p.user_id', 'up.user_id')
@@ -56,6 +70,8 @@ function comments(post_id) {
 module.exports = {
   list,
   listWithAll,
+  listWithAllLatest,
+  listWithAllTop,
   readWithAll,
   read,
   readUser,

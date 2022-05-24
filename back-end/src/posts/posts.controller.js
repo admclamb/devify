@@ -28,6 +28,12 @@ function validateDataValues(req, res, next) {
   next();
 }
 
+function checkQueryParams(req, res, next) {
+  const { type = '' } = req.query;
+  res.locals.query = type;
+  next();
+}
+
 async function postExist(req, res, next) {
   const { post_id } = req.params;
   const postExist = await service.read(post_id);
@@ -39,7 +45,15 @@ async function postExist(req, res, next) {
 }
 
 async function list(req, res) {
-  const posts = await service.listWithAll();
+  const { query } = res.locals;
+  let posts;
+  if (query === 'latest') {
+    posts = await service.listWithAllLatest();
+  } else if (query === 'top') {
+    posts = await service.listWithAllTop();
+  } else {
+    posts = await service.listWithAll();
+  }
   res.status(200).json({ data: posts });
 }
 
@@ -60,7 +74,7 @@ async function listComments(req, res, next) {
 }
 
 module.exports = {
-  list,
+  list: [checkQueryParams, asyncErrorBoundary(list)],
   read: [asyncErrorBoundary(postExist), asyncErrorBoundary(read)],
   listComments: [
     asyncErrorBoundary(postExist),

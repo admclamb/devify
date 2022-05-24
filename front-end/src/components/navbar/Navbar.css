@@ -1,4 +1,4 @@
-.navbar {
+.navbar-main {
   max-height: 4rem;
   padding-block: 0.4rem;
   margin-bottom: 1rem;
@@ -7,7 +7,7 @@
   z-index: 100;
 }
 
-.navbar > div {
+.navbar-main > div {
   padding: 0;
 }
 
@@ -46,7 +46,7 @@
   height: 2em;
 }
 
-.navbar > div {
+.navbar-main > div {
   display: flex;
   align-items: center;
 }

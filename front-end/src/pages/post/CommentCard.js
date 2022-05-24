@@ -73,7 +73,7 @@ const CommentCard = ({ comment_data, deleteComment }) => {
             <p>{comment}</p>
           </article>
         </div>
-        <div className="buttons">
+        {/* <div className="buttons">
           <button className="btn me-2 comment-button">
             <i className="fa-solid fa-heart me-2"></i>0 Likes
           </button>
@@ -81,7 +81,7 @@ const CommentCard = ({ comment_data, deleteComment }) => {
             <i className="fa-solid fa-comment me-2"></i>
             Reply
           </button>
-        </div>
+        </div> */}
       </main>
     </article>
   );

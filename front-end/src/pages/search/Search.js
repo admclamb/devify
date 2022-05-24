@@ -17,9 +17,9 @@ const Search = ({ search }) => {
           <SearchSearchBar search={search} />
         </div>
         <h3 className="d-none d-md-block col-12">Search for {search}</h3>
-        <div className="ms-auto">
+        {/* <div className="ms-auto">
           <SearchResultNav />
-        </div>
+        </div> */}
       </header>
       <main className="row">
         <aside className="col-12 col-md-2">

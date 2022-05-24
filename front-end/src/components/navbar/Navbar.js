@@ -51,7 +51,7 @@ const Navbar = ({ darkMode, setDarkMode, session, logoutUser, setSearch }) => {
   );
 
   return (
-    <nav className="navbar ps-4 ps-sm-0 pe-sm-0 pe-4">
+    <nav className="navbar-main ps-4 ps-sm-0 pe-sm-0 pe-4">
       <div className="container">
         <div className="d-block d-md-none">
           <OffCanvasNavButton />

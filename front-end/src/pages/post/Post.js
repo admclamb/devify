@@ -6,6 +6,8 @@ import PostMain from './PostMain';
 import FeedLoading from '../../components/Feed/FeedLoading';
 import ErrorAlert from '../../errors/ErrorAlert';
 import ProfileBio from '../../components/Profile/ProfileBio';
+import PostSidebarBottom from './PostSideBarBottom';
+import './Post.css';
 const Post = ({ reactions, setReactions }) => {
   const { post_id } = useParams();
   const [post, setPost] = useState({});
@@ -28,7 +30,7 @@ const Post = ({ reactions, setReactions }) => {
     <div className="container">
       <main className="row gx-4">
         <ErrorAlert error={error} />
-        <aside className="col-sm-1">
+        <aside className="d-none d-sm-block col-sm-1">
           <PostSidebar
             post={post}
             setError={setError}
@@ -36,12 +38,21 @@ const Post = ({ reactions, setReactions }) => {
             setReactions={setReactions}
           />
         </aside>
-        <section className="col-sm-8">
+        <section className="col-sm-8 mb-3 mb-sm-0">
           <PostMain post={post} comments={comments} setComments={setComments} />
         </section>
         <section className="col-sm-3">
           <ProfileBio post_user_id={post.user_id} />
         </section>
+        {/* Conditionally renders nav to bottom of screen with bootstrap  */}
+        <nav className="d-sm-none post-sidebar-nav navbar fixed-bottom">
+          <PostSidebarBottom
+            post={post}
+            setError={setError}
+            reactions={reactions}
+            setReactions={setReactions}
+          />
+        </nav>
       </main>
     </div>
   );

@@ -9,18 +9,16 @@ import { UserContext } from '../../utils/UserContext';
 const Feed = ({ reactions, setReactions }) => {
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
+  const [query, setQuery] = useState({ type: '' });
   const session = useContext(UserContext);
   const { user_id } = session;
   useEffect(() => {
     const abortController = new AbortController();
     setPosts([]);
     setError(null);
-    listPosts({}, abortController.signal)
-      .then(sortPosts)
-      .then(setPosts)
-      .catch(setError);
+    listPosts(query, abortController.signal).then(setPosts).catch(setError);
     return () => abortController.abort();
-  }, []);
+  }, [query]);
   const content =
     posts.length > 0 ? (
       <Posts
@@ -30,13 +28,23 @@ const Feed = ({ reactions, setReactions }) => {
         setReactions={setReactions}
       />
     ) : !error ? (
-      <FeedLoading />
+      <>
+        <div className="mb-3">
+          <FeedLoading />
+        </div>
+        <div className="mb-3">
+          <FeedLoading />
+        </div>
+        <div className="mb-3">
+          <FeedLoading />
+        </div>
+      </>
     ) : (
       ''
     );
   return (
     <section>
-      <FeedNav />
+      <FeedNav setQuery={setQuery} query={query} />
       <ErrorAlert error={error} />
       {content}
     </section>

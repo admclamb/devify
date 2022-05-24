@@ -8,9 +8,15 @@
   border-radius: 6px;
   padding: 0.8rem 0.6rem;
   color: var(--color-dark);
+  cursor: pointer;
 }
 
 .feed-nav ul li:hover {
+  background-color: var(--color-light);
+  color: var(--color-main);
+}
+
+.feed-nav ul .active {
   background-color: var(--color-light);
   color: var(--color-main);
 }
