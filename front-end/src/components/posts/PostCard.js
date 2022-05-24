@@ -28,7 +28,7 @@ const PostCard = ({ post, reactions, setReactions }) => {
   );
   const handleSave = async () => {
     const abortController = new AbortController();
-    const method = saveBtnText === 'Saved' ? 'POST' : 'DELETE';
+    const method = saveBtnText === 'Save' ? 'POST' : 'DELETE';
     handleReaction(post_id, user_id, abortController.signal, 'save', method);
     if (saveBtnText === 'Saved') {
       const filtered = (arr) =>
@@ -53,8 +53,9 @@ const PostCard = ({ post, reactions, setReactions }) => {
       reactions.hasOwnProperty('saves') &&
       Array.isArray(reactions.saves)
     ) {
-      const saves = reactions.saves.some((save) => save.post_id === post_id);
-      console.log('saves: ', saves);
+      const saves = reactions.saves.some(
+        (save) => save.post_id === post_id && save.user_id === user_id
+      );
       setSaveBtnText(saves ? 'Saved' : 'Save');
     }
   }, [reactions]);

@@ -82,7 +82,6 @@ function App() {
       color.lightDarker
     );
   }, [darkMode]);
-  console.log(reactions);
   return (
     <>
       <UserContext.Provider value={session}>

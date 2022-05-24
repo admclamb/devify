@@ -11,6 +11,7 @@ const Post = ({ reactions, setReactions }) => {
   const [post, setPost] = useState({});
   const [comments, setComments] = useState([]);
   const [error, setError] = useState(null);
+
   useEffect(() => {
     const abortController = new AbortController();
     setPost({});

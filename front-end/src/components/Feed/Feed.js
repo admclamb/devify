@@ -7,7 +7,6 @@ import Posts from '../posts/Posts';
 import { sortPosts } from '../../utils/sort';
 import { UserContext } from '../../utils/UserContext';
 const Feed = ({ reactions, setReactions }) => {
-  console.log('1: ', reactions);
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
   const session = useContext(UserContext);

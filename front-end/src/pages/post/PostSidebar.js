@@ -17,6 +17,8 @@ const PostSidebar = ({ post, setError, reactions, setReactions }) => {
   const [liked, setLiked] = useState(false);
   const [special_liked, setSpecial_liked] = useState(false);
   const [saved, setSaved] = useState(false);
+  console.log(post);
+  console.log(reactions);
   const filtered = (arr) =>
     arr.filter((x) => x.user_id === user_id && x.post_id === post_id);
   useEffect(() => {
@@ -25,24 +27,35 @@ const PostSidebar = ({ post, setError, reactions, setReactions }) => {
     setSaves(post.saves);
   }, [post]);
   useEffect(() => {
+    const somed = (arr) =>
+      arr.some((x) => x.user_id === x.user_id && x.post_id === post_id);
+    console.log(
+      'BEFORE CHANGE In reaction change: ',
+      liked,
+      special_liked,
+      saved
+    );
     if (reactions) {
       if (reactions.hasOwnProperty('likes') && Array.isArray(reactions.likes)) {
-        setLiked(filtered(reactions.likes));
+        console.log('In likes');
+        setLiked(somed(reactions.likes));
       }
       if (
         reactions.hasOwnProperty('special_likes') &&
         Array.isArray(reactions.special_likes)
       ) {
-        setSpecial_liked(filtered(reactions.special_likes));
+        console.log('In special_likes');
+        setSpecial_liked(somed(reactions.special_likes));
       }
       if (reactions.hasOwnProperty('saves') && Array.isArray(reactions.saves)) {
-        setSaved(filtered(reactions.saves));
+        console.log('In saves');
+        setSaved(somed(reactions.saves));
       }
     }
+    console.log('In reaction change: ', liked, special_liked, saved);
   }, [reactions]);
   const handleLike = () => {
     const abortController = new AbortController();
-    setLiked((curr) => !curr);
     const method = liked ? 'DELETE' : 'POST';
     handleReaction(post_id, user_id, abortController.signal, 'like', method);
     if (liked) {
