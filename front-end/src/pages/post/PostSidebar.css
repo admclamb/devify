@@ -10,9 +10,13 @@
 
 .text-like,
 .text-like:hover {
-  color: #dc2626 !important;
+  color: #dc2626;
   background-color: #f2e0e0;
   border: solid 2px #dc2626;
+}
+
+.sidebar-btn i {
+  color: inherit;
 }
 
 .text-special_like,

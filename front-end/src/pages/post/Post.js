@@ -6,7 +6,7 @@ import PostMain from './PostMain';
 import FeedLoading from '../../components/Feed/FeedLoading';
 import ErrorAlert from '../../errors/ErrorAlert';
 import ProfileBio from '../../components/Profile/ProfileBio';
-const Post = () => {
+const Post = ({ reactions, setReactions }) => {
   const { post_id } = useParams();
   const [post, setPost] = useState({});
   const [comments, setComments] = useState([]);
@@ -28,7 +28,12 @@ const Post = () => {
       <main className="row gx-4">
         <ErrorAlert error={error} />
         <aside className="col-sm-1">
-          <PostSidebar post={post} setError={setError} />
+          <PostSidebar
+            post={post}
+            setError={setError}
+            reactions={reactions}
+            setReactions={setReactions}
+          />
         </aside>
         <section className="col-sm-8">
           <PostMain post={post} comments={comments} setComments={setComments} />

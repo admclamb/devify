@@ -48,7 +48,6 @@ const PostCard = ({ post, reactions, setReactions }) => {
   };
 
   useEffect(() => {
-    console.log('in here');
     if (
       reactions &&
       reactions.hasOwnProperty('saves') &&

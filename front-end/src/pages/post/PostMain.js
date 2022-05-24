@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import FeedLoading from '../../components/Feed/FeedLoading';
 import { formatAsMonthDay, formatAsMonthDayYear } from '../../utils/formatDate';
 import './PostMain.css';
@@ -18,6 +19,7 @@ const PostMain = ({ post, comments, setComments }) => {
   const hashtags = Array.isArray(hashtags_array)
     ? hashtags_array.join('  ')
     : '';
+
   return (
     <>
       <article className="post-main-container border">

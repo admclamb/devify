@@ -61,7 +61,11 @@ const PageRoutes = ({
         <Route path="notification" element={<SettingsNotifications />} />
         <Route path="account" element={<SettingsAccount />} />
       </Route>
-      <Route exact={true} path="/post/:post_id" element={<Post />} />
+      <Route
+        exact={true}
+        path="/post/:post_id"
+        element={<Post reactions={reactions} setReactions={setReactions} />}
+      />
       <Route exact={true} path="/profile/:username" element={<Profile />} />
       <Route exact={true} path="/:user_id/create" element={<CreatePost />} />
       <Route
