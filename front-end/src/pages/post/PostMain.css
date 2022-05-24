@@ -6,3 +6,10 @@
 .post-main-body {
   padding: 1.6rem;
 }
+
+.img-wrapper {
+  max-height: 400px;
+  object-fit: cover;
+  object-position: center;
+  overflow: hidden;
+}

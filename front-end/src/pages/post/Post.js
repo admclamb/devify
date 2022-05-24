@@ -38,10 +38,11 @@ const Post = ({ reactions, setReactions }) => {
             setReactions={setReactions}
           />
         </aside>
-        <section className="col-sm-8 mb-3 mb-sm-0">
+        <section className="col-12 col-sm-11 col-lg-8">
           <PostMain post={post} comments={comments} setComments={setComments} />
         </section>
-        <section className="col-sm-3">
+        <div className="col-0 col-sm-1 col-lg-0"></div>
+        <section className="col-12 col-sm-11 col-lg-3 mt-3 mt-lg-0">
           <ProfileBio post_user_id={post.user_id} />
         </section>
         {/* Conditionally renders nav to bottom of screen with bootstrap  */}
