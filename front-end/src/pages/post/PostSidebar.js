@@ -19,48 +19,24 @@ const PostSidebar = ({ post, setError, reactions, setReactions }) => {
   const [saved, setSaved] = useState(false);
   console.log(post);
   console.log(reactions);
-  const filtered = (arr) =>
-    arr.filter((x) => x.user_id === user_id && x.post_id === post_id);
   useEffect(() => {
-    setLikes(post.likes);
-    setSpecial_likes(post.special_likes);
-    setSaves(post.saves);
-  }, [post]);
-  useEffect(() => {
-    const somed = (arr) =>
-      arr.some((x) => x.user_id === x.user_id && x.post_id === post_id);
-    console.log(
-      'BEFORE CHANGE In reaction change: ',
-      liked,
-      special_liked,
-      saved
-    );
     if (reactions) {
-      if (reactions.hasOwnProperty('likes') && Array.isArray(reactions.likes)) {
-        console.log('In likes');
-        setLiked(somed(reactions.likes));
-      }
-      if (
-        reactions.hasOwnProperty('special_likes') &&
-        Array.isArray(reactions.special_likes)
-      ) {
-        console.log('In special_likes');
-        setSpecial_liked(somed(reactions.special_likes));
-      }
-      if (reactions.hasOwnProperty('saves') && Array.isArray(reactions.saves)) {
-        console.log('In saves');
-        setSaved(somed(reactions.saves));
-      }
+      const filtered = (arr) => {
+        return (
+          (Array.isArray(arr) && arr.some((x) => x.post_id === post_id)) ||
+          false
+        );
+      };
+      setLiked(filtered(reactions.likes));
+      setSpecial_liked(filtered(reactions.special_likes));
+      setSaved(filtered(reactions.saves));
     }
-    console.log('In reaction change: ', liked, special_liked, saved);
   }, [reactions]);
+  const filterOut = (arr) => arr.filter((x) => x.post_id !== post_id);
   const handleLike = () => {
-    const abortController = new AbortController();
-    const method = liked ? 'DELETE' : 'POST';
-    handleReaction(post_id, user_id, abortController.signal, 'like', method);
     if (liked) {
       setReactions((curr) => ({
-        likes: filtered(curr.likes),
+        likes: filterOut(curr.likes),
         special_likes: curr.special_likes,
         saves: curr.saves,
       }));
@@ -71,23 +47,12 @@ const PostSidebar = ({ post, setError, reactions, setReactions }) => {
         saves: curr.saves,
       }));
     }
-    setLikes((curr) => (liked ? curr - 1 : curr + 1));
   };
   const handleSpecial_like = () => {
-    const abortController = new AbortController();
-    setSpecial_liked((curr) => !curr);
-    const method = special_liked ? 'DELETE' : 'POST';
-    handleReaction(
-      post_id,
-      user_id,
-      abortController.signal,
-      'special_like',
-      method
-    );
     if (special_liked) {
       setReactions((curr) => ({
         likes: curr.likes,
-        special_likes: filtered(curr.special_likes),
+        special_likes: filterOut(curr.special_likes),
         saves: curr.saves,
       }));
     } else {
@@ -97,18 +62,13 @@ const PostSidebar = ({ post, setError, reactions, setReactions }) => {
         saves: curr.saves,
       }));
     }
-    setSpecial_likes((curr) => (special_liked ? curr - 1 : curr + 1));
   };
   const handleSave = () => {
-    const abortController = new AbortController();
-    setSaved((curr) => !curr);
-    const method = saved ? 'DELETE' : 'POST';
-    handleReaction(post_id, user_id, abortController.signal, 'save', method);
     if (saved) {
       setReactions((curr) => ({
         likes: curr.likes,
         special_likes: curr.special_likes,
-        saves: filtered(curr.saves),
+        saves: filterOut(curr.saves),
       }));
     } else {
       setReactions((curr) => ({
@@ -117,9 +77,7 @@ const PostSidebar = ({ post, setError, reactions, setReactions }) => {
         saves: [...curr.saves, { post_id, user_id }],
       }));
     }
-    setSaves((curr) => (saved ? curr - 1 : curr + 1));
   };
-
   const likeButton = (
     <button
       className={`sidebar-btn sidebar-heart btn ${liked ? 'text-like' : ''}`}
