@@ -5,11 +5,11 @@ const SignedInNav = ({ openModal, setOpenModal, modal, user_id, avatar }) => {
     <div className="navbar__profile-container ms-md-auto">
       <Link
         to={`${user_id}/create`}
-        className="btn btn-outline-primary d-none d-md-block"
+        className="btn btn-outline-primary d-none d-md-block me-3"
       >
         Create Post
       </Link>
-      <i className="fa-thin fa-bell fa-lg"></i>
+      {/* <i className="fa-thin fa-bell fa-lg"></i> */}
       <div>
         <img
           src={avatar ? avatar : ''}

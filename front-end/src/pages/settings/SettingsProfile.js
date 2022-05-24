@@ -147,6 +147,9 @@ const SettingsProfile = ({ session, setSession }) => {
         >
           {imageBtnText}
         </button>
+        <p className="mt-2">
+          *Please refresh page to see your updated profile picture*
+        </p>
       </div>
     </>
   );

@@ -27,8 +27,10 @@ const SearchResults = ({ search, query, setError, error }) => {
     ) : (
       <h4>No Results...</h4>
     )
-  ) : (
+  ) : error ? (
     <h4>Loading...</h4>
+  ) : (
+    ''
   );
 
   return (
