@@ -2,7 +2,7 @@ import Feed from '../../components/Feed/Feed';
 import Navbar from '../../components/navbar/Navbar';
 import SidebarNav from '../../components/sidebarNav/SidebarNav';
 
-const Home = () => {
+const Home = ({ reactions, setReactions }) => {
   return (
     <>
       <div className="container">
@@ -11,7 +11,7 @@ const Home = () => {
             <SidebarNav />
           </aside>
           <section className="col-12 col-md-8">
-            <Feed />
+            <Feed reactions={reactions} setReactions={setReactions} />
           </section>
         </main>
       </div>

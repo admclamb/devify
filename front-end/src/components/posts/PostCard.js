@@ -5,7 +5,7 @@ import { formatAsMonthDay } from '../../utils/formatDate';
 import { UserContext } from '../../utils/UserContext';
 import './PostCard.css';
 
-const PostCard = ({ post, userSaves }) => {
+const PostCard = ({ post, reactions, setReactions }) => {
   const [saveBtnText, setSaveBtnText] = useState('Save');
   const {
     post_id,
@@ -28,19 +28,37 @@ const PostCard = ({ post, userSaves }) => {
   );
   const handleSave = async () => {
     const abortController = new AbortController();
-    await handleReaction(
-      post_id,
-      user_id,
-      abortController.signal,
-      'save',
-      'POST'
-    );
+    const method = saveBtnText === 'Saved' ? 'POST' : 'DELETE';
+    handleReaction(post_id, user_id, abortController.signal, 'save', method);
+    if (saveBtnText === 'Saved') {
+      const filtered = (arr) =>
+        arr.filter((x) => x.user_id !== user_id && x.post_id !== post_id);
+      setReactions((curr) => ({
+        likes: curr.likes,
+        special_likes: curr.special_likes,
+        saves: filtered(curr.saves),
+      }));
+    } else {
+      setReactions((curr) => ({
+        likes: curr.likes,
+        special_likes: curr.special_likes,
+        saves: [...curr.saves, { post_id, user_id }],
+      }));
+    }
   };
 
   useEffect(() => {
-    const saves = userSaves.some((save) => save.post_id === post_id);
-    setSaveBtnText(saves ? 'Saved' : 'Save');
-  }, [userSaves]);
+    console.log('in here');
+    if (
+      reactions &&
+      reactions.hasOwnProperty('saves') &&
+      Array.isArray(reactions.saves)
+    ) {
+      const saves = reactions.saves.some((save) => save.post_id === post_id);
+      console.log('saves: ', saves);
+      setSaveBtnText(saves ? 'Saved' : 'Save');
+    }
+  }, [reactions]);
   return (
     <article className="post-card">
       {image_url && (

@@ -162,7 +162,7 @@ export async function readUserReactions(user_id, signal) {
     headers,
     signal,
   };
-  return await fetchJson(url, options, []);
+  return await fetchJson(url, options, {});
 }
 
 export async function updateUserProfile(user, user_id, signal) {

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import PostCard from './PostCard';
 import './Posts.css';
-const Posts = ({ posts, userSaves }) => {
+const Posts = ({ posts, userSaves, reactions, setReactions }) => {
   useEffect(() => {});
   if (!Array.isArray(posts)) return null;
   const postsList = posts.map((post, index) => {
@@ -11,6 +11,8 @@ const Posts = ({ posts, userSaves }) => {
         key={post.post_id}
         liked={true}
         userSaves={userSaves}
+        reactions={reactions}
+        setReactions={setReactions}
       />
     );
   });

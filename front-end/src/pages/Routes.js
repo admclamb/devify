@@ -21,10 +21,17 @@ const PageRoutes = ({
   setDarkMode,
   search,
   setSearch,
+  reactions,
+  setReactions,
 }) => {
   return (
     <Routes>
-      <Route index exact={true} path="/" element={<Home />} />
+      <Route
+        index
+        exact={true}
+        path="/"
+        element={<Home reactions={reactions} setReactions={setReactions} />}
+      />
       <Route
         exact={true}
         path="/settings"

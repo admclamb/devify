@@ -2,11 +2,41 @@ import { useEffect, useState } from 'react';
 import Navbar from './components/navbar/Navbar';
 import PageRoutes from './pages/Routes';
 import { UserContext } from './utils/UserContext';
+import { readUserReactions } from './utils/api';
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [session, setSession] = useState({});
   //Search term used for navbar and search page
   const [search, setSearch] = useState('');
+  //State for users reactions to a post
+  const [reactions, setReactions] = useState({
+    likes: [],
+    specialLikes: [],
+    saves: [],
+  });
+  const [saveChange, setSaveChange] = useState(0);
+  const [likeChange, setLikeChange] = useState(0);
+  const [specialLikeChange, setSpecialLikeChange] = useState(0);
+  const [error, setError] = useState(null);
+  const { user_id } = session;
+  useEffect(() => {
+    const abortController = new AbortController();
+
+    const getReactions = async () => {
+      setError(null);
+      try {
+        const response = await readUserReactions(
+          user_id,
+          abortController.signal
+        );
+        setReactions(response);
+      } catch (error) {
+        setError(error);
+      }
+    };
+    getReactions();
+    return () => abortController.abort();
+  }, [user_id]);
   useEffect(() => {
     if (session.hasOwnProperty('user_id')) {
       localStorage.setItem('session', JSON.stringify(session));
@@ -52,6 +82,7 @@ function App() {
       color.lightDarker
     );
   }, [darkMode]);
+  console.log(reactions);
   return (
     <>
       <UserContext.Provider value={session}>
@@ -72,6 +103,8 @@ function App() {
           setSearch={setSearch}
           darkMode={darkMode}
           setDarkMode={setDarkMode}
+          reactions={reactions}
+          setReactions={setReactions}
         />
       </UserContext.Provider>
     </>
