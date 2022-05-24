@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import './NotSignedInNav.css';
 const NotSignedInNav = () => {
   return (
-    <div className="d-none d-md-block navbar__profile-container not-signed-in-nav">
+    <div className="d-none d-md-block navbar__profile-container not-signed-in-nav ms-auto">
       <Link to="/login" className="me-3 btn login">
         Log in
       </Link>
