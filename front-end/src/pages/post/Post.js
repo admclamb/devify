@@ -41,7 +41,7 @@ const Post = ({ reactions, setReactions }) => {
         <section className="col-12 col-sm-11 col-lg-8">
           <PostMain post={post} comments={comments} setComments={setComments} />
         </section>
-        <div className="col-0 col-sm-1 col-lg-0"></div>
+        <div className="col-0 col-sm-1 col-lg-0 d-lg-none"></div>
         <section className="col-12 col-sm-11 col-lg-3 mt-3 mt-lg-0">
           <ProfileBio post_user_id={post.user_id} />
         </section>

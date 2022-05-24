@@ -3,6 +3,7 @@ import Navbar from './components/navbar/Navbar';
 import PageRoutes from './pages/Routes';
 import { UserContext } from './utils/UserContext';
 import { readUserReactions } from './utils/api';
+import BetaBanner from './components/banner/BetaBanner';
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [session, setSession] = useState({});
@@ -86,6 +87,7 @@ function App() {
     <>
       <UserContext.Provider value={session}>
         <header>
+          <BetaBanner />
           <Navbar
             darkMode={darkMode}
             setDarkMode={setDarkMode}

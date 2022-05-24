@@ -55,10 +55,10 @@ const CreatePost = () => {
       </div>
 
       <nav className="row">
-        <div className="create-post-top-nav d-flex mb-3">
+        {/* <div className="create-post-top-nav d-flex mb-3">
           <button className="btn ms-auto me-4">Edit</button>
           <button className="btn ">Preview</button>
-        </div>
+        </div> */}
       </nav>
       <article className="row create-post-container rounded gx-0">
         <header>
