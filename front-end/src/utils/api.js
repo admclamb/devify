@@ -121,6 +121,7 @@ export async function handleReaction(
     headers,
     signal,
   };
+  console.log(url, options);
   return await fetchJson(url, options, {});
 }
 

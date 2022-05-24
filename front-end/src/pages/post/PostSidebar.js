@@ -17,6 +17,11 @@ const PostSidebar = ({ post, setError, reactions, setReactions }) => {
   const [liked, setLiked] = useState(false);
   const [special_liked, setSpecial_liked] = useState(false);
   const [saved, setSaved] = useState(false);
+  useEffect(() => {
+    setLikes(post.likes);
+    setSaves(post.saves);
+    setSpecial_likes(post.special_likes);
+  }, [post]);
   console.log(post);
   console.log(reactions);
   useEffect(() => {
@@ -32,8 +37,13 @@ const PostSidebar = ({ post, setError, reactions, setReactions }) => {
       setSaved(filtered(reactions.saves));
     }
   }, [reactions]);
-  const filterOut = (arr) => arr.filter((x) => x.post_id !== post_id);
+
   const handleLike = () => {
+    const abortController = new AbortController();
+    const method = liked ? 'DELETE' : 'POST';
+    handleReaction(post_id, user_id, abortController.signal, 'like', method);
+    const filterOut = (arr) => arr.filter((x) => x.post_id !== post_id);
+    setLikes((curr) => (liked ? curr - 1 : curr + 1));
     if (liked) {
       setReactions((curr) => ({
         likes: filterOut(curr.likes),
@@ -49,6 +59,17 @@ const PostSidebar = ({ post, setError, reactions, setReactions }) => {
     }
   };
   const handleSpecial_like = () => {
+    const abortController = new AbortController();
+    const method = special_liked ? 'DELETE' : 'POST';
+    handleReaction(
+      post_id,
+      user_id,
+      abortController.signal,
+      'special_like',
+      method
+    );
+    const filterOut = (arr) => arr.filter((x) => x.post_id !== post_id);
+    setSpecial_likes((curr) => (special_liked ? curr - 1 : curr + 1));
     if (special_liked) {
       setReactions((curr) => ({
         likes: curr.likes,
@@ -64,6 +85,11 @@ const PostSidebar = ({ post, setError, reactions, setReactions }) => {
     }
   };
   const handleSave = () => {
+    const abortController = new AbortController();
+    const method = saved ? 'DELETE' : 'POST';
+    handleReaction(post_id, user_id, abortController.signal, 'save', method);
+    const filterOut = (arr) => arr.filter((x) => x.post_id !== post_id);
+    setSaves((curr) => (saved ? curr - 1 : curr + 1));
     if (saved) {
       setReactions((curr) => ({
         likes: curr.likes,
