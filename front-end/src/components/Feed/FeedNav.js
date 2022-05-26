@@ -3,10 +3,8 @@ import './FeedNav.css';
 const FeedNav = ({ setQuery, query }) => {
   const handleClick = async ({ target }) => {
     const { id } = target;
-    console.log(id);
     setQuery(id === 'relevant' ? { type: '' } : { type: id });
   };
-  console.log('QUERY: ', query);
   return (
     <nav className="feed-nav">
       <ul>

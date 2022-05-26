@@ -22,8 +22,6 @@ const PostSidebar = ({ post, setError, reactions, setReactions }) => {
     setSaves(post.saves);
     setSpecial_likes(post.special_likes);
   }, [post]);
-  console.log(post);
-  console.log(reactions);
   useEffect(() => {
     if (reactions) {
       const filtered = (arr) => {

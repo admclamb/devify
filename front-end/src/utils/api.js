@@ -51,7 +51,6 @@ export async function listPosts(params, signal) {
   Object.entries(params).forEach(([key, value]) =>
     url.searchParams.append(key, value.toString())
   );
-  console.log(url);
   return await fetchJson(url, { headers, signal }, []);
 }
 
@@ -122,7 +121,6 @@ export async function handleReaction(
     headers,
     signal,
   };
-  console.log(url, options);
   return await fetchJson(url, options, {});
 }
 

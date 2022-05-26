@@ -26,6 +26,7 @@ const Post = ({ reactions, setReactions }) => {
   }, [post_id]);
 
   if (!post && !error) return <FeedLoading />;
+  console.log(post);
   return (
     <div className="container">
       <main className="row gx-4">

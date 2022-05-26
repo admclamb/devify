@@ -45,7 +45,6 @@ async function readForPost(req, res, next) {
 
 async function destroyComment(req, res, next) {
   const { comment_id } = req.body.data;
-  console.log('here', comment_id);
   await service.destroy(comment_id);
   res.sendStatus(204);
 }

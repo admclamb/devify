@@ -19,7 +19,6 @@ const PostMain = ({ post, comments, setComments }) => {
   const hashtags = Array.isArray(hashtags_array)
     ? hashtags_array.join('  ')
     : '';
-
   return (
     <>
       <article className="post-main-container border">

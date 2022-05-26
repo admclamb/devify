@@ -125,7 +125,6 @@ async function deleteSave(req, res, next) {
 
 async function readSaves(req, res, next) {
   const { user_id } = req.params;
-  console.log('in here: ', user_id);
   const saves = await service.readSaves(user_id);
   res.status(200).json({ data: saves });
 }
