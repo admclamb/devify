@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ErrorAlert from '../../errors/ErrorAlert';
 import { readUserProfile } from '../../utils/api';
 import { formatAsMonthDayYear } from '../../utils/formatDate';
@@ -7,6 +7,8 @@ import { UserContext } from '../../utils/UserContext';
 import './Profile.css';
 import ProfileStats from './ProfileStats';
 const Profile = () => {
+  const { username } = useParams();
+  console.log(username);
   const session = useContext(UserContext);
   const { user_id } = session;
   const [profile, setProfile] = useState({});
@@ -36,15 +38,12 @@ const Profile = () => {
         <div className="row pt-3 ">
           <ErrorAlert error={error} />
           <section className="profile border rounded p-4">
-            <div className="profile-pfp">
-              <h3>P</h3>
-              <img
-                src={avatar && avatar}
-                width="100%"
-                alt="Profile Pic"
-                className="profile-pfp__img pfp-img"
-              />
-            </div>
+            <img
+              src={avatar && avatar}
+              width="100%"
+              alt="profile-picture"
+              className="profile-avatar"
+            />
 
             <header className="profile-header__actions d-flex">
               <Link to="/settings" className="btn btn-primary ms-auto">

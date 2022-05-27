@@ -14,7 +14,7 @@ const SignedInNav = ({ openModal, setOpenModal, modal, user_id, avatar }) => {
         <img
           src={avatar ? avatar : ''}
           width="100%"
-          className="profile-picture pfp-img"
+          className="ms-auto ms-md-0 profile-picture pfp-img"
           id="modal-toggle-btn"
           onClick={() => setOpenModal((prev) => !prev)}
         />

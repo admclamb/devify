@@ -100,7 +100,7 @@ const PostCard = ({ post, reactions, setReactions }) => {
             <button
               className=" ms-auto btn btn-secondary"
               onClick={handleSave}
-              disabled={user_id !== 'undefined'}
+              disabled={user_id === 'undefined'}
             >
               {saveBtnText}
             </button>
