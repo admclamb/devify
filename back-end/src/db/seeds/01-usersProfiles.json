@@ -96,5 +96,15 @@
     "brand_color1": "#232F3E",
     "brand_color2": "#ffffff",
     "avatar": "https://devify-app-development.s3.amazonaws.com/fa12077e2d9739dc2b52f6bc5e71f3b6"
+  },
+  {
+    "user_id": 9,
+    "first_name": "Debbie",
+    "last_name": "O'niell",
+    "work": "Front End Developer",
+    "skills_languages": ["JavaScript", "React", "HTML", "CSS"],
+    "brand_color1": "#232F3E",
+    "brand_color2": "#ffffff",
+    "avatar": "https://devify-app-development.s3.amazonaws.com/fa12077e2d9739dc2b52f6bc5e71f3b6"
   }
 ]
