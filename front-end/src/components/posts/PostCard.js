@@ -97,7 +97,11 @@ const PostCard = ({ post, reactions, setReactions }) => {
             <Link to={`/post/${post_id}`} className="text-dark post-comment">
               <i className="fa-light fa-comment"></i> Add Comment
             </Link>
-            <button className=" ms-auto btn btn-secondary" onClick={handleSave}>
+            <button
+              className=" ms-auto btn btn-secondary"
+              onClick={handleSave}
+              disabled={user_id !== 'undefined'}
+            >
               {saveBtnText}
             </button>
           </div>

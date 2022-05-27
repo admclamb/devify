@@ -37,6 +37,7 @@ const PostSidebar = ({ post, setError, reactions, setReactions }) => {
   }, [reactions]);
 
   const handleLike = () => {
+    if (!user_id) return;
     const abortController = new AbortController();
     const method = liked ? 'DELETE' : 'POST';
     handleReaction(post_id, user_id, abortController.signal, 'like', method);
@@ -57,6 +58,7 @@ const PostSidebar = ({ post, setError, reactions, setReactions }) => {
     }
   };
   const handleSpecial_like = () => {
+    if (!user_id) return;
     const abortController = new AbortController();
     const method = special_liked ? 'DELETE' : 'POST';
     handleReaction(
@@ -83,6 +85,7 @@ const PostSidebar = ({ post, setError, reactions, setReactions }) => {
     }
   };
   const handleSave = () => {
+    if (!user_id) return;
     const abortController = new AbortController();
     const method = saved ? 'DELETE' : 'POST';
     handleReaction(post_id, user_id, abortController.signal, 'save', method);
@@ -105,6 +108,8 @@ const PostSidebar = ({ post, setError, reactions, setReactions }) => {
   const likeButton = (
     <button
       className={`sidebar-btn sidebar-heart btn ${liked ? 'text-like' : ''}`}
+      data-bs-toggle={user_id ? 'modal' : ''}
+      data-bs-target={user_id ? '#modal' : ''}
     >
       <i
         className="fa-solid fa-heart fa-lg mb-1"
@@ -121,6 +126,8 @@ const PostSidebar = ({ post, setError, reactions, setReactions }) => {
         className="fa-solid fa-narwhal fa-lg mb-1"
         id="special_like"
         onClick={handleSpecial_like}
+        data-bs-toggle={user_id ? 'modal' : ''}
+        data-bs-target={user_id ? '#modal' : ''}
       ></i>
     </button>
   );
@@ -132,6 +139,8 @@ const PostSidebar = ({ post, setError, reactions, setReactions }) => {
         className="fa-duotone fa-book-bookmark fa-lg mb-1"
         id="save"
         onClick={handleSave}
+        data-bs-toggle={user_id ? 'modal' : ''}
+        data-bs-target={user_id ? '#modal' : ''}
       ></i>
     </button>
   );

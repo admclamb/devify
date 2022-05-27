@@ -1,0 +1,4 @@
+.no-match-jumbotron {
+  background-color: var(--color-main-hover);
+  color: var(--color-light);
+}

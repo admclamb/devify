@@ -1,10 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ErrorAlert from '../../errors/ErrorAlert';
 import { readProfile } from '../../utils/api';
 import { formatAsMonthDayYear } from '../../utils/formatDate';
+import { UserContext } from '../../utils/UserContext';
 import './ProfileBio.css';
 const ProfileBio = ({ post_user_id }) => {
+  const session = useContext(UserContext);
+  const { user_id: main_user_id } = session;
   const [profile, setProfile] = useState({});
   const [error, setError] = useState(null);
   const [brandColor1, setBrandColor1] = useState('#000000');
@@ -70,7 +73,10 @@ const ProfileBio = ({ post_user_id }) => {
               </Link>
 
               <div className="bio-header__button">
-                <button className="bio-follow btn btn-primary d-block bio-button">
+                <button
+                  className="bio-follow btn btn-primary d-block bio-button"
+                  disabled={main_user_id !== 'undefined'}
+                >
                   Follow
                 </button>
               </div>
