@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import FeedLoading from '../../components/Feed/FeedLoading';
 import { formatAsMonthDay, formatAsMonthDayYear } from '../../utils/formatDate';
+import FormatPost from './FormatPost';
 import './PostMain.css';
 import PostMainComments from './PostMainComments';
 const PostMain = ({ post, comments, setComments }) => {
@@ -45,8 +46,8 @@ const PostMain = ({ post, comments, setComments }) => {
           </div>
           <h2>{post_header}</h2>
           <p>{hashtags}</p>
-          <div className="post-main-content">
-            <p>{post_body}</p>
+          <div className="post-main-content mt-4">
+            <FormatPost post={post_body} />
           </div>
         </div>
         <PostMainComments

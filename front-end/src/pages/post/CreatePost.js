@@ -1,10 +1,11 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import CreatePostNav from './CreatePostNav';
 import PostBody from './PostBody';
-import './CreatePost.css';
 import { useState } from 'react';
 import { createPost, postImage } from '../../utils/api';
 import ErrorAlert from '../../errors/ErrorAlert';
+import './CreatePost.css';
+import PreviewPost from './PreviewPost';
 const CreatePost = () => {
   const { user_id } = useParams();
   const [publishBtnText, setPublishBtnText] = useState('Publish');
@@ -19,7 +20,7 @@ const CreatePost = () => {
   const [coverImage, setCoverImage] = useState('');
   const [error, setError] = useState(null);
   const [body, setBody] = useState('');
-
+  const [previewPost, setPreviewPost] = useState(false);
   const handleChange = async ({ target }) => {
     const { id } = target;
     setPost({
@@ -53,42 +54,61 @@ const CreatePost = () => {
       <div className="row">
         <ErrorAlert error={error} />
       </div>
-
       <nav className="row">
-        {/* <div className="create-post-top-nav d-flex mb-3">
-          <button className="btn ms-auto me-4">Edit</button>
-          <button className="btn ">Preview</button>
-        </div> */}
+        <div className="create-post-top-nav d-flex mb-3">
+          <button
+            className={`create-post-button btn ms-auto me-4 ${
+              previewPost ? '' : 'preview-active'
+            }`}
+            onClick={() => setPreviewPost(false)}
+          >
+            Edit
+          </button>
+          <button
+            className={`create-post-button btn ${
+              previewPost ? 'preview-active' : ''
+            }`}
+            onClick={() => setPreviewPost(true)}
+          >
+            Preview
+          </button>
+        </div>
       </nav>
-      <article className="row create-post-container rounded gx-0">
-        <header>
-          <div className="create-post-header-main">
-            <form>
-              <input
-                type="file"
-                className="create-post__add-cover-image form-control mb-3"
-                onChange={({ target }) => setCoverImage(target.files[0])}
-              />
-            </form>
-            {/* <button className="btn btn-lg btn-outline-dark mb-4">
+      <article className="row create-post-container rounded gx-0 border">
+        {previewPost ? (
+          <PreviewPost body={body} />
+        ) : (
+          <>
+            <header>
+              <div className="create-post-header-main">
+                <form>
+                  <input
+                    type="file"
+                    className="create-post__add-cover-image form-control mb-3"
+                    onChange={({ target }) => setCoverImage(target.files[0])}
+                  />
+                </form>
+                {/* <button className="btn btn-lg btn-outline-dark mb-4">
               Add a cover image
             </button> */}
-            <form>
-              <input
-                placeholder="New post title here..."
-                type="text"
-                value={post.post_header}
-                onChange={handleChange}
-                id="post_header"
-                className="post_header-input"
-              />
-            </form>
-          </div>
-          <CreatePostNav setBody={setBody} body={body} />
-        </header>
-        <main className="create-post-body-container">
-          <PostBody body={body} setBody={setBody} />
-        </main>
+                <form>
+                  <input
+                    placeholder="New post title here..."
+                    type="text"
+                    value={post.post_header}
+                    onChange={handleChange}
+                    id="post_header"
+                    className="post_header-input"
+                  />
+                </form>
+              </div>
+              <CreatePostNav setBody={setBody} body={body} />
+            </header>
+            <main className="create-post-body-container">
+              <PostBody body={body} setBody={setBody} />
+            </main>
+          </>
+        )}
       </article>
       <section className="footer row container">
         <div className="publish-buttons mt-4">
