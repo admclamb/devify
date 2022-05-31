@@ -2,13 +2,13 @@
 
 - This application was made with HTML, CSS, Bootstrap 5, JavaScript, React, Axios, Express, Node, PostgreSQL, Knex, and AWS S3 Buckets.
 
-- This application is made similar to the popular [Dev.to]([https://obscure-reaches-21818.herokuapp.com/](https://dev.to/)) to create a social media experience.
+- This application is made similar to the popular [Dev.to](https://dev.to/) to create a social media experience.
 
 - THIS APPLICATION IS CURRENTLY IN DEVELOPMENT.
 
 ## Deployed version
 
-[Devify Deployment]([https://obscure-reaches-21818.herokuapp.com/](https://devify-front-end.herokuapp.com/))
+[Devify Deployment](https://devify-front-end.herokuapp.com/)
 
 
 ## Screenshots
