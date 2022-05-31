@@ -104,6 +104,7 @@ export async function createPost(post, signal) {
     headers,
     signal,
   };
+  console.log(options);
   return await fetchJson(url, options, {});
 }
 

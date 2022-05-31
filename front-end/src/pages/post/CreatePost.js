@@ -36,13 +36,16 @@ const CreatePost = () => {
       event.preventDefault();
       setError(null);
       setPublishBtnText('Publishing...');
-      const imageResponse = await postImage(coverImage);
       const abortController = new AbortController();
       const outPost = {
         ...post,
         post_body: body,
-        image_url: imageResponse.data.data,
+        image_url: null,
       };
+      if (coverImage) {
+        const imageResponse = await postImage(coverImage);
+        outPost.image_url = imageResponse.data.data;
+      }
       await createPost(outPost, abortController.signal);
       navigate('/');
       setPublishBtnText('Publish');
@@ -51,6 +54,7 @@ const CreatePost = () => {
       setPublishBtnText('Publish');
     }
   };
+  console.log(body);
   return (
     <div className="container">
       <div className="row">

@@ -63,6 +63,7 @@ async function read(req, res) {
 
 async function create(req, res, next) {
   const data = req.body.data;
+  console.log(data);
   const response = await service.create(data);
   res.status(201).json({ data });
 }

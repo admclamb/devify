@@ -4,7 +4,19 @@ import './CreatePostNav.css';
 const CreatePostNav = ({ setBody, body, textAreaRef }) => {
   const handleClickWithFocus = ({ target }) => {
     const { id } = target;
-    const text = id === 'bold' ? '****' : '____';
+    let text = '';
+    if (id === 'bold') {
+      text = '****';
+    }
+    if (id === 'italics') {
+      text = '____';
+    }
+    if (id === 'unordered-list') {
+      text = '\n&#183;';
+    }
+    if (id === 'header') {
+      text = '\n##';
+    }
     setBody((currBody) => currBody + text);
     const textarea = document.querySelector('#post-textarea');
     const end = textarea.value.length;
@@ -33,7 +45,7 @@ const CreatePostNav = ({ setBody, body, textAreaRef }) => {
       >
         <em>I</em>
       </button>
-      <button
+      {/* <button
         className="btn btn-lg btn-light"
         onClick={() => setBody((currBody) => currBody + '[](url)')}
       >
@@ -44,16 +56,18 @@ const CreatePostNav = ({ setBody, body, textAreaRef }) => {
         onClick={() => setBody((currBody) => currBody + '\n1. ')}
       >
         <i className="fa-solid fa-list-ol"></i>
-      </button>
+      </button> */}
       <button
         className="btn btn-lg btn-light"
-        onClick={() => setBody((currBody) => currBody + '\n- ')}
+        onClick={handleClickWithFocus}
+        id="unordered-list"
       >
         <i className="fa-solid fa-list-ul"></i>
       </button>
       <button
         className="btn btn-lg btn-light"
-        onClick={() => setBody((currBody) => currBody + '\n## ')}
+        onClick={handleClickWithFocus}
+        id="header"
       >
         H
       </button>
@@ -66,9 +80,9 @@ const CreatePostNav = ({ setBody, body, textAreaRef }) => {
       <button className="btn btn-lg btn-light">
         <i className="fa-solid fa-image"></i>
       </button> */}
-      <button className="btn btn-lg btn-light ms-auto">
+      {/* <button className="btn btn-lg btn-light ms-auto">
         <i className="fa-solid fa-ellipsis-vertical"></i>
-      </button>
+      </button> */}
     </nav>
   );
 };
