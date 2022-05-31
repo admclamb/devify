@@ -2,6 +2,7 @@
   background-color: var(--color-light);
   border-radius: 8px;
   border: solid 1px var(--color-gray);
+  overflow: hidden;
 }
 
 .post-card-container {
@@ -28,12 +29,6 @@
 .post-header-link {
   color: inherit;
   text-decoration: none;
-}
-
-.post-card-image {
-  width: 100%;
-  overflow: hidden;
-  height: 100%;
 }
 
 .post-card-image img {

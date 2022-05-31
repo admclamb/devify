@@ -62,9 +62,7 @@ const PostCard = ({ post, reactions, setReactions }) => {
   return (
     <article className="post-card">
       {image_url && (
-        <div className="post-card-image">
-          <img src={image_url} width="100%" />
-        </div>
+        <img src={image_url} width="100%" className="rounded-top" />
       )}
       <div className="post-card-container">
         <div className="post-card-head d-flex align-items-center mb-3">
