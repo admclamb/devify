@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import CreatePostNav from './CreatePostNav';
 import PostBody from './PostBody';
@@ -21,6 +22,7 @@ const CreatePost = () => {
   const [error, setError] = useState(null);
   const [body, setBody] = useState('');
   const [previewPost, setPreviewPost] = useState(false);
+  const textareaRef = useRef();
   const handleChange = async ({ target }) => {
     const { id } = target;
     setPost({
@@ -88,9 +90,6 @@ const CreatePost = () => {
                     onChange={({ target }) => setCoverImage(target.files[0])}
                   />
                 </form>
-                {/* <button className="btn btn-lg btn-outline-dark mb-4">
-              Add a cover image
-            </button> */}
                 <form>
                   <input
                     placeholder="New post title here..."
@@ -102,10 +101,18 @@ const CreatePost = () => {
                   />
                 </form>
               </div>
-              <CreatePostNav setBody={setBody} body={body} />
+              <CreatePostNav
+                setBody={setBody}
+                body={body}
+                textareaRef={textareaRef}
+              />
             </header>
             <main className="create-post-body-container">
-              <PostBody body={body} setBody={setBody} />
+              <PostBody
+                body={body}
+                setBody={setBody}
+                textareaRef={textareaRef}
+              />
             </main>
           </>
         )}

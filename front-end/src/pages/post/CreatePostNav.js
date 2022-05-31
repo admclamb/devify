@@ -1,17 +1,35 @@
+import { useEffect } from 'react';
 import './CreatePostNav.css';
 
-const CreatePostNav = ({ setBody }) => {
+const CreatePostNav = ({ setBody, body, textAreaRef }) => {
+  const handleClickWithFocus = ({ target }) => {
+    const { id } = target;
+    const text = id === 'bold' ? '****' : '____';
+    setBody((currBody) => currBody + text);
+    const textarea = document.querySelector('#post-textarea');
+    const end = textarea.value.length;
+    textarea.setSelectionRange(end - 2, end - 2);
+    textarea.focus();
+  };
+  // useEffect(() => {
+  //   const validFormats = ["**", "__"];
+  //   if (validFormats.includes(body.slice(-2))) {
+
+  //   }
+  // }, [body]);
   return (
     <nav className="d-flex bg-light create-post-nav">
       <button
         className="btn btn-lg btn-light"
-        onClick={() => setBody((currBody) => currBody + '****')}
+        onClick={handleClickWithFocus}
+        id="bold"
       >
         B
       </button>
       <button
         className="btn btn-lg btn-light"
-        onClick={() => setBody((currBody) => currBody + '__')}
+        onClick={handleClickWithFocus}
+        id="italics"
       >
         <em>I</em>
       </button>
