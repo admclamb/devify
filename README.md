@@ -22,10 +22,6 @@
  <img src="assets/devify-mobile.png" alt="Devify Screenshot">
 </div>
 
-## Getting Started
-
-Fork and clone this repo / or download, and register api keys from [OpenWeather](https://openweathermap.org/api) and [NewsData.io](https://newsdata.io/). Then, use them in .env file and name accordingly to keys in the api folder.
-
 ## About
 
 This is a large project handling multiple different parts of an application. Firstly, this application uses modern practices with securing users data by using Bcrypt.js for hashing passwords and using JWT to handle tokens and user sessions. This application also uses S3 Bucket to handle users profile images and users images in a post. On the front end, this application handles many aspects such as parsing blog post into HTML, handling likes, handling follows, and creating comments. Devify also allows users to sign in and sign up users.
