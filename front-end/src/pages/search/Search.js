@@ -4,7 +4,7 @@ import SearchResultNav from './SearchResultNav';
 import SearchSearchBar from './SearchSearchbar';
 import SearchResults from './SearchResults';
 import './Search.css';
-const Search = ({ search }) => {
+const Search = ({ search, setSearch }) => {
   const [query, setQuery] = useState('posts');
   const [error, setError] = useState(null);
   const handleClick = ({ target }) => {
@@ -14,7 +14,7 @@ const Search = ({ search }) => {
     <section className="container">
       <header className="search-header row mb-2 d-flex flex-column flex-md-row">
         <div className="search-searchbar d-md-none col-12">
-          <SearchSearchBar search={search} />
+          <SearchSearchBar search={search} setSearch={setSearch} />
         </div>
         <h3 className="d-none d-md-block col-12">Search for {search}</h3>
         {/* <div className="ms-auto">

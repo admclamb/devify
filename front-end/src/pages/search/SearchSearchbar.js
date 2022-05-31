@@ -1,9 +1,6 @@
 import './SearchSearchbar.css';
 
-const SearchSearchBar = ({ search }) => {
-  const handleChange = () => {
-    return;
-  };
+const SearchSearchBar = ({ search, setSearch }) => {
   return (
     <form className="search-container">
       <input
@@ -11,7 +8,7 @@ const SearchSearchBar = ({ search }) => {
         className="form-control search-container"
         placeholder="Search..."
         value={search}
-        onChange={handleChange}
+        onChange={({ target }) => setSearch(target.value)}
       />
       <button className="btn search-button">
         <i className="fa-thin fa-magnifying-glass search-container__icon--search fa-lg"></i>
