@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-
+import defaultPFP from '../../assets/defaultPFP.png';
 const SignedInNav = ({ openModal, setOpenModal, modal, user_id, avatar }) => {
   return (
     <div className="navbar__profile-container ms-md-auto">
@@ -12,7 +12,7 @@ const SignedInNav = ({ openModal, setOpenModal, modal, user_id, avatar }) => {
       {/* <i className="fa-thin fa-bell fa-lg"></i> */}
       <div>
         <img
-          src={avatar ? avatar : ''}
+          src={avatar ? avatar : defaultPFP}
           width="100%"
           className="ms-auto ms-md-0 profile-picture pfp-img"
           id="modal-toggle-btn"
