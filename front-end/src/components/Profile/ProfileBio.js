@@ -5,6 +5,7 @@ import { readProfile } from '../../utils/api';
 import { formatAsMonthDayYear } from '../../utils/formatDate';
 import { UserContext } from '../../utils/UserContext';
 import './ProfileBio.css';
+import defaultPFP from '../../assets/defaultPFP.png';
 const ProfileBio = ({ post_user_id }) => {
   const session = useContext(UserContext);
   const { user_id: main_user_id } = session;
@@ -55,18 +56,12 @@ const ProfileBio = ({ post_user_id }) => {
           <div className="ps-3 pb-3 pe-3">
             <header className="mb-3">
               <div className="bio-pfp">
-                {avatar ? (
-                  <img
-                    src={avatar}
-                    className="pfp-img bio-avatar"
-                    width="100%"
-                    height="100%"
-                  />
-                ) : first_name ? (
-                  first_name[0].toUpperCase()
-                ) : (
-                  'P'
-                )}
+                <img
+                  src={avatar ? avatar : defaultPFP}
+                  className="pfp-img bio-avatar"
+                  width="100%"
+                  height="100%"
+                />
               </div>
               <Link to={'/'}>
                 <h4 className="bio-name">{`${first_name} ${last_name}`}</h4>
