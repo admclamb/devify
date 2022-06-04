@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { handleReaction } from '../../utils/api';
 import { formatAsMonthDay } from '../../utils/formatDate';
 import { UserContext } from '../../utils/UserContext';
+import defaultPFP from '../../assets/defaultPFP.png';
 import './PostCard.css';
 
 const PostCard = ({ post, reactions, setReactions }) => {
@@ -24,7 +25,11 @@ const PostCard = ({ post, reactions, setReactions }) => {
     ? hashtags_array.join('  ')
     : '';
   const pfp = (
-    <img src={avatar} width="100%" className="post-card-pfp pfp-img" />
+    <img
+      src={avatar ? avatar : defaultPFP}
+      width="100%"
+      className="post-card-pfp pfp-img"
+    />
   );
   const handleSave = async () => {
     const abortController = new AbortController();
