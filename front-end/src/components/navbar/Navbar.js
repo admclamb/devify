@@ -7,7 +7,14 @@ import OffCanvasNav from './OffCanvasNav';
 import OffCanvasNavButton from './OffCanvasNavButton';
 import SignedInNav from './SignedInNav';
 import NotSignedInNav from './NotSignedInNav';
-const Navbar = ({ darkMode, setDarkMode, session, logoutUser, setSearch }) => {
+const Navbar = ({
+  darkMode,
+  setDarkMode,
+  session,
+  logoutUser,
+  setSearch,
+  notifications,
+}) => {
   const { user_id = '', username = '', avatar = null } = session;
   const [openModal, setOpenModal] = useState(false);
   const [searchBar, setSearchBar] = useState('');
@@ -77,6 +84,7 @@ const Navbar = ({ darkMode, setDarkMode, session, logoutUser, setSearch }) => {
             modal={modal}
             user_id={user_id}
             avatar={avatar}
+            notifications={notifications}
           />
         ) : (
           <NotSignedInNav />

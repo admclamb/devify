@@ -7,10 +7,10 @@ exports.seed = function (knex) {
     .then(function () {
       return USERS_DATA.forEach((USER) => {
         USER.password = bcrypt.hashSync(USER.password, parseInt(SALT));
-        return knex('users')
-          .insert(USER)
-          .returning('*')
-          .then((createdUser) => createdUser[0]);
+        console.log(USER);
       });
+    })
+    .then(function () {
+      return knex('users').insert(USERS_DATA);
     });
 };

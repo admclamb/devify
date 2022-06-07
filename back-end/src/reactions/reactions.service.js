@@ -5,7 +5,7 @@ const USERS_TABLE = 'users';
 const USERS_SPECIAL_LIKES_TABLE = 'special_likes';
 const USERS_SAVES_TABLE = 'users_saves';
 const USERS_LIKES_TABLE = 'users_likes';
-
+const NOTIFICATIONS_TABLE = 'users_notifications';
 function read(post_id, user_id, reaction) {
   let table = reaction;
   if (reaction !== 'special_likes') {
@@ -40,12 +40,18 @@ function readUser(user_id) {
 function readPost(post_id) {
   return knex(POSTS_TABLE).select('*').where({ post_id }).first();
 }
-function createLike(post_id, user_id) {
+function createLike(post, user_id) {
+  const { post_id, user_id: postUser_id } = post;
   return knex.transaction(async (transaction) => {
     await knex(POSTS_TABLE)
       .where({ post_id })
       .update({ likes: knex.raw('likes + 1') })
       .transacting(transaction);
+    await knex(NOTIFICATIONS_TABLE).insert({
+      toUser_id: postUser_id,
+      fromUser_id: user_id,
+      type: 'like',
+    });
     return knex(USERS_LIKES_TABLE)
       .insert({ post_id, user_id })
       .returning('*')

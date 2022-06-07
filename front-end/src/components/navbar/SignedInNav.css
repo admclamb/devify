@@ -1,0 +1,17 @@
+.navbar-notification-button {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.navbar-notification-button:hover {
+  background-color: var(--color-main-hover);
+}
+
+.ding {
+  position: aboslute;
+  left: 100%;
+  top: -10%;
+}

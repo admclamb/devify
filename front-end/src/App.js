@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Navbar from './components/navbar/Navbar';
 import PageRoutes from './pages/Routes';
 import { UserContext } from './utils/UserContext';
-import { readUserReactions } from './utils/api';
+import { readUserReactions, readNotifications } from './utils/api';
 import BetaBanner from './components/banner/BetaBanner';
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -15,6 +15,7 @@ function App() {
     specialLikes: [],
     saves: [],
   });
+  const [notifications, setNotifications] = useState([]);
   const [saveChange, setSaveChange] = useState(0);
   const [likeChange, setLikeChange] = useState(0);
   const [specialLikeChange, setSpecialLikeChange] = useState(0);
@@ -35,7 +36,21 @@ function App() {
         setError(error);
       }
     };
+    const getNotifications = async () => {
+      setError(null);
+      try {
+        console.log('in here', user_id);
+        const response = await readNotifications(
+          user_id,
+          abortController.signal
+        );
+        setNotifications(response);
+      } catch (error) {
+        setError(error);
+      }
+    };
     getReactions();
+    getNotifications();
     return () => abortController.abort();
   }, [user_id]);
   useEffect(() => {
@@ -83,6 +98,7 @@ function App() {
       color.lightDarker
     );
   }, [darkMode]);
+  console.log('notifications: ', notifications);
   return (
     <>
       <UserContext.Provider value={session}>
@@ -95,6 +111,7 @@ function App() {
             logoutUser={logoutUser}
             search={search}
             setSearch={setSearch}
+            notifications={notifications}
           />
         </header>
         <PageRoutes
@@ -106,6 +123,8 @@ function App() {
           setDarkMode={setDarkMode}
           reactions={reactions}
           setReactions={setReactions}
+          notifications={notifications}
+          setNotifications={setNotifications}
         />
       </UserContext.Provider>
     </>

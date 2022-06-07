@@ -88,9 +88,9 @@ async function readTotal(req, res, next) {
 }
 
 async function createLike(req, res, next) {
-  const { post_id } = res.locals.post;
+  const { post } = res.locals;
   const { user_id } = req.params;
-  res.status(201).json({ data: await service.createLike(post_id, user_id) });
+  res.status(201).json({ data: await service.createLike(post, user_id) });
 }
 async function deleteLike(req, res, next) {
   const { post_id } = res.locals.post;

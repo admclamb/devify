@@ -259,3 +259,13 @@ export async function postAvatar(avatar, user_id) {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 }
+
+export async function readNotifications(user_id, signal) {
+  const url = `${API_BASE_URL}/notifications/${user_id}`;
+  const options = {
+    method: 'GET',
+    headers,
+    signal,
+  };
+  return await fetchJson(url, options, {});
+}

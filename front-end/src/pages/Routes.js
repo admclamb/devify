@@ -14,6 +14,7 @@ import SettingsCustomization from './settings/SettingsCustomization';
 import SettingsNotifications from './settings/SettingsNotifications';
 import SettingsAccount from './settings/SettingsAccount';
 import Search from './search/Search';
+import Notifications from './notifications/Notifications';
 const PageRoutes = ({
   setSession,
   session,
@@ -23,6 +24,8 @@ const PageRoutes = ({
   setSearch,
   reactions,
   setReactions,
+  notifications,
+  setNotifications,
 }) => {
   return (
     <Routes>
@@ -84,6 +87,17 @@ const PageRoutes = ({
         exact={true}
         path="/search"
         element={<Search search={search} setSearch={setSearch} />}
+      />
+      <Route
+        exact={true}
+        path="/notifications"
+        element={
+          <Notifications
+            session={session}
+            notifications={notifications}
+            setNotifications={setNotifications}
+          />
+        }
       />
       <Route path="*" element={<NoMatch />} />
     </Routes>

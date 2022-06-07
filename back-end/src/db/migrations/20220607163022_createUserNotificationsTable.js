@@ -4,6 +4,7 @@
  */
 exports.up = function (knex) {
   return knex.schema.createTable('users_notifications', (table) => {
+    table.increments('notification_id').primary();
     table.integer('toUser_id').references('user_id').inTable('users');
     table
       .integer('fromUser_id')
@@ -18,6 +19,9 @@ exports.up = function (knex) {
       .nullable();
     table.string('type').notNullable();
     table.boolean('new').defaultTo(1);
+    table.string('first_name').notNullable();
+    table.string('last_name').notNullable();
+    table.string('avatar').notNullable();
     table.timestamps(true, true);
   });
 };
