@@ -9,7 +9,6 @@ const SignedInNav = ({ openModal, setOpenModal, modal, user_id, avatar }) => {
       >
         Create Post
       </Link>
-      3.20
       {/* <i className="fa-thin fa-bell fa-lg"></i> */}
       <div>
         <img
