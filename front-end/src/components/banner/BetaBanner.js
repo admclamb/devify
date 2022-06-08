@@ -4,8 +4,8 @@ const BetaBanner = () => {
       className=" text-center alert mb-0 alert-primary alert-dismissible fade show"
       role="alert"
     >
-      <strong>This is the beta version!</strong> This is for testing and has
-      incomplete and has bugs 🐛🐜
+      <strong>This is the beta version!</strong> This is for testing and is
+      incomplete and could have bugs 🐛🐜
       <button
         type="button"
         className="btn-close"
