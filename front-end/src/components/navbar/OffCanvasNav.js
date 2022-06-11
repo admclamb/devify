@@ -34,7 +34,7 @@ const OffCanvasNav = ({ user_id, searchBar, setSearchBar, onSearchSubmit }) => {
   return (
     <div
       className="offcanvas offcanvas-start"
-      tabindex="-1"
+      tabIndex="-1"
       id="offcanvasNavbar"
       aria-labelledby="offcanvasNavbarLabel"
     >

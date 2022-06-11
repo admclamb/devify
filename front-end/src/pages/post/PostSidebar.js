@@ -16,6 +16,7 @@ const PostSidebar = ({ post, setError, reactions, setReactions }) => {
   const [saves, setSaves] = useState(0);
   const [liked, setLiked] = useState(false);
   const [special_liked, setSpecial_liked] = useState(false);
+  console.log(session);
   const [saved, setSaved] = useState(false);
   useEffect(() => {
     setLikes(post.likes);

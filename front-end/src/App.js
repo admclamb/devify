@@ -98,7 +98,9 @@ function App() {
       color.lightDarker
     );
   }, [darkMode]);
+  console.log('here');
   console.log('notifications: ', notifications);
+  console.log('session: ', session);
   return (
     <>
       <UserContext.Provider value={session}>

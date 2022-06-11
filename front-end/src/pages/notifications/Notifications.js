@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import NotificationCard from './NotificationCard';
+import NoNotification from './NoNotification';
 import './Notifications';
 const Notifications = ({ notifications, setNotifications, session }) => {
   const [query, setQuery] = useState('all');
@@ -53,7 +54,9 @@ const Notifications = ({ notifications, setNotifications, session }) => {
             </ul>
           </nav>
         </aside>
-        <div className="col-12 col-md-6">{notificationsList}</div>
+        <div className="col-12 col-md-6">
+          {notificationsList > 0 ? notificationsList : <NoNotification />}
+        </div>
       </main>
     </section>
   );
