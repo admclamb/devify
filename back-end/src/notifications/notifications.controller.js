@@ -15,7 +15,7 @@ async function read(req, res, next) {
   const { user_id } = res.locals.user;
   console.log('in here');
   const notifications = await service.read(user_id);
-  console.log(notifications);
+  console.log('notifications: ', notifications);
   res.status(200).json({ data: notifications });
 }
 

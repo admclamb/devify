@@ -40,7 +40,7 @@ function readUser(user_id) {
 function readPost(post_id) {
   return knex(POSTS_TABLE).select('*').where({ post_id }).first();
 }
-function createLike(post, user_id) {
+function createLike(post, user) {
   const { post_id, user_id: postUser_id } = post;
   return knex.transaction(async (transaction) => {
     await knex(POSTS_TABLE)
@@ -49,7 +49,7 @@ function createLike(post, user_id) {
       .transacting(transaction);
     await knex(NOTIFICATIONS_TABLE).insert({
       toUser_id: postUser_id,
-      fromUser_id: user_id,
+      fromUser_id: user.user_id,
       type: 'like',
     });
     return knex(USERS_LIKES_TABLE)

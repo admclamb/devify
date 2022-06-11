@@ -44,6 +44,7 @@ function App() {
           user_id,
           abortController.signal
         );
+        console.log(response);
         setNotifications(response);
       } catch (error) {
         setError(error);

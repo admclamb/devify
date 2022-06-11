@@ -267,5 +267,5 @@ export async function readNotifications(user_id, signal) {
     headers,
     signal,
   };
-  return await fetchJson(url, options, {});
+  return await fetchJson(url, options, []);
 }
