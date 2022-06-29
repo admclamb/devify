@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Searchbar from '../Searchbar/Searchbar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import OutsideAlerter from '../../hooks/OutsideAlerter';
 import OffCanvasNav from './OffCanvasNav';
@@ -18,9 +18,11 @@ const Navbar = ({
   const { user_id = '', username = '', avatar = null } = session;
   const [openModal, setOpenModal] = useState(false);
   const [searchBar, setSearchBar] = useState('');
+  const navigate = useNavigate();
   const onSearchSubmit = (event) => {
     setSearch(searchBar);
     setSearchBar('');
+    navigate('/search');
   };
   const modal = (
     <OutsideAlerter setState={setOpenModal}>

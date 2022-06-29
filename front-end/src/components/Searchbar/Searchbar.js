@@ -4,10 +4,10 @@ import './Searchbar.css';
 const Searchbar = ({ searchBar, setSearchBar, onSearchSubmit }) => {
   return (
     <>
-      <div className="search-container d-none d-md-block">
-        <Link to="/search" onClick={onSearchSubmit}>
+      <form className="search-container d-none d-md-block">
+        <button onClick={onSearchSubmit} className="search-container__btn">
           <i className="fa-thin fa-magnifying-glass search-container__icon fa-lg"></i>
-        </Link>
+        </button>
 
         <input
           type="text"
@@ -16,7 +16,7 @@ const Searchbar = ({ searchBar, setSearchBar, onSearchSubmit }) => {
           value={searchBar}
           onChange={({ target }) => setSearchBar(target.value)}
         />
-      </div>
+      </form>
       <Link
         to="/search"
         className="searchbar-small d-block d-md-none ms-auto btn"
