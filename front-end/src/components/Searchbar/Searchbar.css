@@ -2,7 +2,9 @@
   position: relative;
 }
 
-.search-container__icon {
+.search-container__btn {
+  background-color: inherit;
+  border: none;
   position: absolute;
   right: 3%;
   top: 50%;
@@ -10,11 +12,9 @@
   color: var(--color-dark);
 }
 
-.search-container__button {
-  background-color: none;
-  border: none;
+.searc-container__input {
+  position: absolute;
 }
-
 .searchbar {
   height: 2rem;
   border-radius: 4px;

@@ -20,6 +20,7 @@ const Navbar = ({
   const [searchBar, setSearchBar] = useState('');
   const navigate = useNavigate();
   const onSearchSubmit = (event) => {
+    event.preventDefault();
     setSearch(searchBar);
     setSearchBar('');
     navigate('/search');
